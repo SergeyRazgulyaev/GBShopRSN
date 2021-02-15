@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79525D87D7700220690 /* AppDelegate.swift */; };
 		C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79725D87D7700220690 /* SceneDelegate.swift */; };
-		C5DCB79A25D87D7700220690 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79925D87D7700220690 /* ViewController.swift */; };
-		C5DCB79D25D87D7700220690 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DCB79B25D87D7700220690 /* Main.storyboard */; };
 		C5DCB79F25D87D7A00220690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5DCB79E25D87D7A00220690 /* Assets.xcassets */; };
 		C5DCB7A225D87D7A00220690 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DCB7A025D87D7A00220690 /* LaunchScreen.storyboard */; };
 		C5DCB7AD25D87D7B00220690 /* GBShopRSNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB7AC25D87D7B00220690 /* GBShopRSNTests.swift */; };
@@ -38,8 +36,6 @@
 		C5DCB79225D87D7700220690 /* GBShopRSN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBShopRSN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DCB79525D87D7700220690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5DCB79725D87D7700220690 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C5DCB79925D87D7700220690 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C5DCB79C25D87D7700220690 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5DCB79E25D87D7A00220690 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5DCB7A125D87D7A00220690 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5DCB7A325D87D7A00220690 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,13 +95,10 @@
 		C5DCB79425D87D7700220690 /* GBShopRSN */ = {
 			isa = PBXGroup;
 			children = (
-				C5DCB79525D87D7700220690 /* AppDelegate.swift */,
-				C5DCB79725D87D7700220690 /* SceneDelegate.swift */,
-				C5DCB79925D87D7700220690 /* ViewController.swift */,
-				C5DCB79B25D87D7700220690 /* Main.storyboard */,
-				C5DCB79E25D87D7A00220690 /* Assets.xcassets */,
-				C5DCB7A025D87D7A00220690 /* LaunchScreen.storyboard */,
-				C5DCB7A325D87D7A00220690 /* Info.plist */,
+				C5DCB7C825D887D000220690 /* App */,
+				C5DCB7CD25D8880C00220690 /* Core */,
+				C5DCB7CE25D8881600220690 /* Resources */,
+				C5DCB7CF25D8882000220690 /* Environments */,
 			);
 			path = GBShopRSN;
 			sourceTree = "<group>";
@@ -126,6 +119,71 @@
 				C5DCB7B925D87D7B00220690 /* Info.plist */,
 			);
 			path = GBShopRSNUITests;
+			sourceTree = "<group>";
+		};
+		C5DCB7C825D887D000220690 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C5DCB79525D87D7700220690 /* AppDelegate.swift */,
+				C5DCB79725D87D7700220690 /* SceneDelegate.swift */,
+				C5DCB7C925D887D900220690 /* BusinessLogic */,
+				C5DCB7CA25D887E100220690 /* Entity */,
+				C5DCB7CB25D887F100220690 /* Assembly */,
+				C5DCB7CC25D887FB00220690 /* Flows */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C5DCB7C925D887D900220690 /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		C5DCB7CA25D887E100220690 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		C5DCB7CB25D887F100220690 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		C5DCB7CC25D887FB00220690 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		C5DCB7CD25D8880C00220690 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C5DCB7CE25D8881600220690 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C5DCB79E25D87D7A00220690 /* Assets.xcassets */,
+				C5DCB7A025D87D7A00220690 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C5DCB7CF25D8882000220690 /* Environments */ = {
+			isa = PBXGroup;
+			children = (
+				C5DCB7A325D87D7A00220690 /* Info.plist */,
+			);
+			path = Environments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +291,6 @@
 			files = (
 				C5DCB7A225D87D7A00220690 /* LaunchScreen.storyboard in Resources */,
 				C5DCB79F25D87D7A00220690 /* Assets.xcassets in Resources */,
-				C5DCB79D25D87D7700220690 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +315,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5DCB79A25D87D7700220690 /* ViewController.swift in Sources */,
 				C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */,
 				C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */,
 			);
@@ -296,14 +352,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C5DCB79B25D87D7700220690 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C5DCB79C25D87D7700220690 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C5DCB7A025D87D7A00220690 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,6 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GBShopRSN/Environments/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -421,6 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = GBShopRSN/Environments/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

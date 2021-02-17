@@ -12,6 +12,15 @@
 		C58A506725DD714300D572F1 /* AuthRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506625DD714300D572F1 /* AuthRequestFactory.swift */; };
 		C58A506C25DD71A100D572F1 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506B25DD71A100D572F1 /* Auth.swift */; };
 		C58A507125DD733500D572F1 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507025DD733500D572F1 /* RequestFactory.swift */; };
+		C58A507625DD7FB400D572F1 /* LogoutResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507525DD7FB400D572F1 /* LogoutResult.swift */; };
+		C58A507B25DD800F00D572F1 /* PersonalDataChangeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507A25DD800F00D572F1 /* PersonalDataChangeResult.swift */; };
+		C58A508025DD806800D572F1 /* RegistrationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507F25DD806800D572F1 /* RegistrationResult.swift */; };
+		C58A508D25DD861100D572F1 /* RegistrationRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A508C25DD861100D572F1 /* RegistrationRequestFactory.swift */; };
+		C58A509225DD869700D572F1 /* ChangeUserDataRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A509125DD869700D572F1 /* ChangeUserDataRequestFactory.swift */; };
+		C58A509725DDBCD400D572F1 /* ExitRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A509625DDBCD400D572F1 /* ExitRequestFactory.swift */; };
+		C58A509F25DDBFC800D572F1 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A509E25DDBFC800D572F1 /* Registration.swift */; };
+		C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A50A325DDC4B300D572F1 /* ChangeUserData.swift */; };
+		C58A50B225DDCD2800D572F1 /* ExitFromShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A50B125DDCD2800D572F1 /* ExitFromShop.swift */; };
 		C5A460CD25DD6A9E0089E71C /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460C925DD6A9D0089E71C /* DataRequest.swift */; };
 		C5A460CE25DD6A9E0089E71C /* CustomDecodableSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CA25DD6A9E0089E71C /* CustomDecodableSerializer.swift */; };
 		C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */; };
@@ -57,6 +66,15 @@
 		C58A506625DD714300D572F1 /* AuthRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestFactory.swift; sourceTree = "<group>"; };
 		C58A506B25DD71A100D572F1 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		C58A507025DD733500D572F1 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
+		C58A507525DD7FB400D572F1 /* LogoutResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResult.swift; sourceTree = "<group>"; };
+		C58A507A25DD800F00D572F1 /* PersonalDataChangeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataChangeResult.swift; sourceTree = "<group>"; };
+		C58A507F25DD806800D572F1 /* RegistrationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationResult.swift; sourceTree = "<group>"; };
+		C58A508C25DD861100D572F1 /* RegistrationRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationRequestFactory.swift; sourceTree = "<group>"; };
+		C58A509125DD869700D572F1 /* ChangeUserDataRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserDataRequestFactory.swift; sourceTree = "<group>"; };
+		C58A509625DDBCD400D572F1 /* ExitRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitRequestFactory.swift; sourceTree = "<group>"; };
+		C58A509E25DDBFC800D572F1 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		C58A50A325DDC4B300D572F1 /* ChangeUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserData.swift; sourceTree = "<group>"; };
+		C58A50B125DDCD2800D572F1 /* ExitFromShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFromShop.swift; sourceTree = "<group>"; };
 		C5A460C925DD6A9D0089E71C /* DataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRequest.swift; sourceTree = "<group>"; };
 		C5A460CA25DD6A9E0089E71C /* CustomDecodableSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDecodableSerializer.swift; sourceTree = "<group>"; };
 		C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorParser.swift; sourceTree = "<group>"; };
@@ -130,6 +148,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C58A508725DD84D500D572F1 /* Authorisation */ = {
+			isa = PBXGroup;
+			children = (
+				C58A506625DD714300D572F1 /* AuthRequestFactory.swift */,
+				C58A506B25DD71A100D572F1 /* Auth.swift */,
+			);
+			path = Authorisation;
+			sourceTree = "<group>";
+		};
+		C58A508825DD850400D572F1 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				C58A508C25DD861100D572F1 /* RegistrationRequestFactory.swift */,
+				C58A509E25DDBFC800D572F1 /* Registration.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		C58A508925DD850D00D572F1 /* ExitFromShop */ = {
+			isa = PBXGroup;
+			children = (
+				C58A509625DDBCD400D572F1 /* ExitRequestFactory.swift */,
+				C58A50B125DDCD2800D572F1 /* ExitFromShop.swift */,
+			);
+			path = ExitFromShop;
+			sourceTree = "<group>";
+		};
+		C58A508A25DD851F00D572F1 /* ChangeUserData */ = {
+			isa = PBXGroup;
+			children = (
+				C58A509125DD869700D572F1 /* ChangeUserDataRequestFactory.swift */,
+				C58A50A325DDC4B300D572F1 /* ChangeUserData.swift */,
+			);
+			path = ChangeUserData;
+			sourceTree = "<group>";
+		};
+		C58A508B25DD858600D572F1 /* RequestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				C58A507025DD733500D572F1 /* RequestFactory.swift */,
+			);
+			path = RequestFactory;
+			sourceTree = "<group>";
+		};
 		C5A460C825DD6A770089E71C /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,9 +207,11 @@
 		C5A460F025DD70F30089E71C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C58A506625DD714300D572F1 /* AuthRequestFactory.swift */,
-				C58A506B25DD71A100D572F1 /* Auth.swift */,
-				C58A507025DD733500D572F1 /* RequestFactory.swift */,
+				C58A508B25DD858600D572F1 /* RequestFactory */,
+				C58A508825DD850400D572F1 /* Registration */,
+				C58A508725DD84D500D572F1 /* Authorisation */,
+				C58A508A25DD851F00D572F1 /* ChangeUserData */,
+				C58A508925DD850D00D572F1 /* ExitFromShop */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -227,8 +291,11 @@
 		C5DCB7CA25D887E100220690 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				C5A460E625DD6FD40089E71C /* LoginResult.swift */,
 				C5A460EB25DD6FE40089E71C /* User.swift */,
+				C58A507F25DD806800D572F1 /* RegistrationResult.swift */,
+				C5A460E625DD6FD40089E71C /* LoginResult.swift */,
+				C58A507A25DD800F00D572F1 /* PersonalDataChangeResult.swift */,
+				C58A507525DD7FB400D572F1 /* LogoutResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -510,16 +577,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				C58A507125DD733500D572F1 /* RequestFactory.swift in Sources */,
+				C58A50B225DDCD2800D572F1 /* ExitFromShop.swift in Sources */,
 				C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */,
+				C58A507B25DD800F00D572F1 /* PersonalDataChangeResult.swift in Sources */,
+				C58A507625DD7FB400D572F1 /* LogoutResult.swift in Sources */,
+				C58A509F25DDBFC800D572F1 /* Registration.swift in Sources */,
 				C5A460CD25DD6A9E0089E71C /* DataRequest.swift in Sources */,
 				C58A506725DD714300D572F1 /* AuthRequestFactory.swift in Sources */,
+				C58A509725DDBCD400D572F1 /* ExitRequestFactory.swift in Sources */,
+				C58A508025DD806800D572F1 /* RegistrationResult.swift in Sources */,
 				C5A460E225DD6E630089E71C /* RequestRouter.swift in Sources */,
 				C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */,
+				C58A509225DD869700D572F1 /* ChangeUserDataRequestFactory.swift in Sources */,
 				C5A460E725DD6FD40089E71C /* LoginResult.swift in Sources */,
 				C58A506C25DD71A100D572F1 /* Auth.swift in Sources */,
 				C5A460EC25DD6FE40089E71C /* User.swift in Sources */,
+				C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */,
 				C5A460D025DD6A9E0089E71C /* AbstractErrorParser.swift in Sources */,
 				C5A460CE25DD6A9E0089E71C /* CustomDecodableSerializer.swift in Sources */,
+				C58A508D25DD861100D572F1 /* RegistrationRequestFactory.swift in Sources */,
 				C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

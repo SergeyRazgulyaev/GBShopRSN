@@ -1,5 +1,5 @@
 //
-//  DataRequest.swift
+//  AbstractRequestFactory.swift
 //  GBShopRSN
 //
 //  Created by Sergey Razgulyaev on 17.02.2021.

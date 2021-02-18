@@ -1,5 +1,5 @@
 //
-//  CustomDecodableSerializer.swift
+//  ResponseCodable.swift
 //  GBShopRSN
 //
 //  Created by Sergey Razgulyaev on 17.02.2021.
@@ -35,9 +35,8 @@ extension DataRequest {
     func responseCodable<T: Decodable>(
         errorParser: AbstractErrorParser,
         queue: DispatchQueue = .main,
-        completionHandler: @escaping (AFDataResponse<T>) -> Void)
-        -> Self {
-            let responseSerializer = CustomDecodableSerializer<T>(errorParser: errorParser)
-            return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)
+        completionHandler: @escaping (AFDataResponse<T>) -> Void) -> Self {
+        let responseSerializer = CustomDecodableSerializer<T>(errorParser: errorParser)
+        return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
 }

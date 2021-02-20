@@ -14,6 +14,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let registerUser = requestFactory.makeSignUpRequestFactory()
+        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+            switch response.result {
+            case .success(let signUp):
+                print(signUp)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let authUser = requestFactory.makeAuthRequestFatory()
+        authUser.login(userName: "Somebody", password: "mypassword") { response in
+            switch response.result {
+            case .success(let login):
+                print(login)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let changeData = requestFactory.makeChangeUserDataRequestFactory()
+        changeData.changeUserData(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+            switch response.result {
+            case .success(let changeUserData):
+                print(changeUserData)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let getProductList = requestFactory.makeGetProductListRequestFactory()
+        getProductList.getProductList(pageNumber: 1, idCategory: 1) { response in
+            switch response.result {
+            case .success(let getProductList):
+                print(getProductList)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let logOutUser = requestFactory.makeLogOutRequestFactory()
+        logOutUser.logOut(idUser: 123) { response in
+            switch response.result {
+            case .success(let logOut):
+                print(logOut)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         return true
     }
 

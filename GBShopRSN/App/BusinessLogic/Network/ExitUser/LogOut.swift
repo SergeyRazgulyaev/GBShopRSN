@@ -1,5 +1,5 @@
 //
-//  ExitUser.swift
+//  LogOut.swift
 //  GBShopRSN
 //
 //  Created by Sergey Razgulyaev on 18.02.2021.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class ExitUser: AbstractRequestFactory {
+class LogOut: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,15 +24,15 @@ class ExitUser: AbstractRequestFactory {
     }
 }
 
-extension ExitUser: ExitUserRequestFactory {
-    func logout(idUser: Int, completionHandler: @escaping (AFDataResponse<LogoutResult>) -> Void) {
-        let requestModel = Logout(baseUrl: baseUrl, idUser: idUser)
+extension LogOut: LogOutRequestFactory {
+    func logOut(idUser: Int, completionHandler: @escaping (AFDataResponse<LogOutResult>) -> Void) {
+        let requestModel = LogoutRequest(baseUrl: baseUrl, idUser: idUser)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension ExitUser {
-    struct Logout: RequestRouter {
+extension LogOut {
+    struct LogoutRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
         let path: String = "logout.json"

@@ -26,13 +26,13 @@ class ChangeUserData: AbstractRequestFactory {
 
 extension ChangeUserData: ChangeUserDataRequestFactory {
     func changeUserData(idUser: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let requestModel = UserData(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
+        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
 extension ChangeUserData {
-    struct UserData: RequestRouter {
+    struct ChangeUserDataRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
         let path: String = "changeUserData.json"

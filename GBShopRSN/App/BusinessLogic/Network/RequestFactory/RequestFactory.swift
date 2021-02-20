@@ -10,10 +10,6 @@ import Alamofire
 
 class RequestFactory {
     
-    func makeErrorParser() -> AbstractErrorParser {
-        return ErrorParser()
-    }
-    
     let baseUrl = URL(string:         "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
     
     lazy var commonSession: Session = {
@@ -25,6 +21,10 @@ class RequestFactory {
     }()
     
     let sessionQueue = DispatchQueue.global(qos: .utility)
+    
+    func makeErrorParser() -> AbstractErrorParser {
+        return ErrorParser()
+    }
     
     func makeRegistretionRequestFactory() -> RegistrationRequestFactory {
         let errorParser = makeErrorParser()
@@ -41,8 +41,8 @@ class RequestFactory {
         return ChangeUserData(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
-    func makeExitRequestFactory() -> ExitFromShopRequestFactory {
+    func makeExitRequestFactory() -> ExitUserRequestFactory {
         let errorParser = makeErrorParser()
-        return ExitFromShop(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+        return ExitUser(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
 }

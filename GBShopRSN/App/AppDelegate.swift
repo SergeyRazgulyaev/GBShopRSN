@@ -14,46 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let registerUser = requestFactory.makeRegistretionRequestFactory()
-        registerUser.register(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
-            switch response.result {
-            case .success(let register):
-                print(register)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-        let authUser = requestFactory.makeAuthRequestFatory()
-        authUser.login(userName: "Somebody", password: "mypassword") { response in
-            switch response.result {
-            case .success(let login):
-                print(login)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-        let changeData = requestFactory.makeChangeUserDataRequestFactory()
-        changeData.changeUserData(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
-            switch response.result {
-            case .success(let changeUserData):
-                print(changeUserData)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-        let exitUser = requestFactory.makeExitRequestFactory()
-        exitUser.logout(idUser: 123) { response in
-            switch response.result {
-            case .success(let logout):
-                print(logout)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
         return true
     }
 

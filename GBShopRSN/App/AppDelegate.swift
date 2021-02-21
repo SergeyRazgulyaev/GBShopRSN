@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let requestFactory = RequestFactory()
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let registerUser = requestFactory.makeSignUpRequestFactory()
@@ -49,11 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch response.result {
             case .success(let getProductList):
                 print(getProductList)
+                print(getProductList.filter {$0.idProduct == 123 && $0.productName == "Ноутбук" && $0.price == 45600}.first ?? "No product")
+                print(getProductList.filter {$0.idProduct == 456 && $0.productName == "Мышка" && $0.price == 1000}.first ?? "No product")
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-
+        
         let logOutUser = requestFactory.makeLogOutRequestFactory()
         logOutUser.logOut(idUser: 123) { response in
             switch response.result {

@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias GetProductListResult = [Product]
-
 struct Product: Codable {
     
     let idProduct: Int

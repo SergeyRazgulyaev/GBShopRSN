@@ -42,6 +42,11 @@
 		C5DE21D725E15DF0002B5E7F /* GetProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE21D625E15DF0002B5E7F /* GetProductList.swift */; };
 		C5DE21E125E15F1A002B5E7F /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE21E025E15F1A002B5E7F /* Product.swift */; };
 		C5DE220125E17502002B5E7F /* GetProductListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE220025E17502002B5E7F /* GetProductListTests.swift */; };
+		C5DE226125E27595002B5E7F /* GetProductRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE226025E27595002B5E7F /* GetProductRequestFactory.swift */; };
+		C5DE226625E275B5002B5E7F /* GetProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE226525E275B5002B5E7F /* GetProduct.swift */; };
+		C5DE226B25E277D5002B5E7F /* GetProductListResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE226A25E277D5002B5E7F /* GetProductListResult.swift */; };
+		C5DE227025E277F6002B5E7F /* GetProductResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE226F25E277F6002B5E7F /* GetProductResult.swift */; };
+		C5DE228025E27D4D002B5E7F /* GetProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DE227F25E27D4D002B5E7F /* GetProductTests.swift */; };
 		F6E04D053133295E6FE00FEA /* Pods_GBShopRSNTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CC3F0D613017FC6EF70A7EA /* Pods_GBShopRSNTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +115,11 @@
 		C5DE21D625E15DF0002B5E7F /* GetProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductList.swift; sourceTree = "<group>"; };
 		C5DE21E025E15F1A002B5E7F /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C5DE220025E17502002B5E7F /* GetProductListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductListTests.swift; sourceTree = "<group>"; };
+		C5DE226025E27595002B5E7F /* GetProductRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductRequestFactory.swift; sourceTree = "<group>"; };
+		C5DE226525E275B5002B5E7F /* GetProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProduct.swift; sourceTree = "<group>"; };
+		C5DE226A25E277D5002B5E7F /* GetProductListResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductListResult.swift; sourceTree = "<group>"; };
+		C5DE226F25E277F6002B5E7F /* GetProductResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductResult.swift; sourceTree = "<group>"; };
+		C5DE227F25E27D4D002B5E7F /* GetProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductTests.swift; sourceTree = "<group>"; };
 		E126035AB05F93433CA2BF23 /* Pods-GBShopRSN-GBShopRSNUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBShopRSN-GBShopRSNUITests.debug.xcconfig"; path = "Target Support Files/Pods-GBShopRSN-GBShopRSNUITests/Pods-GBShopRSN-GBShopRSNUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +237,7 @@
 				C58A508825DD850400D572F1 /* SignUp */,
 				C58A508725DD84D500D572F1 /* Authorisation */,
 				C58A508A25DD851F00D572F1 /* ChangeUserData */,
+				C5DE225F25E27545002B5E7F /* GetProduct */,
 				C5DE21D025E15DA3002B5E7F /* GetProductList */,
 				C58A508925DD850D00D572F1 /* ExitUser */,
 			);
@@ -273,6 +284,7 @@
 				C5DE21BD25E15067002B5E7F /* SignUpTests.swift */,
 				C52B22D125E130D100A009CA /* AuthTests.swift */,
 				C5DE21C225E1535D002B5E7F /* ChangeUserDataTests.swift */,
+				C5DE227F25E27D4D002B5E7F /* GetProductTests.swift */,
 				C5DE220025E17502002B5E7F /* GetProductListTests.swift */,
 				C52B22D925E1464F00A009CA /* LogOutTests.swift */,
 				C5DCB7AE25D87D7B00220690 /* Info.plist */,
@@ -318,6 +330,8 @@
 				C58A507F25DD806800D572F1 /* SignUpResult.swift */,
 				C5A460E625DD6FD40089E71C /* LoginResult.swift */,
 				C58A507A25DD800F00D572F1 /* ChangeUserDataResult.swift */,
+				C5DE226F25E277F6002B5E7F /* GetProductResult.swift */,
+				C5DE226A25E277D5002B5E7F /* GetProductListResult.swift */,
 				C58A507525DD7FB400D572F1 /* LogOutResult.swift */,
 			);
 			path = Entity;
@@ -369,6 +383,15 @@
 				C5DE21D625E15DF0002B5E7F /* GetProductList.swift */,
 			);
 			path = GetProductList;
+			sourceTree = "<group>";
+		};
+		C5DE225F25E27545002B5E7F /* GetProduct */ = {
+			isa = PBXGroup;
+			children = (
+				C5DE226025E27595002B5E7F /* GetProductRequestFactory.swift */,
+				C5DE226525E275B5002B5E7F /* GetProduct.swift */,
+			);
+			path = GetProduct;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -614,9 +637,12 @@
 				C58A507B25DD800F00D572F1 /* ChangeUserDataResult.swift in Sources */,
 				C58A507625DD7FB400D572F1 /* LogOutResult.swift in Sources */,
 				C58A509F25DDBFC800D572F1 /* SignUp.swift in Sources */,
+				C5DE226625E275B5002B5E7F /* GetProduct.swift in Sources */,
 				C5DE21E125E15F1A002B5E7F /* Product.swift in Sources */,
 				C5A460CD25DD6A9E0089E71C /* AbstractRequestFactory.swift in Sources */,
+				C5DE227025E277F6002B5E7F /* GetProductResult.swift in Sources */,
 				C58A506725DD714300D572F1 /* AuthRequestFactory.swift in Sources */,
+				C5DE226B25E277D5002B5E7F /* GetProductListResult.swift in Sources */,
 				C58A509725DDBCD400D572F1 /* LogOutRequestFactory.swift in Sources */,
 				C58A508025DD806800D572F1 /* SignUpResult.swift in Sources */,
 				C5A460E225DD6E630089E71C /* RequestRouter.swift in Sources */,
@@ -630,6 +656,7 @@
 				C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */,
 				C5A460D025DD6A9E0089E71C /* AbstractErrorParser.swift in Sources */,
 				C5A460CE25DD6A9E0089E71C /* ResponseCodable.swift in Sources */,
+				C5DE226125E27595002B5E7F /* GetProductRequestFactory.swift in Sources */,
 				C58A508D25DD861100D572F1 /* SignUpRequestFactory.swift in Sources */,
 				C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */,
 			);
@@ -643,6 +670,7 @@
 				C5DE21BE25E15067002B5E7F /* SignUpTests.swift in Sources */,
 				C52B22DA25E1464F00A009CA /* LogOutTests.swift in Sources */,
 				C52B22CA25E12BA600A009CA /* RequestFactoryTests.swift in Sources */,
+				C5DE228025E27D4D002B5E7F /* GetProductTests.swift in Sources */,
 				C5DE220125E17502002B5E7F /* GetProductListTests.swift in Sources */,
 				C52B22D225E130D100A009CA /* AuthTests.swift in Sources */,
 			);

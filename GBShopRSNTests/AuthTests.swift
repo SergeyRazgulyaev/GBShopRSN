@@ -23,7 +23,7 @@ class AuthTests: XCTestCase {
         let authUser = Auth(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let loggedIn = expectation(description: "logged in")
-        authUser.login(userName: "Somebody", password: "myPassword") {response in
+        authUser.logIn(userName: "Somebody", password: "myPassword") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -51,7 +51,7 @@ class AuthTests: XCTestCase {
         let authUser = Auth(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedLogIn = expectation(description: "failed log in")
-        authUser.login(userName: "Somebody", password: "myPassword") {response in
+        authUser.logIn(userName: "Somebody", password: "myPassword") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

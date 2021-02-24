@@ -38,6 +38,7 @@ extension LogOut {
         let path: String = "logout.json"
         
         let idUser: Int
+        
         var parameters: Parameters? {
             return ["id_user" : idUser]
         }

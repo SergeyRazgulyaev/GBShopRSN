@@ -192,13 +192,13 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
-		C58A508925DD850D00D572F1 /* ExitUser */ = {
+		C58A508925DD850D00D572F1 /* LogOut */ = {
 			isa = PBXGroup;
 			children = (
 				C58A509625DDBCD400D572F1 /* LogOutRequestFactory.swift */,
 				C58A50B125DDCD2800D572F1 /* LogOut.swift */,
 			);
-			path = ExitUser;
+			path = LogOut;
 			sourceTree = "<group>";
 		};
 		C58A508A25DD851F00D572F1 /* ChangeUserData */ = {
@@ -239,7 +239,7 @@
 				C58A508A25DD851F00D572F1 /* ChangeUserData */,
 				C5DE225F25E27545002B5E7F /* GetProduct */,
 				C5DE21D025E15DA3002B5E7F /* GetProductList */,
-				C58A508925DD850D00D572F1 /* ExitUser */,
+				C58A508925DD850D00D572F1 /* LogOut */,
 			);
 			path = Network;
 			sourceTree = "<group>";

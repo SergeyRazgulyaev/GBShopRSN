@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let authUser = requestFactory.makeAuthRequestFatory()
-        authUser.login(userName: "Somebody", password: "mypassword") { response in
+        authUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let login):
                 print(login)

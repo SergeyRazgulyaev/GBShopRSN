@@ -27,7 +27,7 @@ class SignUpTests: XCTestCase {
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.userMessage, "Регистрация прошла успешно!")
+                XCTAssertEqual(model.userMessage, "Registration completed successfully!")
                 registered.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

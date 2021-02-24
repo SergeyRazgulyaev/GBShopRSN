@@ -16,7 +16,7 @@ class RequestFactoryTests: XCTestCase {
         let authUser = requestFactory.makeAuthRequestFatory()
         
         let signedIn = expectation(description: "log in")
-        authUser.login(userName: "Somebody", password: "mypassword") { response in
+        authUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.user.id, 123)

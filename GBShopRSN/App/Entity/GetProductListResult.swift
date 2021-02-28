@@ -7,4 +7,12 @@
 
 import Foundation
 
-typealias GetProductListResult = [Product]
+struct GetProductListResult: Codable {
+    let pageNumber: Int
+    let productList: [Product]
+    
+    enum CodingKeys: String, CodingKey {
+        case pageNumber = "page_number"
+        case productList = "product_list"
+    }
+}

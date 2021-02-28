@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        let authUser = requestFactory.makeAuthRequestFatory()
-        authUser.logIn(userName: "Somebody", password: "mypassword") { response in
+        let logInUser = requestFactory.makeLogInRequestFatory()
+        logInUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let login):
                 print(login)
@@ -53,19 +53,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
-        
+
         let getProductList = requestFactory.makeGetProductListRequestFactory()
         getProductList.getProductList(pageNumber: 1, idCategory: 1) { response in
             switch response.result {
             case .success(let getProductList):
                 print(getProductList)
-//                print(getProductList.filter {$0.idProduct == 123 && $0.productName == "Ноутбук" && $0.price == 45600}.first ?? "No product")
-//                print(getProductList.filter {$0.idProduct == 456 && $0.productName == "Мышка" && $0.price == 1000}.first ?? "No product")
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
 
+        let addReview = requestFactory.makeAddReviewRequestFactory()
+        addReview.addReview(idUser: 123, text: "Review text") { response in
+            switch response.result {
+            case .success(let addReview):
+                print(addReview)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let deleteReview = requestFactory.makeDeleteReviewRequestFactory()
+        deleteReview.deleteReview(idComment: 123) { response in
+            switch response.result {
+            case .success(let deleteReview):
+                print(deleteReview)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        let getReviews = requestFactory.makeGetReviewsRequestFactory()
+        getReviews.getReviews(pageNumber: 1, idProduct: 123) { response in
+            switch response.result {
+            case .success(let getReviews):
+                print(getReviews)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         let logOutUser = requestFactory.makeLogOutRequestFactory()
         logOutUser.logOut(idUser: 123) { response in
             switch response.result {

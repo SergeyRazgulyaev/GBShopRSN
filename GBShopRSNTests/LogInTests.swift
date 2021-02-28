@@ -1,5 +1,5 @@
 //
-//  SignUpTests.swift
+//  LogInTests.swift
 //  GBShopRSNTests
 //
 //  Created by Sergey Razgulyaev on 20.02.2021.
@@ -9,10 +9,10 @@ import XCTest
 import Alamofire
 @testable import GBShopRSN
 
-class SignUpTests: XCTestCase {
-    
+class LogInTests: XCTestCase {
+
     //MARK: - Positive tests
-    func testSignUp() throws {
+    func testLogIn() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -20,24 +20,27 @@ class SignUpTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logInUser = LogIn(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let registered = expectation(description: "registered user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        let loggedIn = expectation(description: "logged in")
+        logInUser.logIn(userName: "Somebody", password: "myPassword") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.userMessage, "Registration completed successfully!")
-                registered.fulfill()
+                XCTAssertEqual(model.user.id, 123)
+                XCTAssertEqual(model.user.login, "geekbrains")
+                XCTAssertEqual(model.user.name, "John")
+                XCTAssertEqual(model.user.lastname, "Doe")
+                loggedIn.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
         }
         waitForExpectations(timeout: 10)
     }
-    
+
     //MARK: - Negative tests
-    func testFailedSignUp() throws {
+    func testFailedLogIn() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://wrongUrl.com"))
         
         let configuration = URLSessionConfiguration.default
@@ -45,15 +48,15 @@ class SignUpTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logInUser = LogIn(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let failedRegister = expectation(description: "failed register user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        let failedLogIn = expectation(description: "failed log in")
+        logInUser.logIn(userName: "Somebody", password: "myPassword") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")
             case .failure:
-                failedRegister.fulfill()
+                failedLogIn.fulfill()
             }
         }
         waitForExpectations(timeout: 10)

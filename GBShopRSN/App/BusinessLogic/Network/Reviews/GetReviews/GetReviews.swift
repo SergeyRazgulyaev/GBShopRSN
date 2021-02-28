@@ -1,14 +1,14 @@
 //
-//  LogOut.swift
+//  GetReviews.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 18.02.2021.
+//  Created by Sergey Razgulyaev on 26.02.2021.
 //
 
 import Foundation
 import Alamofire
 
-class LogOut: AbstractRequestFactory {
+class GetReviews: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,23 +24,27 @@ class LogOut: AbstractRequestFactory {
     }
 }
 
-extension LogOut: LogOutRequestFactory {
-    func logOut(idUser: Int, completionHandler: @escaping (AFDataResponse<LogOutResult>) -> Void) {
-        let requestModel = LogoutRequest(baseUrl: baseUrl, idUser: idUser)
+extension GetReviews: GetReviewsRequestFactory {
+    func getReviews(pageNumber: Int, idProduct: Int, completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void) {
+        let requestModel = GetReviewsRequest(baseUrl: baseUrl, pageNumber: pageNumber, idProduct: idProduct)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension LogOut {
-    struct LogoutRequest: RequestRouter {
+extension GetReviews {
+    struct GetReviewsRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .post
-        let path: String = "logOut"
+        let path: String = "getReviews"
         
-        let idUser: Int
+        let pageNumber: Int
+        let idProduct: Int
         
         var parameters: Parameters? {
-            return ["id_user" : idUser]
+            return [
+                "page_number" : pageNumber,
+                "id_product" : idProduct
+            ]
         }
     }
 }

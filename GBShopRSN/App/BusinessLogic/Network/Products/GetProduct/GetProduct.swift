@@ -34,8 +34,8 @@ extension GetProduct: GetProductRequestFactory {
 extension GetProduct {
     struct GetProductRequest: RequestRouter {
         let baseUrl: URL
-        let method: HTTPMethod = .get
-        let path: String = "getGoodById.json"
+        let method: HTTPMethod = .post
+        let path: String = "getProduct"
         
         let idProduct: Int
         

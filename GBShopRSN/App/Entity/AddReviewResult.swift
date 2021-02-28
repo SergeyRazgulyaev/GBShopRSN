@@ -1,13 +1,13 @@
 //
-//  SignUpResult.swift
+//  AddReviewResult.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 17.02.2021.
+//  Created by Sergey Razgulyaev on 26.02.2021.
 //
 
 import Foundation
 
-struct SignUpResult: Codable {
+struct AddReviewResult: Codable {
     let result: Int
     let userMessage: String
     

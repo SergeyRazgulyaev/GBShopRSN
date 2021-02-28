@@ -11,21 +11,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let requestFactory = RequestFactory()
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let registerUser = requestFactory.makeRegistretionRequestFactory()
-        registerUser.register(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+        let registerUser = requestFactory.makeSignUpRequestFactory()
+        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
             switch response.result {
-            case .success(let register):
-                print(register)
+            case .success(let signUp):
+                print(signUp)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-        
+
         let authUser = requestFactory.makeAuthRequestFatory()
-        authUser.login(userName: "Somebody", password: "mypassword") { response in
+        authUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let login):
                 print(login)
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
-        
+
         let changeData = requestFactory.makeChangeUserDataRequestFactory()
         changeData.changeUserData(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
             switch response.result {
@@ -43,12 +43,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
-        
-        let exitUser = requestFactory.makeExitRequestFactory()
-        exitUser.logout(idUser: 123) { response in
+
+        let getProduct = requestFactory.makeGetProductRequestFactory()
+        getProduct.getProduct(idProduct: 123) { response in
             switch response.result {
-            case .success(let logout):
-                print(logout)
+            case .success(let getProduct):
+                print(getProduct)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        let getProductList = requestFactory.makeGetProductListRequestFactory()
+        getProductList.getProductList(pageNumber: 1, idCategory: 1) { response in
+            switch response.result {
+            case .success(let getProductList):
+                print(getProductList)
+//                print(getProductList.filter {$0.idProduct == 123 && $0.productName == "Ноутбук" && $0.price == 45600}.first ?? "No product")
+//                print(getProductList.filter {$0.idProduct == 456 && $0.productName == "Мышка" && $0.price == 1000}.first ?? "No product")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
+        let logOutUser = requestFactory.makeLogOutRequestFactory()
+        logOutUser.logOut(idUser: 123) { response in
+            switch response.result {
+            case .success(let logOut):
+                print(logOut)
             case .failure(let error):
                 print(error.localizedDescription)
             }

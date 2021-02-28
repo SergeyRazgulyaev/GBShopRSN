@@ -1,14 +1,14 @@
 //
-//  ExitFromShop.swift
+//  GetProduct.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 18.02.2021.
+//  Created by Sergey Razgulyaev on 21.02.2021.
 //
 
 import Foundation
 import Alamofire
 
-class ExitFromShop: AbstractRequestFactory {
+class GetProduct: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,22 +24,25 @@ class ExitFromShop: AbstractRequestFactory {
     }
 }
 
-extension ExitFromShop: ExitFromShopRequestFactory {
-    func logout(idUser: Int, completionHandler: @escaping (AFDataResponse<LogoutResult>) -> Void) {
-        let requestModel = Logout(baseUrl: baseUrl, idUser: idUser)
+extension GetProduct: GetProductRequestFactory {
+    func getProduct(idProduct: Int, completionHandler: @escaping (AFDataResponse<GetProductResult>) -> Void) {
+        let requestModel = GetProductRequest(baseUrl: baseUrl, idProduct: idProduct)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension ExitFromShop {
-    struct Logout: RequestRouter {
+extension GetProduct {
+    struct GetProductRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
-        let path: String = "logout.json"
+        let path: String = "getGoodById.json"
         
-        let idUser: Int
+        let idProduct: Int
+        
         var parameters: Parameters? {
-            return ["id_user" : idUser]
+            return [
+                "id_product": idProduct
+            ]
         }
     }
 }

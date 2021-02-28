@@ -10,10 +10,6 @@ import Alamofire
 
 class RequestFactory {
     
-    func makeErrorParser() -> AbstractErrorParser {
-        return ErrorParser()
-    }
-    
     let baseUrl = URL(string:         "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
     
     lazy var commonSession: Session = {
@@ -26,9 +22,13 @@ class RequestFactory {
     
     let sessionQueue = DispatchQueue.global(qos: .utility)
     
-    func makeRegistretionRequestFactory() -> RegistrationRequestFactory {
+    func makeErrorParser() -> AbstractErrorParser {
+        return ErrorParser()
+    }
+    
+    func makeSignUpRequestFactory() -> SignUpRequestFactory {
         let errorParser = makeErrorParser()
-        return Registration(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+        return SignUp(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
     func makeAuthRequestFatory() -> AuthRequestFactory {
@@ -41,8 +41,18 @@ class RequestFactory {
         return ChangeUserData(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
-    func makeExitRequestFactory() -> ExitFromShopRequestFactory {
+    func makeGetProductRequestFactory() -> GetProductRequestFactory {
         let errorParser = makeErrorParser()
-        return ExitFromShop(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+        return GetProduct(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeGetProductListRequestFactory() -> GetProductListRequestFactory {
+        let errorParser = makeErrorParser()
+        return GetProductList(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeLogOutRequestFactory() -> LogOutRequestFactory {
+        let errorParser = makeErrorParser()
+        return LogOut(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
 }

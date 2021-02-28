@@ -1,14 +1,14 @@
 //
-//  Auth.swift
+//  LogOut.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 17.02.2021.
+//  Created by Sergey Razgulyaev on 18.02.2021.
 //
 
 import Foundation
 import Alamofire
 
-class Auth: AbstractRequestFactory {
+class LogOut: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,26 +24,23 @@ class Auth: AbstractRequestFactory {
     }
 }
 
-extension Auth: AuthRequestFactory {
-    func logIn(userName: String, password: String, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
-        let requestModel = LoginRequest(baseUrl: baseUrl, login: userName, password: password)
+extension LogOut: LogOutRequestFactory {
+    func logOut(idUser: Int, completionHandler: @escaping (AFDataResponse<LogOutResult>) -> Void) {
+        let requestModel = LogoutRequest(baseUrl: baseUrl, idUser: idUser)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension Auth {
-    struct LoginRequest: RequestRouter {
+extension LogOut {
+    struct LogoutRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
-        let path: String = "login.json"
+        let path: String = "logout.json"
         
-        let login: String
-        let password: String
+        let idUser: Int
+        
         var parameters: Parameters? {
-            return [
-                "username": login,
-                "password": password
-            ]
+            return ["id_user" : idUser]
         }
     }
 }

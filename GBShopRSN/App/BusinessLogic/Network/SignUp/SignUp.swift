@@ -1,5 +1,5 @@
 //
-//  Registration.swift
+//  SignUp.swift
 //  GBShopRSN
 //
 //  Created by Sergey Razgulyaev on 18.02.2021.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class Registration: AbstractRequestFactory {
+class SignUp: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,15 +24,15 @@ class Registration: AbstractRequestFactory {
     }
 }
 
-extension Registration: RegistrationRequestFactory {
-    func register(idUser: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<RegistrationResult>) -> Void) {
-        let requestModel = Register(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
+extension SignUp: SignUpRequestFactory {
+    func signUp(idUser: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
+        let requestModel = SignUpRequest(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension Registration {
-    struct Register: RequestRouter {
+extension SignUp {
+    struct SignUpRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .get
         let path: String = "registerUser.json"

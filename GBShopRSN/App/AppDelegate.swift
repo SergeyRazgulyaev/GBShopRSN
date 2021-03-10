@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let registerUser = requestFactory.makeSignUpRequestFactory()
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+        registerUser.signUp(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
             switch response.result {
             case .success(let signUp):
                 print(signUp)
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        let logInUser = requestFactory.makeLogInRequestFatory()
+        let logInUser = requestFactory.makeLogInRequestFactory()
         logInUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let login):
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let changeData = requestFactory.makeChangeUserDataRequestFactory()
-        changeData.changeUserData(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+        changeData.changeUserData(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
             switch response.result {
             case .success(let changeUserData):
                 print(changeUserData)
@@ -44,8 +44,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        let addToBasket = requestFactory.makeAddToBasketRequestFactory()
+        addToBasket.addToBasket(productID: 123, quantityInBasket: 1) { response in
+            switch response.result {
+            case .success(let addProductToBasket):
+                print(addProductToBasket)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
+        deleteFromBasket.deleteFromBasket(productID: 123) { response in
+            switch response.result {
+            case .success(let deleteProductFromBasket):
+                print(deleteProductFromBasket)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        let getBasket = requestFactory.makeGetBasketRequestFactory()
+        getBasket.getBasket(userID: 123) { response in
+            switch response.result {
+            case .success(let getBasket):
+                print(getBasket)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        let payBasket = requestFactory.makePayBasketRequestFactory()
+        payBasket.payBasket(userID: 123, payAmount: 1000) { response in
+            switch response.result {
+            case .success(let payBasket):
+                print(payBasket)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         let getProduct = requestFactory.makeGetProductRequestFactory()
-        getProduct.getProduct(idProduct: 123) { response in
+        getProduct.getProduct(productID: 123) { response in
             switch response.result {
             case .success(let getProduct):
                 print(getProduct)
@@ -65,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let addReview = requestFactory.makeAddReviewRequestFactory()
-        addReview.addReview(idUser: 123, text: "Review text") { response in
+        addReview.addReview(userID: 123, text: "Review text") { response in
             switch response.result {
             case .success(let addReview):
                 print(addReview)
@@ -85,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let getReviews = requestFactory.makeGetReviewsRequestFactory()
-        getReviews.getReviews(pageNumber: 1, idProduct: 123) { response in
+        getReviews.getReviews(pageNumber: 1, productID: 123) { response in
             switch response.result {
             case .success(let getReviews):
                 print(getReviews)
@@ -95,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let logOutUser = requestFactory.makeLogOutRequestFactory()
-        logOutUser.logOut(idUser: 123) { response in
+        logOutUser.logOut(userID: 123) { response in
             switch response.result {
             case .success(let logOut):
                 print(logOut)

@@ -13,6 +13,7 @@ class DeleteReviewTests: XCTestCase {
     
     //MARK: - Positive tests
     func testDeleteReview() throws {
+//        let baseURL = try XCTUnwrap(URL(string: "http://127.0.0.1:8080"))
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default

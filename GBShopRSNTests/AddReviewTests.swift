@@ -13,6 +13,7 @@ class AddReviewTests: XCTestCase {
     
     //MARK: - Positive tests
     func testAddReview() throws {
+//        let baseURL = try XCTUnwrap(URL(string: "http://127.0.0.1:8080"))
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -23,7 +24,7 @@ class AddReviewTests: XCTestCase {
         let addReview = AddReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let addedReview = expectation(description: "added review")
-        addReview.addReview(idUser: 123, text: "Review text") {response in
+        addReview.addReview(userID: 123, text: "Review text") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -48,7 +49,7 @@ class AddReviewTests: XCTestCase {
         let addReview = AddReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedAddReview = expectation(description: "failed add review")
-        addReview.addReview(idUser: 123, text: "Review text") {response in
+        addReview.addReview(userID: 123, text: "Review text") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

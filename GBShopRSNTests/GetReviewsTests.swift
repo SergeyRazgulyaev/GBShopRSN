@@ -13,6 +13,7 @@ class GetReviewsTests: XCTestCase {
     
     //MARK: - Positive tests
     func testGetReviews() throws {
+//        let baseURL = try XCTUnwrap(URL(string: "http://127.0.0.1:8080"))
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -23,15 +24,15 @@ class GetReviewsTests: XCTestCase {
         let getReviews = GetReviews(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let receivedReviews = expectation(description: "received reviews")
-        getReviews.getReviews(pageNumber: 1, idProduct: 123) {response in
+        getReviews.getReviews(pageNumber: 1, productID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.pageNumber, 1)
                 XCTAssertEqual(model.reviews[0].idComment, 567)
-                XCTAssertEqual(model.reviews[0].idUser, 123)
+                XCTAssertEqual(model.reviews[0].userID, 123)
                 XCTAssertEqual(model.reviews[0].text, "I liked the look and functionality of the product")
                 XCTAssertEqual(model.reviews[1].idComment, 890)
-                XCTAssertEqual(model.reviews[1].idUser, 456)
+                XCTAssertEqual(model.reviews[1].userID, 456)
                 XCTAssertEqual(model.reviews[1].text, "This is a good product!")
                 receivedReviews.fulfill()
             case .failure(let error):
@@ -53,7 +54,7 @@ class GetReviewsTests: XCTestCase {
         let getReviews = GetReviews(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedReceiveReviews = expectation(description: "failed receive reviews")
-        getReviews.getReviews(pageNumber: 1, idProduct: 123) {response in
+        getReviews.getReviews(pageNumber: 1, productID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("must have failed: \(model)")

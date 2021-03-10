@@ -13,7 +13,7 @@ class RequestFactoryTests: XCTestCase {
     
     func testLogIn() throws {
         let requestFactory = RequestFactory()
-        let logInUser = requestFactory.makeLogInRequestFatory()
+        let logInUser = requestFactory.makeLogInRequestFactory()
         
         let signedIn = expectation(description: "log in")
         logInUser.logIn(userName: "Somebody", password: "mypassword") { response in

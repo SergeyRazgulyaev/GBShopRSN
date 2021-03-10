@@ -25,8 +25,8 @@ class GetReviews: AbstractRequestFactory {
 }
 
 extension GetReviews: GetReviewsRequestFactory {
-    func getReviews(pageNumber: Int, idProduct: Int, completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void) {
-        let requestModel = GetReviewsRequest(baseUrl: baseUrl, pageNumber: pageNumber, idProduct: idProduct)
+    func getReviews(pageNumber: Int, productID: Int, completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void) {
+        let requestModel = GetReviewsRequest(baseUrl: baseUrl, pageNumber: pageNumber, productID: productID)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
@@ -38,12 +38,12 @@ extension GetReviews {
         let path: String = "getReviews"
         
         let pageNumber: Int
-        let idProduct: Int
+        let productID: Int
         
         var parameters: Parameters? {
             return [
                 "page_number" : pageNumber,
-                "id_product" : idProduct
+                "product_id" : productID
             ]
         }
     }

@@ -13,6 +13,7 @@ class LogOutTests: XCTestCase {
 
     //MARK: - Positive tests
     func testLogOutUser() throws {
+//        let baseURL = try XCTUnwrap(URL(string: "http://127.0.0.1:8080"))
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -23,7 +24,7 @@ class LogOutTests: XCTestCase {
         let logOutUser = LogOut(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let logOut = expectation(description: "log out user")
-        logOutUser.logOut(idUser: 123) {response in
+        logOutUser.logOut(userID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -47,7 +48,7 @@ class LogOutTests: XCTestCase {
         let logOutUser = LogOut(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedLogOut = expectation(description: "failed log out user")
-        logOutUser.logOut(idUser: 123) {response in
+        logOutUser.logOut(userID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

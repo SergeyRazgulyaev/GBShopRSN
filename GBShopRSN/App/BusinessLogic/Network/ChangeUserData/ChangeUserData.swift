@@ -25,8 +25,8 @@ class ChangeUserData: AbstractRequestFactory {
 }
 
 extension ChangeUserData: ChangeUserDataRequestFactory {
-    func changeUserData(idUser: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
+    func changeUserData(userID: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
+        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl, userID: userID, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
@@ -37,7 +37,7 @@ extension ChangeUserData {
         let method: HTTPMethod = .post
         let path: String = "changeUserData"
         
-        let idUser: Int
+        let userID: Int
         let userName: String
         let password: String
         let email: String
@@ -48,7 +48,7 @@ extension ChangeUserData {
         var parameters: Parameters? {
             return [
                 
-                "id_user" : idUser,
+                "user_id" : userID,
                 "username" : userName,
                 "password" : password,
                 "email" : email,

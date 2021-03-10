@@ -13,6 +13,7 @@ class SignUpTests: XCTestCase {
     
     //MARK: - Positive tests
     func testSignUp() throws {
+//        let baseURL = try XCTUnwrap(URL(string: "http://127.0.0.1:8080"))
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -23,7 +24,7 @@ class SignUpTests: XCTestCase {
         let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let registered = expectation(description: "registered user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        registerUser.signUp(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -48,7 +49,7 @@ class SignUpTests: XCTestCase {
         let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedRegister = expectation(description: "failed register user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        registerUser.signUp(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

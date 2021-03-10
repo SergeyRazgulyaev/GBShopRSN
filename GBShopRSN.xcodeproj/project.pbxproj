@@ -37,6 +37,11 @@
 		C58A509F25DDBFC800D572F1 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A509E25DDBFC800D572F1 /* SignUp.swift */; };
 		C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A50A325DDC4B300D572F1 /* ChangeUserData.swift */; };
 		C58A50B225DDCD2800D572F1 /* LogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A50B125DDCD2800D572F1 /* LogOut.swift */; };
+		C58C1E4025F57475006A0E95 /* SignUpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C1E3F25F57475006A0E95 /* SignUpScreenView.swift */; };
+		C58C1E4B25F574C5006A0E95 /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C1E4A25F574C5006A0E95 /* SignUpScreenViewController.swift */; };
+		C58C1E5325F574F0006A0E95 /* LogInScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C1E5225F574F0006A0E95 /* LogInScreenViewController.swift */; };
+		C58D8F0F25F80E1C00C1BC22 /* LogInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F0E25F80E1C00C1BC22 /* LogInScreenView.swift */; };
+		C58D8F1825F8366500C1BC22 /* UserInfoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F1725F8366500C1BC22 /* UserInfoScreenView.swift */; };
 		C5A460CD25DD6A9E0089E71C /* AbstractRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460C925DD6A9D0089E71C /* AbstractRequestFactory.swift */; };
 		C5A460CE25DD6A9E0089E71C /* ResponseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CA25DD6A9E0089E71C /* ResponseCodable.swift */; };
 		C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */; };
@@ -44,6 +49,10 @@
 		C5A460E225DD6E630089E71C /* RequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460E125DD6E630089E71C /* RequestRouter.swift */; };
 		C5A460E725DD6FD40089E71C /* LogInResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460E625DD6FD40089E71C /* LogInResult.swift */; };
 		C5A460EC25DD6FE40089E71C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460EB25DD6FE40089E71C /* User.swift */; };
+		C5B209BA25F24A5C00535A64 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B209B925F24A5C00535A64 /* TabBarController.swift */; };
+		C5B209C725F2525D00535A64 /* UserInfoScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B209C625F2525D00535A64 /* UserInfoScreenViewController.swift */; };
+		C5B209D225F2536B00535A64 /* EntranceScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B209D125F2536B00535A64 /* EntranceScreenViewController.swift */; };
+		C5B209FD25F2917900535A64 /* EntranceScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B209FC25F2917900535A64 /* EntranceScreenView.swift */; };
 		C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79525D87D7700220690 /* AppDelegate.swift */; };
 		C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79725D87D7700220690 /* SceneDelegate.swift */; };
 		C5DCB79F25D87D7A00220690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5DCB79E25D87D7A00220690 /* Assets.xcassets */; };
@@ -133,6 +142,11 @@
 		C58A509E25DDBFC800D572F1 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		C58A50A325DDC4B300D572F1 /* ChangeUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserData.swift; sourceTree = "<group>"; };
 		C58A50B125DDCD2800D572F1 /* LogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOut.swift; sourceTree = "<group>"; };
+		C58C1E3F25F57475006A0E95 /* SignUpScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenView.swift; sourceTree = "<group>"; };
+		C58C1E4A25F574C5006A0E95 /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
+		C58C1E5225F574F0006A0E95 /* LogInScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreenViewController.swift; sourceTree = "<group>"; };
+		C58D8F0E25F80E1C00C1BC22 /* LogInScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreenView.swift; sourceTree = "<group>"; };
+		C58D8F1725F8366500C1BC22 /* UserInfoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoScreenView.swift; sourceTree = "<group>"; };
 		C5A460C925DD6A9D0089E71C /* AbstractRequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractRequestFactory.swift; sourceTree = "<group>"; };
 		C5A460CA25DD6A9E0089E71C /* ResponseCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseCodable.swift; sourceTree = "<group>"; };
 		C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorParser.swift; sourceTree = "<group>"; };
@@ -140,6 +154,10 @@
 		C5A460E125DD6E630089E71C /* RequestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRouter.swift; sourceTree = "<group>"; };
 		C5A460E625DD6FD40089E71C /* LogInResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInResult.swift; sourceTree = "<group>"; };
 		C5A460EB25DD6FE40089E71C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C5B209B925F24A5C00535A64 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C5B209C625F2525D00535A64 /* UserInfoScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoScreenViewController.swift; sourceTree = "<group>"; };
+		C5B209D125F2536B00535A64 /* EntranceScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceScreenViewController.swift; sourceTree = "<group>"; };
+		C5B209FC25F2917900535A64 /* EntranceScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceScreenView.swift; sourceTree = "<group>"; };
 		C5DCB79225D87D7700220690 /* GBShopRSN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBShopRSN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DCB79525D87D7700220690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5DCB79725D87D7700220690 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -349,6 +367,122 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		C5B209A725F2420D00535A64 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209F625F2912A00535A64 /* ViewController */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		C5B209C525F2524D00535A64 /* UserInfoScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209FB25F2915400535A64 /* View */,
+				C5B209F725F2912D00535A64 /* ViewController */,
+			);
+			path = UserInfoScreenViewController;
+			sourceTree = "<group>";
+		};
+		C5B209CE25F252BD00535A64 /* EntranceScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209F825F2914100535A64 /* View */,
+				C5B209F325F2911F00535A64 /* ViewController */,
+			);
+			path = EntranceScreen;
+			sourceTree = "<group>";
+		};
+		C5B209CF25F2534000535A64 /* SignUpScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209F925F2914900535A64 /* View */,
+				C5B209F425F2912500535A64 /* ViewController */,
+			);
+			path = SignUpScreenViewController;
+			sourceTree = "<group>";
+		};
+		C5B209D025F2534900535A64 /* LogInScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209FA25F2914C00535A64 /* View */,
+				C5B209F525F2912700535A64 /* ViewController */,
+			);
+			path = LogInScreenViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F325F2911F00535A64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209D125F2536B00535A64 /* EntranceScreenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F425F2912500535A64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C58C1E4A25F574C5006A0E95 /* SignUpScreenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F525F2912700535A64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C58C1E5225F574F0006A0E95 /* LogInScreenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F625F2912A00535A64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209B925F24A5C00535A64 /* TabBarController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F725F2912D00535A64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209C625F2525D00535A64 /* UserInfoScreenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5B209F825F2914100535A64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C5B209FC25F2917900535A64 /* EntranceScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5B209F925F2914900535A64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C58C1E3F25F57475006A0E95 /* SignUpScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5B209FA25F2914C00535A64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C58D8F0E25F80E1C00C1BC22 /* LogInScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C5B209FB25F2915400535A64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C58D8F1725F8366500C1BC22 /* UserInfoScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C5DCB78925D87D7600220690 = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +601,11 @@
 		C5DCB7CC25D887FB00220690 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				C5B209CE25F252BD00535A64 /* EntranceScreen */,
+				C5B209CF25F2534000535A64 /* SignUpScreenViewController */,
+				C5B209D025F2534900535A64 /* LogInScreenViewController */,
+				C5B209A725F2420D00535A64 /* TabBarController */,
+				C5B209C525F2524D00535A64 /* UserInfoScreenViewController */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -800,11 +939,14 @@
 			files = (
 				C58A507125DD733500D572F1 /* RequestFactory.swift in Sources */,
 				C58A50B225DDCD2800D572F1 /* LogOut.swift in Sources */,
+				C58D8F0F25F80E1C00C1BC22 /* LogInScreenView.swift in Sources */,
 				C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */,
 				C5FFAEF925EE7D980004BC2B /* GetBasketRequestFactory.swift in Sources */,
 				C5FFAEDE25ED12630004BC2B /* AddToBasketResult.swift in Sources */,
 				C539A64325E938AA00865D6E /* GetReviewsResult.swift in Sources */,
+				C5B209BA25F24A5C00535A64 /* TabBarController.swift in Sources */,
 				C58A507B25DD800F00D572F1 /* ChangeUserDataResult.swift in Sources */,
+				C58C1E5325F574F0006A0E95 /* LogInScreenViewController.swift in Sources */,
 				C58A507625DD7FB400D572F1 /* LogOutResult.swift in Sources */,
 				C5FFAF1025EF87940004BC2B /* PayBasket.swift in Sources */,
 				C5FFAF1525EF89360004BC2B /* PayBasketResult.swift in Sources */,
@@ -815,8 +957,10 @@
 				C5FFAEF125EE78730004BC2B /* DeleteFromBasketResult.swift in Sources */,
 				C5FFAF0B25EF87820004BC2B /* PayBasketRequestFactory.swift in Sources */,
 				C5A460CD25DD6A9E0089E71C /* AbstractRequestFactory.swift in Sources */,
+				C58C1E4025F57475006A0E95 /* SignUpScreenView.swift in Sources */,
 				C539A63125E8FF5300865D6E /* DeleteReviewResult.swift in Sources */,
 				C5DE227025E277F6002B5E7F /* GetProductResult.swift in Sources */,
+				C5B209FD25F2917900535A64 /* EntranceScreenView.swift in Sources */,
 				C58A506725DD714300D572F1 /* LogInRequestFactory.swift in Sources */,
 				C539A61A25E8FB6200865D6E /* AddReview.swift in Sources */,
 				C5DE226B25E277D5002B5E7F /* GetProductListResult.swift in Sources */,
@@ -825,6 +969,7 @@
 				C539A61F25E8FC7400865D6E /* AddReviewResult.swift in Sources */,
 				C5FFAF0325EE7E7C0004BC2B /* GetBasketResult.swift in Sources */,
 				C5A460E225DD6E630089E71C /* RequestRouter.swift in Sources */,
+				C58C1E4B25F574C5006A0E95 /* SignUpScreenViewController.swift in Sources */,
 				C539A63925E9362500865D6E /* GetReviewsRequestFactory.swift in Sources */,
 				C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */,
 				C539A62725E8FE4500865D6E /* DeleteReviewRequestFactory.swift in Sources */,
@@ -833,6 +978,7 @@
 				C58A509225DD869700D572F1 /* ChangeUserDataRequestFactory.swift in Sources */,
 				C5FFAED425ED0D640004BC2B /* AddToBasketRequestFactory.swift in Sources */,
 				C539A61525E8FB4D00865D6E /* AddReviewRequestFactory.swift in Sources */,
+				C58D8F1825F8366500C1BC22 /* UserInfoScreenView.swift in Sources */,
 				C5FFAED925ED0D7A0004BC2B /* AddToBasket.swift in Sources */,
 				C5DE21D225E15DDC002B5E7F /* GetProductListRequestFactory.swift in Sources */,
 				C5A460E725DD6FD40089E71C /* LogInResult.swift in Sources */,
@@ -841,7 +987,9 @@
 				C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */,
 				C5FFAEE725EE77A40004BC2B /* DeleteFromBasketRequestFactory.swift in Sources */,
 				C5A460D025DD6A9E0089E71C /* AbstractErrorParser.swift in Sources */,
+				C5B209D225F2536B00535A64 /* EntranceScreenViewController.swift in Sources */,
 				C5A460CE25DD6A9E0089E71C /* ResponseCodable.swift in Sources */,
+				C5B209C725F2525D00535A64 /* UserInfoScreenViewController.swift in Sources */,
 				C539A62C25E8FECC00865D6E /* DeleteReview.swift in Sources */,
 				C539A64825E938FA00865D6E /* Review.swift in Sources */,
 				C539A63E25E9363400865D6E /* GetReviews.swift in Sources */,

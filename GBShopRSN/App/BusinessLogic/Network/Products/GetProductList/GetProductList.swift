@@ -34,8 +34,8 @@ extension GetProductList: GetProductListRequestFactory {
 extension GetProductList {
     struct GetProductListRequest: RequestRouter {
         let baseUrl: URL
-        let method: HTTPMethod = .get
-        let path: String = "catalogData.json"
+        let method: HTTPMethod = .post
+        let path: String = "getProductList"
         
         let pageNumber: Int
         let idCategory: Int

@@ -1,46 +1,42 @@
 //
-//  AuthTests.swift
+//  DeleteReviewTests.swift
 //  GBShopRSNTests
 //
-//  Created by Sergey Razgulyaev on 20.02.2021.
+//  Created by Sergey Razgulyaev on 26.02.2021.
 //
 
 import XCTest
 import Alamofire
 @testable import GBShopRSN
 
-class AuthTests: XCTestCase {
-
+class DeleteReviewTests: XCTestCase {
+    
     //MARK: - Positive tests
-    func testLogIn() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/"))
+    func testDeleteReview() throws {
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let authUser = Auth(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let deleteReview = DeleteReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let loggedIn = expectation(description: "logged in")
-        authUser.logIn(userName: "Somebody", password: "myPassword") {response in
+        let deletedReview = expectation(description: "deleted review")
+        deleteReview.deleteReview(idComment: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.user.id, 123)
-                XCTAssertEqual(model.user.login, "geekbrains")
-                XCTAssertEqual(model.user.name, "John")
-                XCTAssertEqual(model.user.lastname, "Doe")
-                loggedIn.fulfill()
+                deletedReview.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
         }
         waitForExpectations(timeout: 10)
     }
-
+    
     //MARK: - Negative tests
-    func testFailedLogIn() throws {
+    func testFailedDeleteReview() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://wrongUrl.com"))
         
         let configuration = URLSessionConfiguration.default
@@ -48,15 +44,15 @@ class AuthTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let authUser = Auth(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let deleteReview = DeleteReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let failedLogIn = expectation(description: "failed log in")
-        authUser.logIn(userName: "Somebody", password: "myPassword") {response in
+        let failedDeleteReview = expectation(description: "failed delete review")
+        deleteReview.deleteReview(idComment: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")
             case .failure:
-                failedLogIn.fulfill()
+                failedDeleteReview.fulfill()
             }
         }
         waitForExpectations(timeout: 10)

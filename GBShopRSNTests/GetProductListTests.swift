@@ -13,7 +13,7 @@ class GetProductListTests: XCTestCase {
     
     //MARK: - Positive tests
     func testGetProductList() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/"))
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
@@ -26,12 +26,13 @@ class GetProductListTests: XCTestCase {
         getProductList.getProductList(pageNumber: 1, idCategory: 1) {response in
             switch response.result {
             case .success(let model):
-                XCTAssertEqual(model[0].idProduct, 123)
-                XCTAssertEqual(model[0].productName, "Ноутбук")
-                XCTAssertEqual(model[0].price, 45600)
-                XCTAssertEqual(model[1].idProduct, 456)
-                XCTAssertEqual(model[1].productName, "Мышка")
-                XCTAssertEqual(model[1].price, 1000)
+                XCTAssertEqual(model.pageNumber, 1)
+                XCTAssertEqual(model.productList[0].idProduct, 123)
+                XCTAssertEqual(model.productList[0].productName, "Notebook")
+                XCTAssertEqual(model.productList[0].price, 45600)
+                XCTAssertEqual(model.productList[1].idProduct, 456)
+                XCTAssertEqual(model.productList[1].productName, "Mouse")
+                XCTAssertEqual(model.productList[1].price, 1000)
                 receivedProductList.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

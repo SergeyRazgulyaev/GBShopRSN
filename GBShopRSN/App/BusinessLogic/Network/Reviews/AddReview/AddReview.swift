@@ -1,14 +1,14 @@
 //
-//  Auth.swift
+//  AddReview.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 17.02.2021.
+//  Created by Sergey Razgulyaev on 26.02.2021.
 //
 
 import Foundation
 import Alamofire
 
-class Auth: AbstractRequestFactory {
+class AddReview: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,25 +24,26 @@ class Auth: AbstractRequestFactory {
     }
 }
 
-extension Auth: AuthRequestFactory {
-    func logIn(userName: String, password: String, completionHandler: @escaping (AFDataResponse<LoginResult>) -> Void) {
-        let requestModel = LoginRequest(baseUrl: baseUrl, login: userName, password: password)
+extension AddReview: AddReviewRequestFactory {
+    func addReview(idUser: Int, text: String, completionHandler: @escaping (AFDataResponse<AddReviewResult>) -> Void) {
+        let requestModel = AddReviewRequest(baseUrl: baseUrl, idUser: idUser, text: text)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension Auth {
-    struct LoginRequest: RequestRouter {
+extension AddReview {
+    struct AddReviewRequest: RequestRouter {
         let baseUrl: URL
-        let method: HTTPMethod = .get
-        let path: String = "login.json"
+        let method: HTTPMethod = .post
+        let path: String = "addReview"
         
-        let login: String
-        let password: String
+        let idUser: Int
+        let text: String
+        
         var parameters: Parameters? {
             return [
-                "username": login,
-                "password": password
+                "id_user" : idUser,
+                "text" : text
             ]
         }
     }

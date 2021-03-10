@@ -1,18 +1,18 @@
 //
-//  SignUpTests.swift
+//  AddReviewTests.swift
 //  GBShopRSNTests
 //
-//  Created by Sergey Razgulyaev on 20.02.2021.
+//  Created by Sergey Razgulyaev on 26.02.2021.
 //
 
 import XCTest
 import Alamofire
 @testable import GBShopRSN
 
-class SignUpTests: XCTestCase {
+class AddReviewTests: XCTestCase {
     
     //MARK: - Positive tests
-    func testSignUp() throws {
+    func testAddReview() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         
         let configuration = URLSessionConfiguration.default
@@ -20,15 +20,15 @@ class SignUpTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let addReview = AddReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let registered = expectation(description: "registered user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        let addedReview = expectation(description: "added review")
+        addReview.addReview(idUser: 123, text: "Review text") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.userMessage, "Registration completed successfully!")
-                registered.fulfill()
+                XCTAssertEqual(model.userMessage, "Your review has been submitted for moderation")
+                addedReview.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
@@ -37,7 +37,7 @@ class SignUpTests: XCTestCase {
     }
     
     //MARK: - Negative tests
-    func testFailedSignUp() throws {
+    func testFailedAddReview() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://wrongUrl.com"))
         
         let configuration = URLSessionConfiguration.default
@@ -45,15 +45,15 @@ class SignUpTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let registerUser = SignUp(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let addReview = AddReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
-        let failedRegister = expectation(description: "failed register user")
-        registerUser.signUp(idUser: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        let failedAddReview = expectation(description: "failed add review")
+        addReview.addReview(idUser: 123, text: "Review text") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")
             case .failure:
-                failedRegister.fulfill()
+                failedAddReview.fulfill()
             }
         }
         waitForExpectations(timeout: 10)

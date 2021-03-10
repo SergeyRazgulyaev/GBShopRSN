@@ -10,7 +10,8 @@ import Alamofire
 
 class RequestFactory {
     
-    let baseUrl = URL(string:         "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/")!
+//    let baseUrl = URL(string: "http://127.0.0.1:8080")!
+    let baseUrl = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
     
     lazy var commonSession: Session = {
         let configuration = URLSessionConfiguration.default
@@ -31,9 +32,9 @@ class RequestFactory {
         return SignUp(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
-    func makeAuthRequestFatory() -> AuthRequestFactory {
+    func makeLogInRequestFatory() -> LogInRequestFactory {
         let errorParser = makeErrorParser()
-        return Auth(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+        return LogIn(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
     func makeChangeUserDataRequestFactory() -> ChangeUserDataRequestFactory {
@@ -49,6 +50,21 @@ class RequestFactory {
     func makeGetProductListRequestFactory() -> GetProductListRequestFactory {
         let errorParser = makeErrorParser()
         return GetProductList(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeAddReviewRequestFactory() -> AddReviewRequestFactory {
+        let errorParser = makeErrorParser()
+        return AddReview(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeDeleteReviewRequestFactory() -> DeleteReviewRequestFactory {
+        let errorParser = makeErrorParser()
+        return DeleteReview(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
+    }
+    
+    func makeGetReviewsRequestFactory() -> GetReviewsRequestFactory {
+        let errorParser = makeErrorParser()
+        return GetReviews(baseUrl: baseUrl, errorParser: errorParser, sessionManager: commonSession, queue: sessionQueue)
     }
     
     func makeLogOutRequestFactory() -> LogOutRequestFactory {

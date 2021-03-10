@@ -13,10 +13,10 @@ class RequestFactoryTests: XCTestCase {
     
     func testLogIn() throws {
         let requestFactory = RequestFactory()
-        let authUser = requestFactory.makeAuthRequestFatory()
+        let logInUser = requestFactory.makeLogInRequestFatory()
         
         let signedIn = expectation(description: "log in")
-        authUser.logIn(userName: "Somebody", password: "mypassword") { response in
+        logInUser.logIn(userName: "Somebody", password: "mypassword") { response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.user.id, 123)

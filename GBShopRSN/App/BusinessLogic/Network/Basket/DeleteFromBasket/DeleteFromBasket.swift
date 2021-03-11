@@ -1,14 +1,14 @@
 //
-//  GetProduct.swift
+//  DeleteFromBasket.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 21.02.2021.
+//  Created by Sergey Razgulyaev on 02.03.2021.
 //
 
 import Foundation
 import Alamofire
 
-class GetProduct: AbstractRequestFactory {
+class DeleteFromBasket: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,24 +24,24 @@ class GetProduct: AbstractRequestFactory {
     }
 }
 
-extension GetProduct: GetProductRequestFactory {
-    func getProduct(productID: Int, completionHandler: @escaping (AFDataResponse<GetProductResult>) -> Void) {
-        let requestModel = GetProductRequest(baseUrl: baseUrl, productID: productID)
+extension DeleteFromBasket: DeleteFromBasketRequestFactory {
+    func deleteFromBasket(productID: Int, completionHandler: @escaping (AFDataResponse<DeleteFromBasketResult>) -> Void) {
+        let requestModel = DeleteFromBasketRequest(baseUrl: baseUrl, productID: productID)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension GetProduct {
-    struct GetProductRequest: RequestRouter {
+extension DeleteFromBasket {
+    struct DeleteFromBasketRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .post
-        let path: String = "getProduct"
+        let path: String = "deleteFromBasket"
         
         let productID: Int
         
         var parameters: Parameters? {
             return [
-                "product_id": productID
+                "product_id" : productID
             ]
         }
     }

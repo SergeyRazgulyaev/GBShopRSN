@@ -1,19 +1,19 @@
 //
-//  GetProduct.swift
+//  PayBasket.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 21.02.2021.
+//  Created by Sergey Razgulyaev on 03.03.2021.
 //
 
 import Foundation
 import Alamofire
 
-class GetProduct: AbstractRequestFactory {
+class PayBasket: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
     let baseUrl: URL
-    
+
     init(baseUrl: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
@@ -24,24 +24,26 @@ class GetProduct: AbstractRequestFactory {
     }
 }
 
-extension GetProduct: GetProductRequestFactory {
-    func getProduct(productID: Int, completionHandler: @escaping (AFDataResponse<GetProductResult>) -> Void) {
-        let requestModel = GetProductRequest(baseUrl: baseUrl, productID: productID)
+extension PayBasket: PayBasketRequestFactory {
+    func payBasket(userID: Int, payAmount: Int, completionHandler: @escaping (AFDataResponse<PayBasketResult>) -> Void) {
+        let requestModel = PayBasketRequest(baseUrl: baseUrl, userID: userID, payAmount: payAmount)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension GetProduct {
-    struct GetProductRequest: RequestRouter {
+extension PayBasket {
+    struct PayBasketRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .post
-        let path: String = "getProduct"
-        
-        let productID: Int
-        
+        let path: String = "payBasket"
+
+        let userID: Int
+        let payAmount: Int
+
         var parameters: Parameters? {
             return [
-                "product_id": productID
+                "user_id" : userID,
+                "pay_amount" : payAmount
             ]
         }
     }

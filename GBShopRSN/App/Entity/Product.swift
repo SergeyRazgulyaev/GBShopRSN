@@ -8,14 +8,17 @@
 import Foundation
 
 struct Product: Codable {
-    
-    let idProduct: Int
+    let productID: Int
     let productName: String
-    let price: Int
+    let productPrice: Int
+    let productDescription: String
+    let quantityInBasket: Int
     
     enum CodingKeys: String, CodingKey {
-        case idProduct = "id_product"
+        case productID = "product_id"
         case productName = "product_name"
-        case price = "price"
+        case productPrice = "product_price"
+        case productDescription = "product_description"
+        case quantityInBasket = "quantity_in_basket"
     }
 }

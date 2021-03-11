@@ -25,8 +25,8 @@ class SignUp: AbstractRequestFactory {
 }
 
 extension SignUp: SignUpRequestFactory {
-    func signUp(idUser: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
-        let requestModel = SignUpRequest(baseUrl: baseUrl, idUser: idUser, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
+    func signUp(userID: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
+        let requestModel = SignUpRequest(baseUrl: baseUrl, userID: userID, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
@@ -37,7 +37,7 @@ extension SignUp {
         let method: HTTPMethod = .post
         let path: String = "signUp"
         
-        let idUser: Int
+        let userID: Int
         let userName: String
         let password: String
         let email: String
@@ -47,7 +47,7 @@ extension SignUp {
         
         var parameters: Parameters? {
             return [
-                "id_user" : idUser,
+                "user_id" : userID,
                 "username" : userName,
                 "password" : password,
                 "email" : email,

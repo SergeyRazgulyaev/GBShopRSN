@@ -1,14 +1,14 @@
 //
-//  GetProduct.swift
+//  AddToBasket.swift
 //  GBShopRSN
 //
-//  Created by Sergey Razgulyaev on 21.02.2021.
+//  Created by Sergey Razgulyaev on 01.03.2021.
 //
 
 import Foundation
 import Alamofire
 
-class GetProduct: AbstractRequestFactory {
+class AddToBasket: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
@@ -24,24 +24,26 @@ class GetProduct: AbstractRequestFactory {
     }
 }
 
-extension GetProduct: GetProductRequestFactory {
-    func getProduct(productID: Int, completionHandler: @escaping (AFDataResponse<GetProductResult>) -> Void) {
-        let requestModel = GetProductRequest(baseUrl: baseUrl, productID: productID)
+extension AddToBasket: AddToBasketRequestFactory {
+    func addToBasket(productID: Int, quantityInBasket: Int, completionHandler: @escaping (AFDataResponse<AddToBasketResult>) -> Void) {
+        let requestModel = AddToBasketRequest(baseUrl: baseUrl, productID: productID, quantityInBasket: quantityInBasket)
         self.request(request: requestModel, completionHandler: completionHandler)
     }
 }
 
-extension GetProduct {
-    struct GetProductRequest: RequestRouter {
+extension AddToBasket {
+    struct AddToBasketRequest: RequestRouter {
         let baseUrl: URL
         let method: HTTPMethod = .post
-        let path: String = "getProduct"
+        let path: String = "addToBasket"
         
         let productID: Int
+        let quantityInBasket: Int
         
         var parameters: Parameters? {
             return [
-                "product_id": productID
+                "product_id" : productID,
+                "quantity_in_basket" : quantityInBasket,
             ]
         }
     }

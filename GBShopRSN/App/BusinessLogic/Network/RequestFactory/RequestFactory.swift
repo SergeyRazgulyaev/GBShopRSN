@@ -9,10 +9,6 @@ import Foundation
 import Alamofire
 
 class RequestFactory {
-    
-//    let baseUrl = URL(string: "http://127.0.0.1:8080")!
-    let baseUrl = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
-    
     lazy var commonSession: Session = {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
@@ -22,6 +18,12 @@ class RequestFactory {
     }()
     
     let sessionQueue = DispatchQueue.global(qos: .utility)
+    let baseUrl: URL
+    
+    //MARK: - Init
+    init(baseUrl: URL) {
+        self.baseUrl = baseUrl
+    }
     
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()

@@ -24,20 +24,14 @@ class UserInfoScreenView: UIView {
         logoUserInfoScreenImageView.translatesAutoresizingMaskIntoConstraints = false
         logoUserInfoScreenImageView.layer.masksToBounds = true
         logoUserInfoScreenImageView.image = UIImage(systemName: "person.circle")
-        logoUserInfoScreenImageView.tintColor = UIColor(red: 120.0/255.0,
-                                                green: 80.0/255.0,
-                                                blue: 155.0/255.0,
-                                                alpha: 1.0)
+        logoUserInfoScreenImageView.tintColor = .rsnPurpleColor
         return logoUserInfoScreenImageView
     }()
     
     private(set) lazy var logoUserInfoScreenLabel: UILabel = {
         let logoUserInfoScreenLabel = UILabel()
         logoUserInfoScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoUserInfoScreenLabel.textColor = UIColor(red: 120.0/255.0,
-                                            green: 80.0/255.0,
-                                            blue: 155.0/255.0,
-                                            alpha: 1.0)
+        logoUserInfoScreenLabel.textColor = .rsnPurpleColor
         logoUserInfoScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         logoUserInfoScreenLabel.text = "User info"
         return logoUserInfoScreenLabel
@@ -119,10 +113,7 @@ class UserInfoScreenView: UIView {
         let saveUserInfoButton = UIButton()
         saveUserInfoButton.translatesAutoresizingMaskIntoConstraints = false
         saveUserInfoButton.setTitle("Save user info", for: .normal)
-        saveUserInfoButton.backgroundColor = UIColor(red: 220.0/255.0,
-                                               green: 100.0/255.0,
-                                               blue: 180.0/255.0,
-                                               alpha: 1.0)
+        saveUserInfoButton.backgroundColor = .rsnPinkColor
         saveUserInfoButton.layer.cornerRadius = 12.0
         saveUserInfoButton.layer.masksToBounds = true
         return saveUserInfoButton
@@ -139,7 +130,7 @@ class UserInfoScreenView: UIView {
     }
     
     func setUI() {
-        self.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.addSubview(logoUserInfoScreenImageView)
         scrollView.addSubview(logoUserInfoScreenLabel)
         scrollView.addSubview(changeUserInfoLabel)

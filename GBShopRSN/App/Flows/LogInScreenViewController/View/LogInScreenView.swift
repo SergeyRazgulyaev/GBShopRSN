@@ -24,20 +24,14 @@ class LogInScreenView: UIView {
         logoLogInScreenImageView.translatesAutoresizingMaskIntoConstraints = false
         logoLogInScreenImageView.layer.masksToBounds = true
         logoLogInScreenImageView.image = UIImage(systemName: "network")
-        logoLogInScreenImageView.tintColor = UIColor(red: 120.0/255.0,
-                                                      green: 80.0/255.0,
-                                                      blue: 155.0/255.0,
-                                                      alpha: 1.0)
+        logoLogInScreenImageView.tintColor = .rsnPurpleColor
         return logoLogInScreenImageView
     }()
     
     private(set) lazy var logoLogInScreenLabel: UILabel = {
         let logoLogInScreenLabel = UILabel()
         logoLogInScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoLogInScreenLabel.textColor = UIColor(red: 120.0/255.0,
-                                                  green: 80.0/255.0,
-                                                  blue: 155.0/255.0,
-                                                  alpha: 1.0)
+        logoLogInScreenLabel.textColor = .rsnPurpleColor
         logoLogInScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         logoLogInScreenLabel.text = "Let's log in"
         return logoLogInScreenLabel
@@ -74,10 +68,7 @@ class LogInScreenView: UIView {
         let sendDataForLogInButton = UIButton()
         sendDataForLogInButton.translatesAutoresizingMaskIntoConstraints = false
         sendDataForLogInButton.setTitle("Log in", for: .normal)
-        sendDataForLogInButton.backgroundColor = UIColor(red: 150.0/255.0,
-                                                         green: 200.0/255.0,
-                                                         blue: 120.0/255.0,
-                                                         alpha: 1.0)
+        sendDataForLogInButton.backgroundColor = .rsnLightGreenColor
         sendDataForLogInButton.layer.cornerRadius = 12.0
         sendDataForLogInButton.layer.masksToBounds = true
         return sendDataForLogInButton
@@ -87,10 +78,7 @@ class LogInScreenView: UIView {
         let cancelAndReturnButton = UIButton()
         cancelAndReturnButton.translatesAutoresizingMaskIntoConstraints = false
         cancelAndReturnButton.setTitle("Сancel and return", for: .normal)
-        cancelAndReturnButton.backgroundColor = UIColor(red: 150.0/255.0,
-                                               green: 150.0/255.0,
-                                               blue: 150.0/255.0,
-                                               alpha: 1.0)
+        cancelAndReturnButton.backgroundColor = .lightGray
         cancelAndReturnButton.layer.cornerRadius = 12.0
         cancelAndReturnButton.layer.masksToBounds = true
         return cancelAndReturnButton
@@ -107,7 +95,7 @@ class LogInScreenView: UIView {
     }
     
     func setUI() {
-        self.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.addSubview(logoLogInScreenImageView)
         scrollView.addSubview(logoLogInScreenLabel)
         scrollView.addSubview(enterDataForLogInLabel)

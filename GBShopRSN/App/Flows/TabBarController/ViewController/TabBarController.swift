@@ -8,9 +8,11 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+    let requestFactory: RequestFactory
     
     // MARK: - Init
-    init() {
+    init(requestFactory: RequestFactory) {
+        self.requestFactory = requestFactory
         super.init(nibName: nil, bundle: nil)
         self.viewControllers = createViewControllers()
     }
@@ -26,27 +28,18 @@ class TabBarController: UITabBarController {
     }
     
     func configureTabBarController() {
-        self.tabBar.tintColor = UIColor(red: 120.0/255.0,
-                                        green: 80.0/255.0,
-                                        blue: 155.0/255.0,
-                                        alpha: 1.0)
+        self.tabBar.tintColor = .rsnPurpleColor
     }
     func createViewControllers() -> [UIViewController] {
         var viewControllers = [UIViewController]()
         
         //1. UserInfoScreenViewController
-        let userInfoScreenViewController = UserInfoScreenViewController()
+        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
         userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
         
         let userInfoNavigationController = UINavigationController(rootViewController: userInfoScreenViewController)
-        userInfoNavigationController.navigationBar.tintColor = UIColor(red: 120.0/255.0,
-                                                                       green: 80.0/255.0,
-                                                                       blue: 155.0/255.0,
-                                                                       alpha: 1.0)
-        userInfoNavigationController.navigationBar.barTintColor = UIColor(red: 100.0/255.0,
-                                                                        green: 180.0/255.0,
-                                                                        blue: 220.0/255.0,
-                                                                        alpha: 1.0)
+        userInfoNavigationController.navigationBar.tintColor = .rsnPurpleColor
+        userInfoNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
         userInfoNavigationController.navigationBar.prefersLargeTitles = false;
         
         viewControllers.append(userInfoNavigationController)

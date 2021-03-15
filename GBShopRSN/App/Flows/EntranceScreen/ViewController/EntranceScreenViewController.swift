@@ -8,8 +8,19 @@
 import UIKit
 
 class EntranceScreenViewController: UIViewController {
-    private var entranceScreenView: EntranceScreenView {
-        return self.view as! EntranceScreenView
+    private lazy var entranceScreenView: EntranceScreenView = {
+        return EntranceScreenView()
+    }()
+    let requestFactory: RequestFactory
+    
+    // MARK: - Init
+    init(requestFactory: RequestFactory) {
+        self.requestFactory = requestFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - ViewController Lifecycle
@@ -21,14 +32,11 @@ class EntranceScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = EntranceScreenView()
+        self.view = entranceScreenView
     }
     
     func configureViewController() {
-        self.view.backgroundColor = UIColor(red: 100.0/255.0,
-                                            green: 180.0/255.0,
-                                            blue: 220.0/255.0,
-                                            alpha: 1.0)
+        self.view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSignUpButton() {
@@ -36,7 +44,7 @@ class EntranceScreenViewController: UIViewController {
     }
     
     @objc func tapSignUpButton(_ sender: Any?) {
-        let signUpScreenViewController = SignUpScreenViewController()
+        let signUpScreenViewController = SignUpScreenViewController(requestFactory: requestFactory)
         signUpScreenViewController.modalPresentationStyle = .fullScreen
         self.present(signUpScreenViewController, animated: true, completion: nil)
     }
@@ -46,7 +54,7 @@ class EntranceScreenViewController: UIViewController {
     }
     
     @objc func tapLogInButton(_ sender: Any?) {
-        let logInScreenViewController = LogInScreenViewController()
+        let logInScreenViewController = LogInScreenViewController(requestFactory: requestFactory)
         logInScreenViewController.modalPresentationStyle = .fullScreen
         self.present(logInScreenViewController, animated: true, completion: nil)
     }

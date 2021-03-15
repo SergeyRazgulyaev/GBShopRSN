@@ -8,10 +8,22 @@
 import UIKit
 
 class LogInScreenViewController: UIViewController {
-    let requestFactory = RequestFactory()
+    private lazy var logInScreenView: LogInScreenView = {
+        return LogInScreenView()
+    }()
+    let defaultUserName = "Somebody"
+    let defaultPassword = "mypassword"
     
-    private var logInScreenView: LogInScreenView {
-        return self.view as! LogInScreenView
+    let requestFactory: RequestFactory
+    
+    // MARK: - Init
+    init(requestFactory: RequestFactory) {
+        self.requestFactory = requestFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - ViewController Lifecycle
@@ -33,34 +45,36 @@ class LogInScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = LogInScreenView()
+        self.view = logInScreenView
     }
     
     func configureViewController() {
-        self.view.backgroundColor = UIColor(red: 100.0/255.0,
-                                            green: 180.0/255.0,
-                                            blue: 220.0/255.0,
-                                            alpha: 1.0)
+        self.view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSendDataForLogInButton() {
         logInScreenView.sendDataForLogInButton.addTarget(self, action: #selector(tapSendDataForLogInButton(_:)), for: .touchUpInside)
     }
-    
+    //
     @objc func tapSendDataForLogInButton(_ sender: Any?) {
-        if (logInScreenView.userNameTextField.text != "" && logInScreenView.passwordTextField.text != "") {
+        if (!(logInScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+                !(logInScreenView.passwordTextField.text?.isTrimmedEmpty ?? true)) {
             let logInUser = requestFactory.makeLogInRequestFactory()
-            logInUser.logIn(userName: "Somebody", password: "mypassword") { response in
+            logInUser.logIn(userName: logInScreenView.userNameTextField.text ?? defaultUserName,
+                            password: logInScreenView.passwordTextField.text ?? defaultPassword) {
+                response in
                 switch response.result {
                 case .success(let login):
+                    DispatchQueue.main.async {
+                        let tabBarController = TabBarController(requestFactory: self.requestFactory)
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self.present(tabBarController, animated: true, completion: nil)
+                    }
                     print(login)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
-            let tabBarController = TabBarController()
-            tabBarController.modalPresentationStyle = .fullScreen
-            self.present(tabBarController, animated: true, completion: nil)
         } else {
             print("You need to fill in all the fields for sign up")
         }

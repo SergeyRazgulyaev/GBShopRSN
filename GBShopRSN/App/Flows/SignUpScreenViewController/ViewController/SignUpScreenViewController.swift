@@ -8,10 +8,26 @@
 import UIKit
 
 class SignUpScreenViewController: UIViewController {
-    let requestFactory = RequestFactory()
+    private lazy var signUpScreenView: SignUpScreenView = {
+        return SignUpScreenView()
+    }()
+    let defaultUserName = "Somebody"
+    let defaultEmail = "some@some.ru"
+    let defaultGender = "m"
+    let defaultCreditCard = "9872389-2424-234224-234"
+    let defaultBio = "This is good! I think I will switch to another language"
+    let defaultPassword = "mypassword"
     
-    private var signUpScreenView: SignUpScreenView {
-        return self.view as! SignUpScreenView
+    let requestFactory: RequestFactory
+    
+    // MARK: - Init
+    init(requestFactory: RequestFactory) {
+        self.requestFactory = requestFactory
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - ViewController Lifecycle
@@ -33,14 +49,11 @@ class SignUpScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = SignUpScreenView()
+        self.view = signUpScreenView
     }
     
     func configureViewController() {
-        self.view.backgroundColor = UIColor(red: 100.0/255.0,
-                                            green: 180.0/255.0,
-                                            blue: 220.0/255.0,
-                                            alpha: 1.0)
+        self.view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSendDataForSignUpButton() {
@@ -48,17 +61,24 @@ class SignUpScreenViewController: UIViewController {
     }
     
     @objc func tapSendDataForSignUpButton(_ sender: Any?) {
-        if (signUpScreenView.userNameTextField.text != "" &&
-                signUpScreenView.emailTextField.text != "" &&
-                signUpScreenView.genderTextField.text != "" &&
-                signUpScreenView.creditCardTextField.text != "" &&
-                signUpScreenView.bioTextField.text != "" &&
-                signUpScreenView.passwordTextField.text != "" &&
-                signUpScreenView.repeatedPasswordTextField.text != "") {
+        if (!(signUpScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.bioTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.passwordTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.repeatedPasswordTextField.text?.isTrimmedEmpty ?? true)) {
             if signUpScreenView.passwordTextField.text ==
                 signUpScreenView.repeatedPasswordTextField.text {
                 let registerUser = requestFactory.makeSignUpRequestFactory()
-                registerUser.signUp(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+                registerUser.signUp(userID: 123,
+                                    userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
+                                    password: signUpScreenView.passwordTextField.text ?? defaultPassword,
+                                    email: signUpScreenView.emailTextField.text ?? defaultEmail,
+                                    gender: signUpScreenView.genderTextField.text ?? defaultGender,
+                                    creditCard: signUpScreenView.creditCardTextField.text ?? defaultCreditCard,
+                                    bio: signUpScreenView.bioTextField.text ?? defaultBio) {
+                    response in
                     switch response.result {
                     case .success(let signUp):
                         print(signUp)
@@ -66,7 +86,7 @@ class SignUpScreenViewController: UIViewController {
                         print(error.localizedDescription)
                     }
                 }
-                let logInScreenViewController = LogInScreenViewController()
+                let logInScreenViewController = LogInScreenViewController(requestFactory: requestFactory)
                 logInScreenViewController.modalPresentationStyle = .fullScreen
                 self.present(logInScreenViewController, animated: true, completion: nil)
             } else {

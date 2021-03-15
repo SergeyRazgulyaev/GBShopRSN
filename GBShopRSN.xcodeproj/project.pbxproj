@@ -42,6 +42,8 @@
 		C58C1E5325F574F0006A0E95 /* LogInScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C1E5225F574F0006A0E95 /* LogInScreenViewController.swift */; };
 		C58D8F0F25F80E1C00C1BC22 /* LogInScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F0E25F80E1C00C1BC22 /* LogInScreenView.swift */; };
 		C58D8F1825F8366500C1BC22 /* UserInfoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F1725F8366500C1BC22 /* UserInfoScreenView.swift */; };
+		C58D8F2D25FA8A3100C1BC22 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F2C25FA8A3100C1BC22 /* UIColorExtension.swift */; };
+		C58D8F3325FA992100C1BC22 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D8F3225FA992100C1BC22 /* StringExtensions.swift */; };
 		C5A460CD25DD6A9E0089E71C /* AbstractRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460C925DD6A9D0089E71C /* AbstractRequestFactory.swift */; };
 		C5A460CE25DD6A9E0089E71C /* ResponseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CA25DD6A9E0089E71C /* ResponseCodable.swift */; };
 		C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */; };
@@ -147,6 +149,8 @@
 		C58C1E5225F574F0006A0E95 /* LogInScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreenViewController.swift; sourceTree = "<group>"; };
 		C58D8F0E25F80E1C00C1BC22 /* LogInScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreenView.swift; sourceTree = "<group>"; };
 		C58D8F1725F8366500C1BC22 /* UserInfoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoScreenView.swift; sourceTree = "<group>"; };
+		C58D8F2C25FA8A3100C1BC22 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		C58D8F3225FA992100C1BC22 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		C5A460C925DD6A9D0089E71C /* AbstractRequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractRequestFactory.swift; sourceTree = "<group>"; };
 		C5A460CA25DD6A9E0089E71C /* ResponseCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseCodable.swift; sourceTree = "<group>"; };
 		C5A460CB25DD6A9E0089E71C /* ErrorParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorParser.swift; sourceTree = "<group>"; };
@@ -340,6 +344,31 @@
 			path = RequestFactory;
 			sourceTree = "<group>";
 		};
+		C58D8F2A25FA89F500C1BC22 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C58D8F3125FA990C00C1BC22 /* String */,
+				C58D8F2B25FA89FE00C1BC22 /* UIColor */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C58D8F2B25FA89FE00C1BC22 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				C58D8F2C25FA8A3100C1BC22 /* UIColorExtension.swift */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		C58D8F3125FA990C00C1BC22 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				C58D8F3225FA992100C1BC22 /* StringExtensions.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
 		C5A460C825DD6A770089E71C /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,6 +541,7 @@
 				C5DCB7CD25D8880C00220690 /* Core */,
 				C5DCB7CE25D8881600220690 /* Resources */,
 				C5DCB7CF25D8882000220690 /* Environments */,
+				C58D8F2A25FA89F500C1BC22 /* Extensions */,
 			);
 			path = GBShopRSN;
 			sourceTree = "<group>";
@@ -959,6 +989,7 @@
 				C5A460CD25DD6A9E0089E71C /* AbstractRequestFactory.swift in Sources */,
 				C58C1E4025F57475006A0E95 /* SignUpScreenView.swift in Sources */,
 				C539A63125E8FF5300865D6E /* DeleteReviewResult.swift in Sources */,
+				C58D8F3325FA992100C1BC22 /* StringExtensions.swift in Sources */,
 				C5DE227025E277F6002B5E7F /* GetProductResult.swift in Sources */,
 				C5B209FD25F2917900535A64 /* EntranceScreenView.swift in Sources */,
 				C58A506725DD714300D572F1 /* LogInRequestFactory.swift in Sources */,
@@ -984,6 +1015,7 @@
 				C5A460E725DD6FD40089E71C /* LogInResult.swift in Sources */,
 				C58A506C25DD71A100D572F1 /* LogIn.swift in Sources */,
 				C5A460EC25DD6FE40089E71C /* User.swift in Sources */,
+				C58D8F2D25FA8A3100C1BC22 /* UIColorExtension.swift in Sources */,
 				C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */,
 				C5FFAEE725EE77A40004BC2B /* DeleteFromBasketRequestFactory.swift in Sources */,
 				C5A460D025DD6A9E0089E71C /* AbstractErrorParser.swift in Sources */,

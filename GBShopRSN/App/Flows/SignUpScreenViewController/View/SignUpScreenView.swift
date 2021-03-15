@@ -24,20 +24,14 @@ class SignUpScreenView: UIView {
         logoSignUpScreenImageView.translatesAutoresizingMaskIntoConstraints = false
         logoSignUpScreenImageView.layer.masksToBounds = true
         logoSignUpScreenImageView.image = UIImage(systemName: "figure.wave")
-        logoSignUpScreenImageView.tintColor = UIColor(red: 120.0/255.0,
-                                                green: 80.0/255.0,
-                                                blue: 155.0/255.0,
-                                                alpha: 1.0)
+        logoSignUpScreenImageView.tintColor = .rsnPurpleColor
         return logoSignUpScreenImageView
     }()
     
     private(set) lazy var logoSignUpScreenLabel: UILabel = {
         let logoSignUpScreenLabel = UILabel()
         logoSignUpScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoSignUpScreenLabel.textColor = UIColor(red: 120.0/255.0,
-                                            green: 80.0/255.0,
-                                            blue: 155.0/255.0,
-                                            alpha: 1.0)
+        logoSignUpScreenLabel.textColor = .rsnPurpleColor
         logoSignUpScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         logoSignUpScreenLabel.text = "Let's sign up"
         return logoSignUpScreenLabel
@@ -119,10 +113,7 @@ class SignUpScreenView: UIView {
         let sendDataForSignUpButton = UIButton()
         sendDataForSignUpButton.translatesAutoresizingMaskIntoConstraints = false
         sendDataForSignUpButton.setTitle("Sign up", for: .normal)
-        sendDataForSignUpButton.backgroundColor = UIColor(red: 220.0/255.0,
-                                               green: 100.0/255.0,
-                                               blue: 180.0/255.0,
-                                               alpha: 1.0)
+        sendDataForSignUpButton.backgroundColor = .rsnPinkColor
         sendDataForSignUpButton.layer.cornerRadius = 12.0
         sendDataForSignUpButton.layer.masksToBounds = true
         return sendDataForSignUpButton
@@ -132,10 +123,7 @@ class SignUpScreenView: UIView {
         let cancelAndReturnButton = UIButton()
         cancelAndReturnButton.translatesAutoresizingMaskIntoConstraints = false
         cancelAndReturnButton.setTitle("Сancel and return", for: .normal)
-        cancelAndReturnButton.backgroundColor = UIColor(red: 150.0/255.0,
-                                               green: 150.0/255.0,
-                                               blue: 150.0/255.0,
-                                               alpha: 1.0)
+        cancelAndReturnButton.backgroundColor = .lightGray
         cancelAndReturnButton.layer.cornerRadius = 12.0
         cancelAndReturnButton.layer.masksToBounds = true
         return cancelAndReturnButton
@@ -152,7 +140,7 @@ class SignUpScreenView: UIView {
     }
     
     func setUI() {
-        self.addSubview(scrollView)
+        addSubview(scrollView)
         scrollView.addSubview(logoSignUpScreenImageView)
         scrollView.addSubview(logoSignUpScreenLabel)
         scrollView.addSubview(enterDataForSignUpLabel)

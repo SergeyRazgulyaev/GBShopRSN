@@ -13,20 +13,14 @@ class EntranceScreenView: UIView {
         logoEntranceScreenImageView.translatesAutoresizingMaskIntoConstraints = false
         logoEntranceScreenImageView.layer.masksToBounds = true
         logoEntranceScreenImageView.image = UIImage(systemName: "sparkles")
-        logoEntranceScreenImageView.tintColor = UIColor(red: 120.0/255.0,
-                                      green: 80.0/255.0,
-                                      blue: 155.0/255.0,
-                                      alpha: 1.0)
+        logoEntranceScreenImageView.tintColor = .rsnPurpleColor
         return logoEntranceScreenImageView
     }()
     
     private(set) lazy var logoEntranceScreenLabel: UILabel = {
         let logoEntranceScreenLabel = UILabel()
         logoEntranceScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoEntranceScreenLabel.textColor = UIColor(red: 120.0/255.0,
-                                  green: 80.0/255.0,
-                                  blue: 155.0/255.0,
-                                  alpha: 1.0)
+        logoEntranceScreenLabel.textColor = .rsnPurpleColor
         logoEntranceScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         logoEntranceScreenLabel.text = "GBShopRSN"
         return logoEntranceScreenLabel
@@ -45,10 +39,7 @@ class EntranceScreenView: UIView {
         let signUpButton = UIButton()
         signUpButton.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.setTitle("Sign up", for: .normal)
-        signUpButton.backgroundColor = UIColor(red: 220.0/255.0,
-                                               green: 100.0/255.0,
-                                               blue: 180.0/255.0,
-                                               alpha: 1.0)
+        signUpButton.backgroundColor = .rsnPinkColor
         signUpButton.layer.cornerRadius = 12.0
         signUpButton.layer.masksToBounds = true
         return signUpButton
@@ -58,10 +49,7 @@ class EntranceScreenView: UIView {
         let logInButton = UIButton()
         logInButton.translatesAutoresizingMaskIntoConstraints = false
         logInButton.setTitle("Log in", for: .normal)
-        logInButton.backgroundColor = UIColor(red: 150.0/255.0,
-                                               green: 200.0/255.0,
-                                               blue: 120.0/255.0,
-                                               alpha: 1.0)
+        logInButton.backgroundColor = .rsnLightGreenColor
         logInButton.layer.cornerRadius = 12.0
         logInButton.layer.masksToBounds = true
         return logInButton
@@ -78,11 +66,11 @@ class EntranceScreenView: UIView {
     }
     
     func setUI() {
-        self.addSubview(logoEntranceScreenImageView)
-        self.addSubview(logoEntranceScreenLabel)
-        self.addSubview(signUpOrLogOnLabel)
-        self.addSubview(signUpButton)
-        self.addSubview(logInButton)
+        addSubview(logoEntranceScreenImageView)
+        addSubview(logoEntranceScreenLabel)
+        addSubview(signUpOrLogOnLabel)
+        addSubview(signUpButton)
+        addSubview(logInButton)
         
         NSLayoutConstraint.activate([
             logoEntranceScreenImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50.0),

@@ -8,16 +8,36 @@
 import UIKit
 
 class UserInfoScreenViewController: UIViewController {
-    let requestFactory = RequestFactory()
+    private lazy var userInfoScreenView: UserInfoScreenView = {
+        return UserInfoScreenView()
+    }()
     
-    private var userInfoScreenView: UserInfoScreenView {
-        return self.view as! UserInfoScreenView
+    let defaultUserName = "Somebody"
+    let defaultEmail = "some@some.ru"
+    let defaultGender = "m"
+    let defaultCreditCard = "9872389-2424-234224-234"
+    let defaultBio = "This is good! I think I will switch to another language"
+    let defaultPassword = "mypassword"
+    
+    let requestFactory: RequestFactory
+    
+    // MARK: - Init
+    init(requestFactory: RequestFactory) {
+        self.requestFactory = requestFactory
+        super.init(nibName: nil, bundle: nil)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     
     //MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        configureTextFields()
         configureSaveUserInfoButton()
     }
     
@@ -32,14 +52,19 @@ class UserInfoScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = UserInfoScreenView()
+        self.view = userInfoScreenView
     }
     
     func configureViewController() {
-        self.view.backgroundColor = UIColor(red: 100.0/255.0,
-                                            green: 180.0/255.0,
-                                            blue: 220.0/255.0,
-                                            alpha: 1.0)
+        self.view.backgroundColor = .rsnLightBlueColor
+    }
+    
+    func configureTextFields() {
+        userInfoScreenView.userNameTextField.text = defaultUserName
+        userInfoScreenView.emailTextField.text = defaultEmail
+        userInfoScreenView.genderTextField.text = defaultGender
+        userInfoScreenView.creditCardTextField.text = defaultCreditCard
+        userInfoScreenView.bioTextField.text = defaultBio
     }
     
     func configureSaveUserInfoButton() {
@@ -47,21 +72,29 @@ class UserInfoScreenViewController: UIViewController {
     }
     
     @objc func tapSaveUserInfoButton(_ sender: Any?) {
-        if (userInfoScreenView.userNameTextField.text != "" &&
-                userInfoScreenView.emailTextField.text != "" &&
-                userInfoScreenView.genderTextField.text != "" &&
-                userInfoScreenView.creditCardTextField.text != "" &&
-                userInfoScreenView.bioTextField.text != "" &&
-                userInfoScreenView.passwordTextField.text != "" &&
-                userInfoScreenView.repeatedPasswordTextField.text != "") {
+        if (!(userInfoScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.bioTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.passwordTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.repeatedPasswordTextField.text?.isTrimmedEmpty ?? true)) {
             if userInfoScreenView.passwordTextField.text ==
                 userInfoScreenView.repeatedPasswordTextField.text {
                 let changeData = requestFactory.makeChangeUserDataRequestFactory()
-                changeData.changeUserData(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") { response in
+                changeData.changeUserData(userID: 123,
+                                          userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
+                                          password: userInfoScreenView.passwordTextField.text ?? defaultPassword,
+                                          email: userInfoScreenView.emailTextField.text ?? defaultEmail,
+                                          gender: userInfoScreenView.genderTextField.text ?? defaultGender,
+                                          creditCard: userInfoScreenView.creditCardTextField.text ?? defaultCreditCard,
+                                          bio: userInfoScreenView.bioTextField.text ?? defaultBio) {
+                    response in
                     switch response.result {
                     case .success(let changeUserData):
                         print(changeUserData)
                         print("User info changed")
+                        
                     case .failure(let error):
                         print(error.localizedDescription)
                     }

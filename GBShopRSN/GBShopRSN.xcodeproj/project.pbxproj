@@ -350,13 +350,13 @@
 			path = RequestFactory;
 			sourceTree = "<group>";
 		};
-		C58D8F2A25FA89F500C1BC22 /* Extensions */ = {
+		C58D8F2A25FA89F500C1BC22 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
 				C58D8F3125FA990C00C1BC22 /* String */,
 				C58D8F2B25FA89FE00C1BC22 /* UIColor */,
 			);
-			path = Extensions;
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		C58D8F2B25FA89FE00C1BC22 /* UIColor */ = {
@@ -589,7 +589,7 @@
 				C5DCB7CD25D8880C00220690 /* Core */,
 				C5DCB7CE25D8881600220690 /* Resources */,
 				C5DCB7CF25D8882000220690 /* Environments */,
-				C58D8F2A25FA89F500C1BC22 /* Extensions */,
+				C58D8F2A25FA89F500C1BC22 /* DesignSystem */,
 			);
 			path = GBShopRSN;
 			sourceTree = "<group>";

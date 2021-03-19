@@ -26,7 +26,7 @@ extension UIComponentsMakeable {
         let screenHeight = screensize.height
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + 70.0)
+        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + increaseInScreenHeight)
         return scrollView
     }
     

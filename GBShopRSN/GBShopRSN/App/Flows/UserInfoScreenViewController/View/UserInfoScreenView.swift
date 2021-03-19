@@ -10,7 +10,7 @@ import UIKit
 class UserInfoScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 70.0)
+        configureScrollView(increaseInScreenHeight: -120.0)
     }()
     
     private(set) lazy var logoUserInfoScreenImageView: UIImageView = {

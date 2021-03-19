@@ -27,9 +27,14 @@ class GetProductList: AbstractRequestFactory {
 }
 
 extension GetProductList: GetProductListRequestFactory {
-    func getProductList(pageNumber: Int, idCategory: Int, completionHandler: @escaping (AFDataResponse<GetProductListResult>) -> Void) {
-        let requestModel = GetProductListRequest(baseUrl: baseUrl, pageNumber: pageNumber, idCategory: idCategory)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func getProductList(pageNumber: Int,
+                        idCategory: Int,
+                        completionHandler: @escaping (AFDataResponse<GetProductListResult>) -> Void) {
+        let requestModel = GetProductListRequest(baseUrl: baseUrl,
+                                                 pageNumber: pageNumber,
+                                                 idCategory: idCategory)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

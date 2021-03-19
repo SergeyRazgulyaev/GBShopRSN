@@ -35,12 +35,12 @@ class EntranceScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = entranceScreenView
+        view = entranceScreenView
     }
     
     //MARK: - Configuration Methods
     func configureViewController() {
-        self.view.backgroundColor = .rsnLightBlueColor
+        view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSignUpButton() {

@@ -9,5 +9,6 @@ import Foundation
 import Alamofire
 
 protocol DeleteFromBasketRequestFactory {
-    func deleteFromBasket(productID: Int, completionHandler: @escaping (AFDataResponse<DeleteFromBasketResult>) -> Void)
+    func deleteFromBasket(productID: Int,
+                          completionHandler: @escaping (AFDataResponse<DeleteFromBasketResult>) -> Void)
 }

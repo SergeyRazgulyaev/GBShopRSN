@@ -27,9 +27,14 @@ class PayBasket: AbstractRequestFactory {
 }
 
 extension PayBasket: PayBasketRequestFactory {
-    func payBasket(userID: Int, payAmount: Int, completionHandler: @escaping (AFDataResponse<PayBasketResult>) -> Void) {
-        let requestModel = PayBasketRequest(baseUrl: baseUrl, userID: userID, payAmount: payAmount)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func payBasket(userID: Int,
+                   payAmount: Int,
+                   completionHandler: @escaping (AFDataResponse<PayBasketResult>) -> Void) {
+        let requestModel = PayBasketRequest(baseUrl: baseUrl,
+                                            userID: userID,
+                                            payAmount: payAmount)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

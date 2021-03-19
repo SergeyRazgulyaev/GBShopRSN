@@ -25,6 +25,7 @@
 		C539A65025E942C500865D6E /* GetReviewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539A64F25E942C500865D6E /* GetReviewsTests.swift */; };
 		C539A65825E948AC00865D6E /* AddReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539A65725E948AC00865D6E /* AddReviewTests.swift */; };
 		C539A66025E94BFB00865D6E /* DeleteReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539A65F25E94BFB00865D6E /* DeleteReviewTests.swift */; };
+		C57ED26A2603D25B001C6EFA /* UIComponentsMakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */; };
 		C58A506725DD714300D572F1 /* LogInRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506625DD714300D572F1 /* LogInRequestFactory.swift */; };
 		C58A506C25DD71A100D572F1 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506B25DD71A100D572F1 /* LogIn.swift */; };
 		C58A507125DD733500D572F1 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507025DD733500D572F1 /* RequestFactory.swift */; };
@@ -135,6 +136,7 @@
 		C539A65725E948AC00865D6E /* AddReviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewTests.swift; sourceTree = "<group>"; };
 		C539A65F25E94BFB00865D6E /* DeleteReviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReviewTests.swift; sourceTree = "<group>"; };
 		C539ECB7B02C488EA8BC03CE /* Pods-GBShopRSNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBShopRSNTests.release.xcconfig"; path = "Target Support Files/Pods-GBShopRSNTests/Pods-GBShopRSNTests.release.xcconfig"; sourceTree = "<group>"; };
+		C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponentsMakeable.swift; sourceTree = "<group>"; };
 		C58A506625DD714300D572F1 /* LogInRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInRequestFactory.swift; sourceTree = "<group>"; };
 		C58A506B25DD71A100D572F1 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		C58A507025DD733500D572F1 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
@@ -306,6 +308,14 @@
 			path = GetReviews;
 			sourceTree = "<group>";
 		};
+		C57ED2682603D193001C6EFA /* UIConfigure */ = {
+			isa = PBXGroup;
+			children = (
+				C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */,
+			);
+			path = UIConfigure;
+			sourceTree = "<group>";
+		};
 		C58A508725DD84D500D572F1 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +363,7 @@
 		C58D8F2A25FA89F500C1BC22 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				C57ED2682603D193001C6EFA /* UIConfigure */,
 				C58D8F3125FA990C00C1BC22 /* String */,
 				C58D8F2B25FA89FE00C1BC22 /* UIColor */,
 			);
@@ -1078,6 +1089,7 @@
 				C539A63E25E9363400865D6E /* GetReviews.swift in Sources */,
 				C5DE226125E27595002B5E7F /* GetProductRequestFactory.swift in Sources */,
 				C58A508D25DD861100D572F1 /* SignUpRequestFactory.swift in Sources */,
+				C57ED26A2603D25B001C6EFA /* UIComponentsMakeable.swift in Sources */,
 				C5B987DE2600BF410077CD08 /* ProductListScreenViewController.swift in Sources */,
 				C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */,
 			);

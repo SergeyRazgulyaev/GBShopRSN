@@ -48,15 +48,16 @@ class SignUpScreenViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         keyboardRemoveObserver()
+        clearSignUpScreenTextFields()
     }
     
     override func loadView() {
-        self.view = signUpScreenView
+        view = signUpScreenView
     }
     
     //MARK: - Configuration Methods
     func configureViewController() {
-        self.view.backgroundColor = .rsnLightBlueColor
+        view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSendDataForSignUpButton() {
@@ -108,6 +109,16 @@ class SignUpScreenViewController: UIViewController {
     
     @objc func tapCancelAndReturnButton(_ sender: Any?) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func clearSignUpScreenTextFields() {
+        signUpScreenView.userNameTextField.text = ""
+        signUpScreenView.emailTextField.text = ""
+        signUpScreenView.genderTextField.text = ""
+        signUpScreenView.creditCardTextField.text = ""
+        signUpScreenView.bioTextField.text = ""
+        signUpScreenView.passwordTextField.text = ""
+        signUpScreenView.repeatedPasswordTextField.text = ""
     }
 }
 

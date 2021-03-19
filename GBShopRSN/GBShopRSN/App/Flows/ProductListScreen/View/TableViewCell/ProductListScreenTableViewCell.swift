@@ -7,46 +7,36 @@
 
 import UIKit
 
-class ProductListScreenTableViewCell: UITableViewCell {
+class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var productIDLabel: UILabel = {
-        let productIDLabel = UILabel()
-        productIDLabel.translatesAutoresizingMaskIntoConstraints = false
-        productIDLabel.font = UIFont.boldSystemFont(ofSize: 14.0)
-        productIDLabel.text = "Product ID: "
-        return productIDLabel
+        configureLabel(text: "Product ID: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productNameLabel: UILabel = {
-        let productNameLabel = UILabel()
-        productNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        productNameLabel.font = UIFont.systemFont(ofSize: 14.0)
-        productNameLabel.text = "Name: "
-        return productNameLabel
+        configureLabel(text: "Name: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productPriceLabel: UILabel = {
-        let productPriceLabel = UILabel()
-        productPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        productPriceLabel.font = UIFont.systemFont(ofSize: 14.0)
-        productPriceLabel.text = "Price: "
-        return productPriceLabel
+        configureLabel(text: "Price: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productDescriptionLabel: UILabel = {
-        let productDescriptionLabel = UILabel()
-        productDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        productDescriptionLabel.font = UIFont.systemFont(ofSize: 14.0)
-        productDescriptionLabel.text = "Description: "
-        return productDescriptionLabel
+        configureLabel(text: "Description: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productQuantityInBasketLabel: UILabel = {
-        let productQuantityInBasketLabel = UILabel()
-        productQuantityInBasketLabel.translatesAutoresizingMaskIntoConstraints = false
-        productQuantityInBasketLabel.font = UIFont.systemFont(ofSize: 14.0)
-        productQuantityInBasketLabel.text = "Quantity in basket: "
-        return productQuantityInBasketLabel
+        configureLabel(text: "Quantity in basket: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
     }()
     
     // MARK: - Init

@@ -7,53 +7,34 @@
 
 import UIKit
 
-class EntranceScreenView: UIView {
+class EntranceScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var logoEntranceScreenImageView: UIImageView = {
-        let logoEntranceScreenImageView = UIImageView()
-        logoEntranceScreenImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoEntranceScreenImageView.layer.masksToBounds = true
-        logoEntranceScreenImageView.image = UIImage(systemName: "sparkles")
-        logoEntranceScreenImageView.tintColor = .rsnPurpleColor
-        return logoEntranceScreenImageView
+        configureSystemImageView(systemImage: UIImage(systemName: "sparkles")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoEntranceScreenLabel: UILabel = {
-        let logoEntranceScreenLabel = UILabel()
-        logoEntranceScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoEntranceScreenLabel.textColor = .rsnPurpleColor
-        logoEntranceScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-        logoEntranceScreenLabel.text = "GBShopRSN"
-        return logoEntranceScreenLabel
+        configureLabel(text: "GBShopRSN",
+                       textColor: .rsnPurpleColor,
+                       font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var signUpOrLogOnLabel: UILabel = {
-        let signUpLabel = UILabel()
-        signUpLabel.translatesAutoresizingMaskIntoConstraints = false
-        signUpLabel.textColor = .white
-        signUpLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        signUpLabel.text = "Select sign up or log in"
-        return signUpLabel
+        configureLabel(text: "Select sign up or log in",
+                       textColor: .white,
+                       font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var signUpButton: UIButton = {
-        let signUpButton = UIButton()
-        signUpButton.translatesAutoresizingMaskIntoConstraints = false
-        signUpButton.setTitle("Sign up", for: .normal)
-        signUpButton.backgroundColor = .rsnPinkColor
-        signUpButton.layer.cornerRadius = 12.0
-        signUpButton.layer.masksToBounds = true
-        return signUpButton
+        configureButton(title: "Sign up",
+                        backgroundColor: .rsnPinkColor,
+                        cornerRadius: 12.0)
     }()
     
     private(set) lazy var logInButton: UIButton = {
-        let logInButton = UIButton()
-        logInButton.translatesAutoresizingMaskIntoConstraints = false
-        logInButton.setTitle("Log in", for: .normal)
-        logInButton.backgroundColor = .rsnLightGreenColor
-        logInButton.layer.cornerRadius = 12.0
-        logInButton.layer.masksToBounds = true
-        return logInButton
+        configureButton(title: "Log in",
+                        backgroundColor: .rsnLightGreenColor,
+                        cornerRadius: 12.0)
     }()
     
     // MARK: - Init

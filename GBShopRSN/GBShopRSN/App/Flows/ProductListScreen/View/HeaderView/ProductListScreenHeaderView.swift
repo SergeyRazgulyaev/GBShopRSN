@@ -7,36 +7,23 @@
 
 import UIKit
 
-class ProductListScreenHeaderView: UIView {
+class ProductListScreenHeaderView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var selectProductsCategoryImageView: UIImageView = {
-        let selectProductsCategoryImageView = UIImageView()
-        selectProductsCategoryImageView.translatesAutoresizingMaskIntoConstraints = false
-        selectProductsCategoryImageView.layer.masksToBounds = true
-        selectProductsCategoryImageView.image = UIImage(systemName: "cube.box.fill")
-        selectProductsCategoryImageView.tintColor = .rsnPurpleColor
-        return selectProductsCategoryImageView
+        configureSystemImageView(systemImage: UIImage(systemName: "cube.box.fill")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var selectProductsCategoryTextField: UITextField = {
-        let selectProductsCategoryTextField = UITextField()
-        selectProductsCategoryTextField.translatesAutoresizingMaskIntoConstraints = false
-        selectProductsCategoryTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        selectProductsCategoryTextField.placeholder = "Select products category"
-        selectProductsCategoryTextField.font = UIFont.systemFont(ofSize: 17)
-        return selectProductsCategoryTextField
+        configureTextField(placeholder: "Select products category",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var selectProductsCategoryButton: UIButton = {
-        let selectProductsCategoryButton = UIButton()
-        selectProductsCategoryButton.translatesAutoresizingMaskIntoConstraints = false
-        selectProductsCategoryButton.setTitle("Show", for: .normal)
-        selectProductsCategoryButton.backgroundColor = .rsnLightGreenColor
-        selectProductsCategoryButton.layer.cornerRadius = 8.0
-        selectProductsCategoryButton.layer.masksToBounds = true
-        return selectProductsCategoryButton
+        configureButton(title: "Show",
+                        backgroundColor: .rsnLightGreenColor,
+                        cornerRadius: 8.0)
     }()
-    
     
     // MARK: - Init
     override init(frame: CGRect) {

@@ -27,9 +27,14 @@ class LogIn: AbstractRequestFactory {
 }
 
 extension LogIn: LogInRequestFactory {
-    func logIn(userName: String, password: String, completionHandler: @escaping (AFDataResponse<LogInResult>) -> Void) {
-        let requestModel = LoginRequest(baseUrl: baseUrl, login: userName, password: password)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func logIn(userName: String,
+               password: String,
+               completionHandler: @escaping (AFDataResponse<LogInResult>) -> Void) {
+        let requestModel = LoginRequest(baseUrl: baseUrl,
+                                        login: userName,
+                                        password: password)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

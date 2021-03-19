@@ -27,9 +27,24 @@ class ChangeUserData: AbstractRequestFactory {
 }
 
 extension ChangeUserData: ChangeUserDataRequestFactory {
-    func changeUserData(userID: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl, userID: userID, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func changeUserData(userID: Int,
+                        userName: String,
+                        password: String,
+                        email: String,
+                        gender: String,
+                        creditCard: String,
+                        bio: String,
+                        completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
+        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl,
+                                                 userID: userID,
+                                                 userName: userName,
+                                                 password: password,
+                                                 email: email,
+                                                 gender: gender,
+                                                 creditCard: creditCard,
+                                                 bio: bio)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 
@@ -49,7 +64,6 @@ extension ChangeUserData {
         
         var parameters: Parameters? {
             return [
-                
                 "user_id" : userID,
                 "username" : userName,
                 "password" : password,

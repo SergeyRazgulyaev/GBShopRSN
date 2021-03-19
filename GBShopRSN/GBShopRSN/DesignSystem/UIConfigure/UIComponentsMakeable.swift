@@ -1,0 +1,70 @@
+//
+//  UIComponentsMakeable.swift
+//  GBShopRSN
+//
+//  Created by Sergey Razgulyaev on 18.03.2021.
+//
+
+import UIKit
+
+protocol UIComponentsMakeable: UIView {
+    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView
+    
+    func configureSystemImageView(systemImage: UIImage, tintColor: UIColor) -> UIImageView
+    
+    func configureLabel(text: String, textColor: UIColor, font: UIFont) -> UILabel
+    
+    func configureTextField(placeholder: String, font: UIFont, borderStyle: UITextField.BorderStyle) -> UITextField
+    
+    func configureButton(title: String, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton
+}
+
+extension UIComponentsMakeable {
+    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView {
+        let screensize: CGRect = UIScreen.main.bounds
+        let screenWidth = screensize.width
+        let screenHeight = screensize.height
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + 70.0)
+        return scrollView
+    }
+    
+    func configureSystemImageView(systemImage: UIImage, tintColor: UIColor) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.image = systemImage
+        imageView.tintColor = tintColor
+        return imageView
+    }
+    
+    func configureLabel(text: String, textColor: UIColor, font: UIFont) -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        label.textColor = textColor
+        label.font = font
+        return label
+    }
+    
+    func configureTextField(placeholder: String, font: UIFont, borderStyle: UITextField.BorderStyle) -> UITextField {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = borderStyle
+        textField.placeholder = placeholder
+        textField.font = font
+        return textField
+    }
+    
+    func configureButton(title: String, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.layer.cornerRadius = cornerRadius
+        button.layer.masksToBounds = true
+        return button
+    }
+}
+

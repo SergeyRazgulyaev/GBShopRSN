@@ -56,8 +56,8 @@ class UserInfoScreenViewController: UIViewController {
     
     //MARK: - Configuration Methods
     func configureViewController() {
-        self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.barTintColor = .white
+        view.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
     }
     
     func configureTextFields() {

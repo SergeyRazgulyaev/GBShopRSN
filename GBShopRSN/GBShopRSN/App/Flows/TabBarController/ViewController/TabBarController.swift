@@ -49,7 +49,7 @@ class TabBarController: UITabBarController {
         
         //2. ProductListScreenViewController
         let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory)
-        productListScreenViewController.tabBarItem = UITabBarItem(title: "Products", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
+        productListScreenViewController.tabBarItem = UITabBarItem(title: "Product list", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
         
         let productListNavigationController = UINavigationController(rootViewController: productListScreenViewController)
         productListNavigationController.navigationBar.tintColor = .rsnPurpleColor

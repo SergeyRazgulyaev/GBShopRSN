@@ -7,127 +7,80 @@
 
 import UIKit
 
-class SignUpScreenView: UIView {
+class SignUpScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        let screensize: CGRect = UIScreen.main.bounds
-        let screenWidth = screensize.width
-        let screenHeight = screensize.height
-        
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + 70.0)
-        return scrollView
+        configureScrollView(increaseInScreenHeight: 70.0)
     }()
     
     private(set) lazy var logoSignUpScreenImageView: UIImageView = {
-        let logoSignUpScreenImageView = UIImageView()
-        logoSignUpScreenImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoSignUpScreenImageView.layer.masksToBounds = true
-        logoSignUpScreenImageView.image = UIImage(systemName: "figure.wave")
-        logoSignUpScreenImageView.tintColor = .rsnPurpleColor
-        return logoSignUpScreenImageView
+        configureSystemImageView(systemImage: UIImage(systemName: "figure.wave")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoSignUpScreenLabel: UILabel = {
-        let logoSignUpScreenLabel = UILabel()
-        logoSignUpScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoSignUpScreenLabel.textColor = .rsnPurpleColor
-        logoSignUpScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-        logoSignUpScreenLabel.text = "Let's sign up"
-        return logoSignUpScreenLabel
+        configureLabel(text: "Let's sign up",
+                       textColor: .rsnPurpleColor,
+                       font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var enterDataForSignUpLabel: UILabel = {
-        let enterDataForSignUpLabel = UILabel()
-        enterDataForSignUpLabel.translatesAutoresizingMaskIntoConstraints = false
-        enterDataForSignUpLabel.textColor = .white
-        enterDataForSignUpLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        enterDataForSignUpLabel.text = "Enter data for sign up:"
-        return enterDataForSignUpLabel
+        configureLabel(text: "Enter data for sign up:",
+                       textColor: .white,
+                       font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var userNameTextField: UITextField = {
-        let userNameTextField = UITextField()
-        userNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        userNameTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        userNameTextField.placeholder = "User name"
-        userNameTextField.font = UIFont.systemFont(ofSize: 17)
-        return userNameTextField
+        configureTextField(placeholder: "User name",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var emailTextField: UITextField = {
-        let emailTextField = UITextField()
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        emailTextField.placeholder = "E-mail"
-        emailTextField.font = UIFont.systemFont(ofSize: 17)
-        return emailTextField
+        configureTextField(placeholder: "E-mail",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var genderTextField: UITextField = {
-        let genderTextField = UITextField()
-        genderTextField.translatesAutoresizingMaskIntoConstraints = false
-        genderTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        genderTextField.placeholder = "Your gender (m/w)"
-        genderTextField.font = UIFont.systemFont(ofSize: 17)
-        return genderTextField
+        configureTextField(placeholder: "Your gender (m/w)",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var creditCardTextField: UITextField = {
-        let creditCardTextField = UITextField()
-        creditCardTextField.translatesAutoresizingMaskIntoConstraints = false
-        creditCardTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        creditCardTextField.placeholder = "Credit card number"
-        creditCardTextField.font = UIFont.systemFont(ofSize: 17)
-        return creditCardTextField
+        configureTextField(placeholder: "Credit card number",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var bioTextField: UITextField = {
-        let bioTextField = UITextField()
-        bioTextField.translatesAutoresizingMaskIntoConstraints = false
-        bioTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        bioTextField.placeholder = "Your bio"
-        bioTextField.font = UIFont.systemFont(ofSize: 17)
-        return bioTextField
+        configureTextField(placeholder: "Your bio",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        passwordTextField.placeholder = "Сreate and enter a password"
-        passwordTextField.font = UIFont.systemFont(ofSize: 17)
-        return passwordTextField
+        configureTextField(placeholder: "Сreate and enter a password",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var repeatedPasswordTextField: UITextField = {
-        let repeatedPasswordTextField = UITextField()
-        repeatedPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-        repeatedPasswordTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        repeatedPasswordTextField.placeholder = "Repeat password"
-        repeatedPasswordTextField.font = UIFont.systemFont(ofSize: 17)
-        return repeatedPasswordTextField
+        configureTextField(placeholder: "Repeat password",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var sendDataForSignUpButton: UIButton = {
-        let sendDataForSignUpButton = UIButton()
-        sendDataForSignUpButton.translatesAutoresizingMaskIntoConstraints = false
-        sendDataForSignUpButton.setTitle("Sign up", for: .normal)
-        sendDataForSignUpButton.backgroundColor = .rsnPinkColor
-        sendDataForSignUpButton.layer.cornerRadius = 12.0
-        sendDataForSignUpButton.layer.masksToBounds = true
-        return sendDataForSignUpButton
+        configureButton(title: "Sign up",
+                        backgroundColor: .rsnPinkColor,
+                        cornerRadius: 12.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
-        let cancelAndReturnButton = UIButton()
-        cancelAndReturnButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelAndReturnButton.setTitle("Сancel and return", for: .normal)
-        cancelAndReturnButton.backgroundColor = .lightGray
-        cancelAndReturnButton.layer.cornerRadius = 12.0
-        cancelAndReturnButton.layer.masksToBounds = true
-        return cancelAndReturnButton
+        configureButton(title: "Сancel and return",
+                        backgroundColor: .lightGray,
+                        cornerRadius: 12.0)
     }()
     
     // MARK: - Init

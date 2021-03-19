@@ -49,7 +49,8 @@ class ProductListScreenViewController: UITableViewController {
     //MARK: - Configuration Methods
     func configureTableView() {
         tableView.register(ProductListScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
-        self.navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        title = "Product list"
     }
     
     //MARK: - Interaction with Network
@@ -72,10 +73,6 @@ class ProductListScreenViewController: UITableViewController {
     }
         
     // MARK: - Table view data source
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productsArray.count == 0 {
             return 1

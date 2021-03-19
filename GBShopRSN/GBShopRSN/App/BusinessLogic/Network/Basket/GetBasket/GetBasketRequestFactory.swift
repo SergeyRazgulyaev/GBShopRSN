@@ -9,5 +9,6 @@ import Foundation
 import Alamofire
 
 protocol GetBasketRequestFactory {
-    func getBasket(userID: Int, completionHandler: @escaping (AFDataResponse<GetBasketResult>) -> Void)
+    func getBasket(userID: Int,
+                   completionHandler: @escaping (AFDataResponse<GetBasketResult>) -> Void)
 }

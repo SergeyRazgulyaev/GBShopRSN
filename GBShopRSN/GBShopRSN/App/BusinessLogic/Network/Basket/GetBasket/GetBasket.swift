@@ -27,9 +27,12 @@ class GetBasket: AbstractRequestFactory {
 }
 
 extension GetBasket: GetBasketRequestFactory {
-    func getBasket(userID: Int, completionHandler: @escaping (AFDataResponse<GetBasketResult>) -> Void) {
-        let requestModel = GetBasketRequest(baseUrl: baseUrl, userID: userID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func getBasket(userID: Int,
+                   completionHandler: @escaping (AFDataResponse<GetBasketResult>) -> Void) {
+        let requestModel = GetBasketRequest(baseUrl: baseUrl,
+                                            userID: userID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

@@ -9,5 +9,7 @@ import Foundation
 import Alamofire
 
 protocol AddToBasketRequestFactory {
-    func addToBasket(productID: Int, quantityInBasket: Int, completionHandler: @escaping (AFDataResponse<AddToBasketResult>) -> Void)
+    func addToBasket(productID: Int,
+                     quantityInBasket: Int,
+                     completionHandler: @escaping (AFDataResponse<AddToBasketResult>) -> Void)
 }

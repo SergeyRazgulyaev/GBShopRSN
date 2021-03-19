@@ -47,12 +47,12 @@ class LogInScreenViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = logInScreenView
+        view = logInScreenView
     }
     
     //MARK: - Configuration Methods
     func configureViewController() {
-        self.view.backgroundColor = .rsnLightBlueColor
+        view.backgroundColor = .rsnLightBlueColor
     }
     
     func configureSendDataForLogInButton() {

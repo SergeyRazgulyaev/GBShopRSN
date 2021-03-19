@@ -27,9 +27,24 @@ class SignUp: AbstractRequestFactory {
 }
 
 extension SignUp: SignUpRequestFactory {
-    func signUp(userID: Int, userName: String, password: String, email: String, gender: String, creditCard: String, bio: String, completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
-        let requestModel = SignUpRequest(baseUrl: baseUrl, userID: userID, userName: userName, password: password, email: email, gender: gender, creditCard: creditCard, bio: bio)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func signUp(userID: Int,
+                userName: String,
+                password: String,
+                email: String,
+                gender: String,
+                creditCard: String,
+                bio: String,
+                completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
+        let requestModel = SignUpRequest(baseUrl: baseUrl,
+                                         userID: userID,
+                                         userName: userName,
+                                         password: password,
+                                         email: email,
+                                         gender: gender,
+                                         creditCard: creditCard,
+                                         bio: bio)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

@@ -27,9 +27,14 @@ class AddReview: AbstractRequestFactory {
 }
 
 extension AddReview: AddReviewRequestFactory {
-    func addReview(userID: Int, text: String, completionHandler: @escaping (AFDataResponse<AddReviewResult>) -> Void) {
-        let requestModel = AddReviewRequest(baseUrl: baseUrl, userID: userID, text: text)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func addReview(userID: Int,
+                   text: String,
+                   completionHandler: @escaping (AFDataResponse<AddReviewResult>) -> Void) {
+        let requestModel = AddReviewRequest(baseUrl: baseUrl,
+                                            userID: userID,
+                                            text: text)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

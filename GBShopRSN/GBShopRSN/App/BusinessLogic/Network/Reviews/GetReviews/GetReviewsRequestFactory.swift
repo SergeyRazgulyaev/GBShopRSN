@@ -9,5 +9,7 @@ import Foundation
 import Alamofire
 
 protocol GetReviewsRequestFactory {
-    func getReviews(pageNumber: Int, productID: Int, completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void)
+    func getReviews(pageNumber: Int,
+                    productID: Int,
+                    completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void)
 }

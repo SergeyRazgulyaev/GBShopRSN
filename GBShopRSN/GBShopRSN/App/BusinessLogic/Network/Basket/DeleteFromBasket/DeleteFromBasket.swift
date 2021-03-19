@@ -27,9 +27,12 @@ class DeleteFromBasket: AbstractRequestFactory {
 }
 
 extension DeleteFromBasket: DeleteFromBasketRequestFactory {
-    func deleteFromBasket(productID: Int, completionHandler: @escaping (AFDataResponse<DeleteFromBasketResult>) -> Void) {
-        let requestModel = DeleteFromBasketRequest(baseUrl: baseUrl, productID: productID)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func deleteFromBasket(productID: Int,
+                          completionHandler: @escaping (AFDataResponse<DeleteFromBasketResult>) -> Void) {
+        let requestModel = DeleteFromBasketRequest(baseUrl: baseUrl,
+                                                   productID: productID)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

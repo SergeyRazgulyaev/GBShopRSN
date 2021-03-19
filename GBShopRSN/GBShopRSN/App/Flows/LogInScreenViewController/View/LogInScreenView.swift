@@ -7,82 +7,50 @@
 
 import UIKit
 
-class LogInScreenView: UIView {
+class LogInScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        let screensize: CGRect = UIScreen.main.bounds
-        let screenWidth = screensize.width
-        let screenHeight = screensize.height
-        
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight - 170)
-        return scrollView
+        configureScrollView(increaseInScreenHeight: -170.0)
     }()
     
     private(set) lazy var logoLogInScreenImageView: UIImageView = {
-        let logoLogInScreenImageView = UIImageView()
-        logoLogInScreenImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoLogInScreenImageView.layer.masksToBounds = true
-        logoLogInScreenImageView.image = UIImage(systemName: "network")
-        logoLogInScreenImageView.tintColor = .rsnPurpleColor
-        return logoLogInScreenImageView
+        configureSystemImageView(systemImage: UIImage(systemName: "network")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoLogInScreenLabel: UILabel = {
-        let logoLogInScreenLabel = UILabel()
-        logoLogInScreenLabel.translatesAutoresizingMaskIntoConstraints = false
-        logoLogInScreenLabel.textColor = .rsnPurpleColor
-        logoLogInScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-        logoLogInScreenLabel.text = "Let's log in"
-        return logoLogInScreenLabel
+        configureLabel(text: "Let's log in",
+                       textColor: .rsnPurpleColor,
+                       font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var enterDataForLogInLabel: UILabel = {
-        let enterDataForLogInLabel = UILabel()
-        enterDataForLogInLabel.translatesAutoresizingMaskIntoConstraints = false
-        enterDataForLogInLabel.textColor = .white
-        enterDataForLogInLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        enterDataForLogInLabel.text = "Enter data for log in:"
-        return enterDataForLogInLabel
+        configureLabel(text: "Enter data for log in:",
+                       textColor: .white,
+                       font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var userNameTextField: UITextField = {
-        let userNameTextField = UITextField()
-        userNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        userNameTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        userNameTextField.placeholder = "User name"
-        userNameTextField.font = UIFont.systemFont(ofSize: 17)
-        return userNameTextField
+        configureTextField(placeholder: "User name",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        let passwordTextField = UITextField()
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        passwordTextField.placeholder = "Password"
-        passwordTextField.font = UIFont.systemFont(ofSize: 17)
-        return passwordTextField
+        configureTextField(placeholder: "Password",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
     }()
     
     private(set) lazy var sendDataForLogInButton: UIButton = {
-        let sendDataForLogInButton = UIButton()
-        sendDataForLogInButton.translatesAutoresizingMaskIntoConstraints = false
-        sendDataForLogInButton.setTitle("Log in", for: .normal)
-        sendDataForLogInButton.backgroundColor = .rsnLightGreenColor
-        sendDataForLogInButton.layer.cornerRadius = 12.0
-        sendDataForLogInButton.layer.masksToBounds = true
-        return sendDataForLogInButton
+        configureButton(title: "Log in",
+                        backgroundColor: .rsnLightGreenColor,
+                        cornerRadius: 12.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
-        let cancelAndReturnButton = UIButton()
-        cancelAndReturnButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelAndReturnButton.setTitle("Сancel and return", for: .normal)
-        cancelAndReturnButton.backgroundColor = .lightGray
-        cancelAndReturnButton.layer.cornerRadius = 12.0
-        cancelAndReturnButton.layer.masksToBounds = true
-        return cancelAndReturnButton
+        configureButton(title: "Сancel and return",
+                        backgroundColor: .lightGray,
+                        cornerRadius: 12.0)
     }()
     
     // MARK: - Init

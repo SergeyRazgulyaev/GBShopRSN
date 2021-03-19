@@ -27,9 +27,12 @@ class DeleteReview: AbstractRequestFactory {
 }
 
 extension DeleteReview: DeleteReviewRequestFactory {
-    func deleteReview(idComment: Int, completionHandler: @escaping (AFDataResponse<DeleteReviewResult>) -> Void) {
-        let requestModel = DeleteReviewRequest(baseUrl: baseUrl, idComment: idComment)
-        self.request(request: requestModel, completionHandler: completionHandler)
+    func deleteReview(idComment: Int,
+                      completionHandler: @escaping (AFDataResponse<DeleteReviewResult>) -> Void) {
+        let requestModel = DeleteReviewRequest(baseUrl: baseUrl,
+                                               idComment: idComment)
+        self.request(request: requestModel,
+                     completionHandler: completionHandler)
     }
 }
 

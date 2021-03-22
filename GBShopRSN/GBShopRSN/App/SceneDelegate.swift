@@ -13,8 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-//        let baseUrl = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
-        let baseUrl = URL(string: "http://127.0.0.1:8080/")!
+        let baseUrl = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
         let requestFactory = RequestFactory(baseUrl: baseUrl)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)

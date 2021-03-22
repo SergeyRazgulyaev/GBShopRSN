@@ -16,7 +16,7 @@ protocol UIComponentsMakeable: UIView {
     
     func configureTextField(placeholder: String, font: UIFont, borderStyle: UITextField.BorderStyle) -> UITextField
     
-    func configureButton(title: String, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton
+    func configureButton(title: String, font: UIFont, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton
 }
 
 extension UIComponentsMakeable {
@@ -54,13 +54,17 @@ extension UIComponentsMakeable {
         textField.borderStyle = borderStyle
         textField.placeholder = placeholder
         textField.font = font
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
         return textField
     }
     
-    func configureButton(title: String, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton {
+    func configureButton(title: String, font: UIFont, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = font
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = cornerRadius
         button.layer.masksToBounds = true

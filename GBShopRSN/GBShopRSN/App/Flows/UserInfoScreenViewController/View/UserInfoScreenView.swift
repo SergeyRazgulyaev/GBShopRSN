@@ -73,6 +73,7 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var saveUserInfoButton: UIButton = {
         configureButton(title: "Save user info",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 12.0)
     }()

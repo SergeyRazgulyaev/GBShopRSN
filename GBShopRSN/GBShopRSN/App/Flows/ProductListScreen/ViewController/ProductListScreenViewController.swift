@@ -16,7 +16,7 @@ class ProductListScreenViewController: UITableViewController {
     // MARK: - Properties
     private var productsArray: Array = [Product]()
     private let currencyUnit: String = "rub."
-    private let reuseIdentifierTableViewCell = "TableViewCell"
+    private let reuseIdentifierTableViewCell = "ProductListScreenTableViewCell"
     private let requestFactory: RequestFactory
     
     // MARK: - Init
@@ -32,25 +32,20 @@ class ProductListScreenViewController: UITableViewController {
     //MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewController()
         configureTableView()
         configureSelectProductsCategoryButton()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        keyboardAddObserver()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        keyboardRemoveObserver()
-    }
 
     //MARK: - Configuration Methods
+    func configureViewController() {
+        navigationController?.navigationBar.barTintColor = .white
+        title = "Products"
+    }
+
+    
     func configureTableView() {
         tableView.register(ProductListScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
-        navigationController?.navigationBar.barTintColor = .white
-        title = "Product list"
     }
     
     //MARK: - Interaction with Network
@@ -61,8 +56,7 @@ class ProductListScreenViewController: UITableViewController {
             switch response.result {
             case .success(let getProductList):
                 self.productsArray = getProductList.productList
-                print(getProductList)
-                print(self.productsArray)
+//                print(getProductList)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -113,6 +107,14 @@ class ProductListScreenViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if productsArray.count != 0 {
+            print(productsArray[indexPath.row].productID)
+            let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory)
+            navigationController?.pushViewController(productScreenViewController, animated: true)
+        }
+    }
+    
     func configureSelectProductsCategoryButton() {
         productListScreenHeaderView.selectProductsCategoryButton.addTarget(self, action: #selector(tapSelectProductsCategoryButton(_:)), for: .touchUpInside)
     }
@@ -123,37 +125,5 @@ class ProductListScreenViewController: UITableViewController {
         } else {
             print("You need to fill in all the fields for sign up")
         }
-    }
-}
-
-//MARK: - Keyboard configuration
-extension ProductListScreenViewController {
-    func keyboardAddObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tableView.addGestureRecognizer(tapGesture)
-    }
-    
-    func keyboardRemoveObserver() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func keyboardWillShown(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-        tableView.contentInset = contentInsets
-        tableView.scrollIndicatorInsets = contentInsets
-    }
-    
-    @objc func keyboardWillHide(notification: Notification) {
-        tableView.contentInset = UIEdgeInsets.zero
-        tableView.scrollIndicatorInsets = UIEdgeInsets.zero
-    }
-    
-    @objc func hideKeyboard() {
-        tableView.endEditing(true)
     }
 }

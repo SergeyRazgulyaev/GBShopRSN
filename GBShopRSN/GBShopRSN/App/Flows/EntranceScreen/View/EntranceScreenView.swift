@@ -27,12 +27,14 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var signUpButton: UIButton = {
         configureButton(title: "Sign up",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 12.0)
     }()
     
     private(set) lazy var logInButton: UIButton = {
         configureButton(title: "Log in",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 12.0)
     }()

@@ -43,12 +43,14 @@ class LogInScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var sendDataForLogInButton: UIButton = {
         configureButton(title: "Log in",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 12.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
         configureButton(title: "Сancel and return",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .lightGray,
                         cornerRadius: 12.0)
     }()

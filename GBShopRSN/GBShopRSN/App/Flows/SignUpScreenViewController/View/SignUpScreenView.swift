@@ -73,12 +73,14 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var sendDataForSignUpButton: UIButton = {
         configureButton(title: "Sign up",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 12.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
         configureButton(title: "Сancel and return",
+                        font: .systemFont(ofSize: 17),
                         backgroundColor: .lightGray,
                         cornerRadius: 12.0)
     }()

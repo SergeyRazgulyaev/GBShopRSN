@@ -16,31 +16,31 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
     private(set) lazy var productIDLabel: UILabel = {
         configureLabel(text: "Product ID: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productNameLabel: UILabel = {
         configureLabel(text: "Name: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productPriceLabel: UILabel = {
         configureLabel(text: "Price: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productQuantityInBasketLabel: UILabel = {
         configureLabel(text: "Quantity in basket: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productDescriptionLabel: UILabel = {
         configureLabel(text: "Description: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var reviewsTitleLabel: UILabel = {
@@ -61,6 +61,7 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
 
     //MARK: - Configuration Methods
     func configureUI() {
+        productDescriptionLabel.numberOfLines = 0
         reviewsTitleLabel.isHidden = true
         backgroundColor = .white
         addSubview(productImageView)
@@ -100,9 +101,9 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
             productDescriptionLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 8.0),
             productDescriptionLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 22.0),
             productDescriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
-            productDescriptionLabel.heightAnchor.constraint(equalToConstant: 20.0),
+            productDescriptionLabel.heightAnchor.constraint(equalToConstant: 65.0),
             
-            reviewsTitleLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 40.0),
+            reviewsTitleLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 20.0),
             reviewsTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }

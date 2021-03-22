@@ -21,7 +21,7 @@ class ProductListScreenHeaderView: UIView, UIComponentsMakeable {
     
     private(set) lazy var selectProductsCategoryButton: UIButton = {
         configureButton(title: "Show",
-                        font: .systemFont(ofSize: 17),
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)
     }()

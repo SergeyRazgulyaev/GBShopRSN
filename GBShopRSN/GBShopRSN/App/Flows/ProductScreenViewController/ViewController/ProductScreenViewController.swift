@@ -34,6 +34,9 @@ class ProductScreenViewController: UITableViewController {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadProductData()
         loadReviewsData()
     }
@@ -50,7 +53,7 @@ class ProductScreenViewController: UITableViewController {
     }
     
     func configureProductDataLabels() {
-        productScreenHeaderView.productIDLabel.text = "Product ID:  \(displayedProduct.productID)"
+        productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
         productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
         productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice)" 
         productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
@@ -104,11 +107,11 @@ class ProductScreenViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        230.0
+        250.0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        130.0
+        150.0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -125,7 +128,7 @@ class ProductScreenViewController: UITableViewController {
             print("Error with Cell")
             return UITableViewCell()
         }
-        cell.reviewIDCommentLabel.text = "Review: \(reviewsArray[indexPath.row].idComment)"
+        cell.reviewIDCommentLabel.text = "Review: \(reviewsArray[indexPath.row].commentID)"
         cell.reviewUserIDLabel.text = "UserID: \(reviewsArray[indexPath.row].userID)"
         cell.reviewTextLabel.text = "Content: \(reviewsArray[indexPath.row].text)"
         return cell

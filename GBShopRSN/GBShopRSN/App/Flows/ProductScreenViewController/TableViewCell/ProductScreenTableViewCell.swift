@@ -24,7 +24,7 @@ class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     private(set) lazy var reviewTextLabel: UILabel = {
         configureLabel(text: "Content: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     // MARK: - Init
@@ -59,7 +59,7 @@ class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
             reviewTextLabel.topAnchor.constraint(equalTo: reviewUserIDLabel.bottomAnchor, constant: 5.0),
             reviewTextLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),
             reviewTextLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
-            reviewTextLabel.heightAnchor.constraint(equalToConstant: 40.0)
+            reviewTextLabel.heightAnchor.constraint(equalToConstant: 70.0)
         ])
     }
 

@@ -12,31 +12,31 @@ class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     private(set) lazy var productIDLabel: UILabel = {
         configureLabel(text: "Product ID: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productNameLabel: UILabel = {
         configureLabel(text: "Name: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productPriceLabel: UILabel = {
         configureLabel(text: "Price: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productDescriptionLabel: UILabel = {
         configureLabel(text: "Description: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productQuantityInBasketLabel: UILabel = {
         configureLabel(text: "Quantity in basket: ",
                        textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
+                       font: .systemFont(ofSize: 17.0))
     }()
     
     // MARK: - Init
@@ -52,6 +52,7 @@ class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
 
     //MARK: - Configuration Methods
     func configureUI() {
+        productDescriptionLabel.numberOfLines = 0
         addSubview(productIDLabel)
         addSubview(productNameLabel)
         addSubview(productPriceLabel)
@@ -77,7 +78,7 @@ class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
             productDescriptionLabel.topAnchor.constraint(equalTo: productPriceLabel.bottomAnchor, constant: 5.0),
             productDescriptionLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),
             productDescriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
-            productDescriptionLabel.heightAnchor.constraint(equalToConstant: 20.0),
+            productDescriptionLabel.heightAnchor.constraint(equalToConstant: 65.0),
             
             productQuantityInBasketLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 5.0),
             productQuantityInBasketLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),

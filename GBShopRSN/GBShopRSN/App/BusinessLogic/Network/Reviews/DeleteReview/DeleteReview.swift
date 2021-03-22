@@ -27,10 +27,10 @@ class DeleteReview: AbstractRequestFactory {
 }
 
 extension DeleteReview: DeleteReviewRequestFactory {
-    func deleteReview(idComment: Int,
+    func deleteReview(commentID: Int,
                       completionHandler: @escaping (AFDataResponse<DeleteReviewResult>) -> Void) {
         let requestModel = DeleteReviewRequest(baseUrl: baseUrl,
-                                               idComment: idComment)
+                                               commentID: commentID)
         self.request(request: requestModel,
                      completionHandler: completionHandler)
     }
@@ -42,11 +42,11 @@ extension DeleteReview {
         let method: HTTPMethod = .post
         let path: String = "deleteReview"
         
-        let idComment: Int
+        let commentID: Int
         
         var parameters: Parameters? {
             return [
-                "id_comment" : idComment
+                "comment_id" : commentID
             ]
         }
     }

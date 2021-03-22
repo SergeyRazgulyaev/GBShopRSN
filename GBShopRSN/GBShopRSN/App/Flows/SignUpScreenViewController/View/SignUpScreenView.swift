@@ -73,16 +73,16 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var sendDataForSignUpButton: UIButton = {
         configureButton(title: "Sign up",
-                        font: .systemFont(ofSize: 17),
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
         configureButton(title: "Сancel and return",
-                        font: .systemFont(ofSize: 17),
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .lightGray,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     // MARK: - Init
@@ -165,12 +165,12 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
             
             sendDataForSignUpButton.topAnchor.constraint(equalTo: repeatedPasswordTextField.bottomAnchor, constant: 20.0),
             sendDataForSignUpButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sendDataForSignUpButton.heightAnchor.constraint(equalToConstant: 40.0),
+            sendDataForSignUpButton.heightAnchor.constraint(equalToConstant: 30.0),
             sendDataForSignUpButton.widthAnchor.constraint(equalToConstant: 100.0),
             
             cancelAndReturnButton.topAnchor.constraint(equalTo: sendDataForSignUpButton.bottomAnchor, constant: 20.0),
             cancelAndReturnButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cancelAndReturnButton.heightAnchor.constraint(equalToConstant: 40.0),
+            cancelAndReturnButton.heightAnchor.constraint(equalToConstant: 30.0),
             cancelAndReturnButton.widthAnchor.constraint(equalToConstant: 180.0)
         ])
     }

@@ -85,5 +85,4 @@ class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
             productQuantityInBasketLabel.heightAnchor.constraint(equalToConstant: 20.0)
         ])
     }
-
 }

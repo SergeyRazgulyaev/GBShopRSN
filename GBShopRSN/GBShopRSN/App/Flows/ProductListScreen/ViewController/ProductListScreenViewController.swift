@@ -42,21 +42,20 @@ class ProductListScreenViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .white
         title = "Products"
     }
-
     
     func configureTableView() {
         tableView.register(ProductListScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
     }
     
     //MARK: - Interaction with Network
-    func loadData() {
+    func loadProductListData() {
         let getProductList = requestFactory.makeGetProductListRequestFactory()
         getProductList.getProductList(pageNumber: 1,
                                       idCategory: ((productListScreenHeaderView.selectProductsCategoryTextField.text ?? "1") as NSString).integerValue) { response in
             switch response.result {
             case .success(let getProductList):
                 self.productsArray = getProductList.productList
-//                print(getProductList)
+                print(getProductList)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -69,7 +68,7 @@ class ProductListScreenViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if productsArray.count == 0 {
-            return 1
+            return 0
         } else {
             return productsArray.count
         }
@@ -109,8 +108,7 @@ class ProductListScreenViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if productsArray.count != 0 {
-            print(productsArray[indexPath.row].productID)
-            let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory)
+            let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory, productID: productsArray[indexPath.row].productID)
             navigationController?.pushViewController(productScreenViewController, animated: true)
         }
     }
@@ -121,7 +119,7 @@ class ProductListScreenViewController: UITableViewController {
     
     @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
         if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
-            loadData()
+            loadProductListData()
         } else {
             print("You need to fill in all the fields for sign up")
         }

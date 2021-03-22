@@ -31,20 +31,20 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
                        font: .boldSystemFont(ofSize: 14.0))
     }()
     
-    private(set) lazy var productDescriptionLabel: UILabel = {
-        configureLabel(text: "Description: ",
-                       textColor: .black,
-                       font: .boldSystemFont(ofSize: 14.0))
-    }()
-    
     private(set) lazy var productQuantityInBasketLabel: UILabel = {
         configureLabel(text: "Quantity in basket: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 14.0))
     }()
     
-    private(set) lazy var reviewsLogoLabel: UILabel = {
-        configureLabel(text: "Reviews",
+    private(set) lazy var productDescriptionLabel: UILabel = {
+        configureLabel(text: "Description: ",
+                       textColor: .black,
+                       font: .boldSystemFont(ofSize: 14.0))
+    }()
+    
+    private(set) lazy var reviewsTitleLabel: UILabel = {
+        configureLabel(text: "No reviews",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
@@ -61,13 +61,15 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
 
     //MARK: - Configuration Methods
     func configureUI() {
+        reviewsTitleLabel.isHidden = true
+        backgroundColor = .white
         addSubview(productImageView)
         addSubview(productIDLabel)
         addSubview(productNameLabel)
         addSubview(productPriceLabel)
         addSubview(productQuantityInBasketLabel)
         addSubview(productDescriptionLabel)
-        addSubview(reviewsLogoLabel)
+        addSubview(reviewsTitleLabel)
 
         NSLayoutConstraint.activate([
             productImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8.0),
@@ -100,8 +102,8 @@ class ProductScreenHeaderView: UIView, UIComponentsMakeable {
             productDescriptionLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
             productDescriptionLabel.heightAnchor.constraint(equalToConstant: 20.0),
             
-            reviewsLogoLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 40.0),
-            reviewsLogoLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            reviewsTitleLabel.topAnchor.constraint(equalTo: productDescriptionLabel.bottomAnchor, constant: 40.0),
+            reviewsTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

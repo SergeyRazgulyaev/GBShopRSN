@@ -36,7 +36,11 @@ class ProductListScreenViewController: UITableViewController {
         configureTableView()
         configureSelectProductsCategoryButton()
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadProductListData()
+    }
+    
     //MARK: - Configuration Methods
     func configureViewController() {
         navigationController?.navigationBar.barTintColor = .white

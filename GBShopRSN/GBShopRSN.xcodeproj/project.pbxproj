@@ -322,14 +322,14 @@
 			path = UIComponents;
 			sourceTree = "<group>";
 		};
-		C57ED2812607FE9D001C6EFA /* ProductScreenViewController */ = {
+		C57ED2812607FE9D001C6EFA /* ProductScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C57ED2822607FEAC001C6EFA /* View */,
 				C57ED2842607FEC3001C6EFA /* TableViewCell */,
 				C57ED2832607FEB3001C6EFA /* ViewController */,
 			);
-			path = ProductScreenViewController;
+			path = ProductScreen;
 			sourceTree = "<group>";
 		};
 		C57ED2822607FEAC001C6EFA /* View */ = {
@@ -461,13 +461,13 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
-		C5B209C525F2524D00535A64 /* UserInfoScreenViewController */ = {
+		C5B209C525F2524D00535A64 /* UserInfoScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209FB25F2915400535A64 /* View */,
 				C5B209F725F2912D00535A64 /* ViewController */,
 			);
-			path = UserInfoScreenViewController;
+			path = UserInfoScreen;
 			sourceTree = "<group>";
 		};
 		C5B209CE25F252BD00535A64 /* EntranceScreen */ = {
@@ -479,22 +479,22 @@
 			path = EntranceScreen;
 			sourceTree = "<group>";
 		};
-		C5B209CF25F2534000535A64 /* SignUpScreenViewController */ = {
+		C5B209CF25F2534000535A64 /* SignUpScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209F925F2914900535A64 /* View */,
 				C5B209F425F2912500535A64 /* ViewController */,
 			);
-			path = SignUpScreenViewController;
+			path = SignUpScreen;
 			sourceTree = "<group>";
 		};
-		C5B209D025F2534900535A64 /* LogInScreenViewController */ = {
+		C5B209D025F2534900535A64 /* LogInScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209FA25F2914C00535A64 /* View */,
 				C5B209F525F2912700535A64 /* ViewController */,
 			);
-			path = LogInScreenViewController;
+			path = LogInScreen;
 			sourceTree = "<group>";
 		};
 		C5B209F325F2911F00535A64 /* ViewController */ = {
@@ -731,12 +731,12 @@
 			isa = PBXGroup;
 			children = (
 				C5B209CE25F252BD00535A64 /* EntranceScreen */,
-				C5B209CF25F2534000535A64 /* SignUpScreenViewController */,
-				C5B209D025F2534900535A64 /* LogInScreenViewController */,
-				C5B209A725F2420D00535A64 /* TabBarController */,
-				C5B209C525F2524D00535A64 /* UserInfoScreenViewController */,
+				C5B209CF25F2534000535A64 /* SignUpScreen */,
+				C5B209D025F2534900535A64 /* LogInScreen */,
+				C5B209C525F2524D00535A64 /* UserInfoScreen */,
 				C5B987D62600BE1C0077CD08 /* ProductListScreen */,
-				C57ED2812607FE9D001C6EFA /* ProductScreenViewController */,
+				C57ED2812607FE9D001C6EFA /* ProductScreen */,
+				C5B209A725F2420D00535A64 /* TabBarController */,
 			);
 			path = Flows;
 			sourceTree = "<group>";

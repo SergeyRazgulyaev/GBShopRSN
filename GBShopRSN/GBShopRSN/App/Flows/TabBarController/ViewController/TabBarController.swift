@@ -36,18 +36,7 @@ class TabBarController: UITabBarController {
     func createViewControllers() -> [UIViewController] {
         var viewControllers = [UIViewController]()
         
-        //1. UserInfoScreenViewController
-        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
-        userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
-        
-        let userInfoNavigationController = UINavigationController(rootViewController: userInfoScreenViewController)
-        userInfoNavigationController.navigationBar.tintColor = .rsnPurpleColor
-        userInfoNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
-        userInfoNavigationController.navigationBar.prefersLargeTitles = false;
-        
-        viewControllers.append(userInfoNavigationController)
-        
-        //2. ProductListScreenViewController
+        //1. ProductListScreen
         let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory)
         productListScreenViewController.tabBarItem = UITabBarItem(title: "Product", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
         
@@ -57,6 +46,17 @@ class TabBarController: UITabBarController {
         productListNavigationController.navigationBar.prefersLargeTitles = false;
         
         viewControllers.append(productListNavigationController)
+        
+        //2. UserInfoScreen
+        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
+        userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
+        
+        let userInfoNavigationController = UINavigationController(rootViewController: userInfoScreenViewController)
+        userInfoNavigationController.navigationBar.tintColor = .rsnPurpleColor
+        userInfoNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
+        userInfoNavigationController.navigationBar.prefersLargeTitles = false;
+        
+        viewControllers.append(userInfoNavigationController)
         
         return viewControllers
     }

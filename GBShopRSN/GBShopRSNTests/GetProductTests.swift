@@ -30,7 +30,7 @@ class GetProductTests: XCTestCase {
                 XCTAssertEqual(model.product.productID, 123)
                 XCTAssertEqual(model.product.productName, "Notebook")
                 XCTAssertEqual(model.product.productPrice, 45600)
-                XCTAssertEqual(model.product.productDescription, "Powerful gaming notebook")
+                XCTAssertEqual(model.product.productDescription, "Powerful AMD gaming laptop with 4K resolution and long battery life")
                 XCTAssertEqual(model.product.quantityInBasket, 0)
                 receivedProduct.fulfill()
             case .failure(let error):

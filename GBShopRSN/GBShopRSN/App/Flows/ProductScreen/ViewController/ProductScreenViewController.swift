@@ -17,6 +17,7 @@ class ProductScreenViewController: UITableViewController {
     private var reviewsArray: Array = [Review]()
     private let reuseIdentifierTableViewCell = "ProductScreenTableViewCell"
     private let requestFactory: RequestFactory
+    private let currencyUnit: String = "rub."
     private let productID: Int
     private var displayedProduct = Product(productID: 0, productName: "", productPrice: 0, productDescription: "", quantityInBasket: 0)
     
@@ -55,7 +56,7 @@ class ProductScreenViewController: UITableViewController {
     func configureProductDataLabels() {
         productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
         productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
-        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice)" 
+        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
         productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
         productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
     }
@@ -83,6 +84,7 @@ class ProductScreenViewController: UITableViewController {
         getReviews.getReviews(pageNumber: 1, productID: productID) { response in
             switch response.result {
             case .success(let getReviews):
+                print(getReviews)
                 self.reviewsArray = getReviews.reviews
                 DispatchQueue.main.async {
                     if self.reviewsArray.count != 0 {
@@ -128,9 +130,9 @@ class ProductScreenViewController: UITableViewController {
             print("Error with Cell")
             return UITableViewCell()
         }
-        cell.reviewIDCommentLabel.text = "Review: \(reviewsArray[indexPath.row].commentID)"
-        cell.reviewUserIDLabel.text = "UserID: \(reviewsArray[indexPath.row].userID)"
-        cell.reviewTextLabel.text = "Content: \(reviewsArray[indexPath.row].text)"
+        cell.reviewIDCommentLabel.text = "Review \(reviewsArray[indexPath.row].commentID)"
+        cell.reviewUserNameAndLastnameLabel.text = "User: \(reviewsArray[indexPath.row].userName) \(reviewsArray[indexPath.row].userLastname)"
+        cell.reviewTextLabel.text = "\(reviewsArray[indexPath.row].text)"
         return cell
     }
     

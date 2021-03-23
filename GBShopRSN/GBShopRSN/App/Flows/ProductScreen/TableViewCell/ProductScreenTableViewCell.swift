@@ -10,19 +10,19 @@ import UIKit
 class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var reviewIDCommentLabel: UILabel = {
-        configureLabel(text: "Review: ",
+        configureLabel(text: "Review ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
-    private(set) lazy var reviewUserIDLabel: UILabel = {
-        configureLabel(text: "UserID: ",
+    private(set) lazy var reviewUserNameAndLastnameLabel: UILabel = {
+        configureLabel(text: "User: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var reviewTextLabel: UILabel = {
-        configureLabel(text: "Content: ",
+        configureLabel(text: "",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
@@ -42,7 +42,7 @@ class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     func configureUI() {
         reviewTextLabel.numberOfLines = 0
         addSubview(reviewIDCommentLabel)
-        addSubview(reviewUserIDLabel)
+        addSubview(reviewUserNameAndLastnameLabel)
         addSubview(reviewTextLabel)
 
         NSLayoutConstraint.activate([
@@ -51,12 +51,12 @@ class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
             reviewIDCommentLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
             reviewIDCommentLabel.heightAnchor.constraint(equalToConstant: 20.0),
             
-            reviewUserIDLabel.topAnchor.constraint(equalTo: reviewIDCommentLabel.bottomAnchor, constant: 5.0),
-            reviewUserIDLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),
-            reviewUserIDLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
-            reviewUserIDLabel.heightAnchor.constraint(equalToConstant: 20.0),
+            reviewUserNameAndLastnameLabel.topAnchor.constraint(equalTo: reviewIDCommentLabel.bottomAnchor, constant: 5.0),
+            reviewUserNameAndLastnameLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),
+            reviewUserNameAndLastnameLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
+            reviewUserNameAndLastnameLabel.heightAnchor.constraint(equalToConstant: 20.0),
             
-            reviewTextLabel.topAnchor.constraint(equalTo: reviewUserIDLabel.bottomAnchor, constant: 5.0),
+            reviewTextLabel.topAnchor.constraint(equalTo: reviewUserNameAndLastnameLabel.bottomAnchor, constant: 5.0),
             reviewTextLabel.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 15.0),
             reviewTextLabel.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -15.0),
             reviewTextLabel.heightAnchor.constraint(equalToConstant: 70.0)

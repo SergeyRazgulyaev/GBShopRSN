@@ -26,17 +26,27 @@ class GBShopRSNUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        
+        let logInButton = app.buttons["showLogInScreenButton"].firstMatch
+        XCTAssertTrue(logInButton.isHittable, "\(app.debugDescription)")
+        logInButton.tap()
+        
+        let logInScreenView = app.otherElements["logInScreenView"].firstMatch
+        XCTAssertTrue(logInScreenView.waitForExistence(timeout: 1))
+        
+        let userNameTextField = logInScreenView.textFields["userNameTextField"]
+        userNameTextField.tap()
+        userNameTextField.typeText("Somebody")
+        
+        let passwordTextField = logInScreenView.textFields["passwordTextField"]
+        passwordTextField.tap()
+        passwordTextField.typeText("mypassword")
+        
+        let sendDataForLogInButton = logInScreenView.buttons["sendDataForLogInButton"]
+        sendDataForLogInButton.tap()
+        
+        let productListScreenView = app.otherElements["productListScreenView"].firstMatch
+        XCTAssertTrue(productListScreenView.waitForExistence(timeout: 5))
 
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
     }
 }

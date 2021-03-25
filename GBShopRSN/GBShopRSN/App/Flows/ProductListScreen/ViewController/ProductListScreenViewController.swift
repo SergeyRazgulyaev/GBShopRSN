@@ -51,6 +51,18 @@ class ProductListScreenViewController: UITableViewController {
         tableView.register(ProductListScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
     }
     
+    func configureSelectProductsCategoryButton() {
+        productListScreenHeaderView.selectProductsCategoryButton.addTarget(self, action: #selector(tapSelectProductsCategoryButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
+        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
+            loadProductListData()
+        } else {
+            print("You need to fill in all the fields for sign up")
+        }
+    }
+    
     //MARK: - Interaction with Network
     func loadProductListData() {
         let getProductList = requestFactory.makeGetProductListRequestFactory()
@@ -114,18 +126,6 @@ class ProductListScreenViewController: UITableViewController {
         if productsArray.count != 0 {
             let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory, productID: productsArray[indexPath.row].productID)
             navigationController?.pushViewController(productScreenViewController, animated: true)
-        }
-    }
-    
-    func configureSelectProductsCategoryButton() {
-        productListScreenHeaderView.selectProductsCategoryButton.addTarget(self, action: #selector(tapSelectProductsCategoryButton(_:)), for: .touchUpInside)
-    }
-    
-    @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
-        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
-            loadProductListData()
-        } else {
-            print("You need to fill in all the fields for sign up")
         }
     }
 }

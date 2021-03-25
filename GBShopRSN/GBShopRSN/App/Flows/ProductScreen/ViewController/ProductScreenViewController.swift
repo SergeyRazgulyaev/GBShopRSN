@@ -19,6 +19,8 @@ class ProductScreenViewController: UITableViewController {
     private let requestFactory: RequestFactory
     private let currencyUnit: String = "rub."
     private let productID: Int
+    private var increaseDecreaseCounter: Int = 0
+    private var basketButtonIsInAddStatus: Bool = true
     private var displayedProduct = Product(productID: 0, productName: "", productPrice: 0, productDescription: "", quantityInBasket: 0)
     
     // MARK: - Init
@@ -31,11 +33,16 @@ class ProductScreenViewController: UITableViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
+        configureAddOrDeleteBasketButton()
+        configureDecreaseProductForBasketCounterButton()
+        configureIncreaseProductForBasketCounterButton()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductData()
@@ -59,6 +66,43 @@ class ProductScreenViewController: UITableViewController {
         productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
         productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
         productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
+    }
+    
+    func configureAddOrDeleteBasketButton() {
+        productScreenHeaderView.addOrDeleteBasketButton.addTarget(self, action: #selector(tapAddOrDeleteBasketButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapAddOrDeleteBasketButton(_ sender: Any?) {
+        if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue != self.displayedProduct.quantityInBasket) && !(productScreenHeaderView.productForBasketCounterTextField.text?.isTrimmedEmpty ?? true) {
+            if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0) {
+                addProductToBasket()
+            } else if ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue == 0 {
+                deleteProductFromBasket()
+            }
+        }
+    }
+    
+    func configureDecreaseProductForBasketCounterButton() {
+        productScreenHeaderView.decreaseProductForBasketCounterButton.addTarget(self, action: #selector(tapDecreaseProductForBasketCounterButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapDecreaseProductForBasketCounterButton(_ sender: Any?) {
+        if ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0 {
+            increaseDecreaseCounter = ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+            increaseDecreaseCounter -= 1
+            productScreenHeaderView.productForBasketCounterTextField.text = "\(increaseDecreaseCounter)"
+        }
+    }
+    
+    func configureIncreaseProductForBasketCounterButton() {
+        productScreenHeaderView.increaseProductForBasketCounterButton.addTarget(self, action: #selector(tapIncreaseProductForBasketCounterButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapIncreaseProductForBasketCounterButton(_ sender: Any?) {
+        increaseDecreaseCounter = ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+        increaseDecreaseCounter += 1
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(increaseDecreaseCounter)"
     }
     
     //MARK: - Interaction with Network
@@ -92,6 +136,42 @@ class ProductScreenViewController: UITableViewController {
                     }
                     self.productScreenHeaderView.reviewsTitleLabel.isHidden = false
                     self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func addProductToBasket() {
+        let addToBasket = requestFactory.makeAddToBasketRequestFactory()
+        addToBasket.addToBasket(productID: 123, quantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
+            switch response.result {
+            case .success(let addProductToBasket):
+                print(addProductToBasket)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.addOrDeleteBasketButton.setTitle("Added to basket", for: .normal)
+                    self.productScreenHeaderView.addOrDeleteBasketButton.backgroundColor = .rsnLightGreenColor
+                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
+                    self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteProductFromBasket() {
+        let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
+        deleteFromBasket.deleteFromBasket(productID: 123) { response in
+            switch response.result {
+            case .success(let deleteProductFromBasket):
+                print(deleteProductFromBasket)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.addOrDeleteBasketButton.setTitle("Deleted from basket", for: .normal)
+                    self.productScreenHeaderView.addOrDeleteBasketButton.backgroundColor = .rsnPinkColor
+                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
+                    self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
                 }
             case .failure(let error):
                 print(error.localizedDescription)

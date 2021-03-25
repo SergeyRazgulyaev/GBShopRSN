@@ -67,6 +67,11 @@ class LogInScreenView: UIView, UIComponentsMakeable {
     
     //MARK: - Configuration Methods
     func configureUI() {
+        accessibilityIdentifier = "logInScreenView"
+        userNameTextField.accessibilityIdentifier = "userNameTextField"
+        passwordTextField.accessibilityIdentifier = "passwordTextField"
+        sendDataForLogInButton.accessibilityIdentifier = "sendDataForLogInButton"
+        
         addSubview(scrollView)
         scrollView.addSubview(logoLogInScreenImageView)
         scrollView.addSubview(logoLogInScreenLabel)

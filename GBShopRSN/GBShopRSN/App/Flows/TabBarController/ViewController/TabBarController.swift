@@ -58,6 +58,17 @@ class TabBarController: UITabBarController {
         
         viewControllers.append(userInfoNavigationController)
         
+        //3. BasketScreen
+//        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory)
+//        basketScreenViewController.tabBarItem = UITabBarItem(title: "Basket", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
+//        
+//        let basketNavigationController = UINavigationController(rootViewController: basketScreenViewController)
+//        basketNavigationController.navigationBar.tintColor = .rsnPurpleColor
+//        basketNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
+//        basketNavigationController.navigationBar.prefersLargeTitles = false;
+//        
+//        viewControllers.append(basketNavigationController)
+        
         return viewControllers
     }
 }

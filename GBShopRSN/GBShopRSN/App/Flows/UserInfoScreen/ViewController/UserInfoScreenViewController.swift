@@ -21,10 +21,12 @@ class UserInfoScreenViewController: UIViewController {
     private let defaultBio = "This is good! I think I will switch to another language"
     private let defaultPassword = "mypassword"
     private let requestFactory: RequestFactory
+    private let userID: Int
     
     // MARK: - Init
-    init(requestFactory: RequestFactory) {
+    init(requestFactory: RequestFactory, userID: Int) {
         self.requestFactory = requestFactory
+        self.userID = userID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -76,7 +78,7 @@ class UserInfoScreenViewController: UIViewController {
             if userInfoScreenView.passwordTextField.text ==
                 userInfoScreenView.repeatedPasswordTextField.text {
                 let changeData = requestFactory.makeChangeUserDataRequestFactory()
-                changeData.changeUserData(userID: 123,
+                changeData.changeUserData(userID: userID,
                                           userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
                                           password: userInfoScreenView.passwordTextField.text ?? defaultPassword,
                                           email: userInfoScreenView.emailTextField.text ?? defaultEmail,
@@ -87,7 +89,6 @@ class UserInfoScreenViewController: UIViewController {
                     switch response.result {
                     case .success(let changeUserData):
                         print(changeUserData)
-                        print("User info changed")
                     case .failure(let error):
                         print(error.localizedDescription)
                     }

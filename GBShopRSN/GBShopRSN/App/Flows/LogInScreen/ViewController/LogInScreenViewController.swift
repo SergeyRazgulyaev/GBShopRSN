@@ -64,7 +64,8 @@ class LogInScreenViewController: UIViewController {
                 switch response.result {
                 case .success(let login):
                     DispatchQueue.main.async {
-                        let tabBarController = TabBarController(requestFactory: self.requestFactory)
+                        let tabBarController = TabBarController(requestFactory: self.requestFactory, userID: login.user.id)
+                        print("userID \(login.user.id)")
                         tabBarController.modalPresentationStyle = .fullScreen
                         self.present(tabBarController, animated: true, completion: nil)
                     }

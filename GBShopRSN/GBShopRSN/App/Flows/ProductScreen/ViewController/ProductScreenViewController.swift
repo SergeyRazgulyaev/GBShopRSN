@@ -152,7 +152,7 @@ class ProductScreenViewController: UITableViewController {
     
     func addProductToBasket() {
         let addToBasket = requestFactory.makeAddToBasketRequestFactory()
-        addToBasket.addToBasket(productID: 123, quantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
+        addToBasket.addToBasket(productID: productID, quantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
             switch response.result {
             case .success(let addProductToBasket):
                 print(addProductToBasket)

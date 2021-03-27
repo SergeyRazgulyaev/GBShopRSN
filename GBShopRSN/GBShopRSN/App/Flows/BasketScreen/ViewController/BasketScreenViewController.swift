@@ -15,13 +15,15 @@ class BasketScreenViewController: UITableViewController {
     
     // MARK: - Properties
     private let requestFactory: RequestFactory
+    private let userID: Int
     private var productsInBasketArray: Array = [Product]()
     private let reuseIdentifierTableViewCell = "BasketScreenTableViewCell"
     private let currencyUnit: String = "rub."
     
     // MARK: - Init
-    init(requestFactory: RequestFactory) {
+    init(requestFactory: RequestFactory, userID: Int) {
         self.requestFactory = requestFactory
+        self.userID = userID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -83,7 +85,7 @@ class BasketScreenViewController: UITableViewController {
     //MARK: - Interaction with Network
     func loadBasketData() {
         let getBasket = requestFactory.makeGetBasketRequestFactory()
-        getBasket.getBasket(userID: 123) { response in
+        getBasket.getBasket(userID: userID) { response in
             switch response.result {
             case .success(let getBasket):
                 print(getBasket)
@@ -99,7 +101,7 @@ class BasketScreenViewController: UITableViewController {
     
     func payBasket(payAmount: Int) {
         let payBasket = requestFactory.makePayBasketRequestFactory()
-        payBasket.payBasket(userID: 123, payAmount: payAmount) { response in
+        payBasket.payBasket(userID: userID, payAmount: payAmount) { response in
             switch response.result {
             case .success(let payBasket):
                 print(payBasket)

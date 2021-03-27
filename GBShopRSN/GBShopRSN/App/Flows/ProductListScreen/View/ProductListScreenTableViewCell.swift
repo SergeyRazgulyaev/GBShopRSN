@@ -56,13 +56,14 @@ class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
 
     //MARK: - Configuration Methods
     func configureUI() {
+        selectionStyle = UITableViewCell.SelectionStyle.none
         productDescriptionLabel.numberOfLines = 0
-        addSubview(productQRCodeImageView)
-        addSubview(productIDLabel)
-        addSubview(productNameLabel)
-        addSubview(productPriceLabel)
-        addSubview(productQuantityInBasketLabel)
-        addSubview(productDescriptionLabel)
+        contentView.addSubview(productQRCodeImageView)
+        contentView.addSubview(productIDLabel)
+        contentView.addSubview(productNameLabel)
+        contentView.addSubview(productPriceLabel)
+        contentView.addSubview(productQuantityInBasketLabel)
+        contentView.addSubview(productDescriptionLabel)
 
         NSLayoutConstraint.activate([
             productQRCodeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10.0),

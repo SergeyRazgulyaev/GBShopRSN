@@ -32,7 +32,7 @@ class DeleteFromBasketTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
     
     //MARK: - Negative tests
@@ -55,6 +55,6 @@ class DeleteFromBasketTests: XCTestCase {
                 failedDeletedFromBasketProduct.fulfill()
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
 }

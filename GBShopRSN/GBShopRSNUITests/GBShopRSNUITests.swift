@@ -42,6 +42,9 @@ class GBShopRSNUITests: XCTestCase {
         passwordTextField.tap()
         passwordTextField.typeText("mypassword")
         
+        let scrollView = logInScreenView.scrollViews["logInScrollView"]
+        scrollView.swipeUp()
+            
         let sendDataForLogInButton = logInScreenView.buttons["sendDataForLogInButton"]
         sendDataForLogInButton.tap()
         

@@ -47,7 +47,18 @@ class TabBarController: UITabBarController {
         
         viewControllers.append(productListNavigationController)
         
-        //2. UserInfoScreen
+        //2. BasketScreen
+        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory)
+        basketScreenViewController.tabBarItem = UITabBarItem(title: "Basket", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
+        
+        let basketNavigationController = UINavigationController(rootViewController: basketScreenViewController)
+        basketNavigationController.navigationBar.tintColor = .rsnPurpleColor
+        basketNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
+        basketNavigationController.navigationBar.prefersLargeTitles = false;
+        
+        viewControllers.append(basketNavigationController)
+        
+        //3. UserInfoScreen
         let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
         userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
         
@@ -57,17 +68,6 @@ class TabBarController: UITabBarController {
         userInfoNavigationController.navigationBar.prefersLargeTitles = false;
         
         viewControllers.append(userInfoNavigationController)
-        
-        //3. BasketScreen
-//        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory)
-//        basketScreenViewController.tabBarItem = UITabBarItem(title: "Basket", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
-//        
-//        let basketNavigationController = UINavigationController(rootViewController: basketScreenViewController)
-//        basketNavigationController.navigationBar.tintColor = .rsnPurpleColor
-//        basketNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
-//        basketNavigationController.navigationBar.prefersLargeTitles = false;
-//        
-//        viewControllers.append(basketNavigationController)
         
         return viewControllers
     }

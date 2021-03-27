@@ -33,7 +33,7 @@ class AddReviewTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
     
     //MARK: - Negative tests
@@ -56,6 +56,6 @@ class AddReviewTests: XCTestCase {
                 failedAddReview.fulfill()
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
 }

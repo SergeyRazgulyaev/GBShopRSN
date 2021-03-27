@@ -14,13 +14,12 @@ class ProductScreenViewController: UITableViewController {
     }()
     
     // MARK: - Properties
+    private let requestFactory: RequestFactory
     private var reviewsArray: Array = [Review]()
     private let reuseIdentifierTableViewCell = "ProductScreenTableViewCell"
-    private let requestFactory: RequestFactory
     private let currencyUnit: String = "rub."
     private let productID: Int
     private var increaseDecreaseCounter: Int = 0
-    private var basketButtonIsInAddStatus: Bool = true
     private var displayedProduct = Product(productID: 0, productName: "", productPrice: 0, productDescription: "", quantityInBasket: 0)
     
     // MARK: - Init
@@ -38,7 +37,8 @@ class ProductScreenViewController: UITableViewController {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
-        configureAddOrDeleteBasketButton()
+        configureAddToBasketButton()
+        configureDeleteFromBasketButton()
         configureDecreaseProductForBasketCounterButton()
         configureIncreaseProductForBasketCounterButton()
     }
@@ -47,8 +47,9 @@ class ProductScreenViewController: UITableViewController {
         super.viewWillAppear(animated)
         loadProductData()
         loadReviewsData()
+        configureKeyboard()
     }
-
+    
     //MARK: - Configuration Methods
     func configureViewController() {
         navigationController?.navigationItem.backBarButtonItem?.title = "Products"
@@ -69,17 +70,23 @@ class ProductScreenViewController: UITableViewController {
         productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
     }
     
-    func configureAddOrDeleteBasketButton() {
-        productScreenHeaderView.addOrDeleteBasketButton.addTarget(self, action: #selector(tapAddOrDeleteBasketButton(_:)), for: .touchUpInside)
+    func configureAddToBasketButton() {
+        productScreenHeaderView.addToBasketButton.addTarget(self, action: #selector(tapAddToBasketButton(_:)), for: .touchUpInside)
     }
     
-    @objc func tapAddOrDeleteBasketButton(_ sender: Any?) {
-        if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue != self.displayedProduct.quantityInBasket) && !(productScreenHeaderView.productForBasketCounterTextField.text?.isTrimmedEmpty ?? true) {
-            if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0) {
-                addProductToBasket()
-            } else if ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue == 0 {
-                deleteProductFromBasket()
-            }
+    @objc func tapAddToBasketButton(_ sender: Any?) {
+        if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue != self.displayedProduct.quantityInBasket) && !(productScreenHeaderView.productForBasketCounterTextField.text?.isTrimmedEmpty ?? true) && (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0) {
+            addProductToBasket()
+        }
+    }
+    
+    func configureDeleteFromBasketButton() {
+        productScreenHeaderView.deleteFromBasketButton.addTarget(self, action: #selector(tapDeleteFromBasketButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapDeleteFromBasketButton(_ sender: Any?) {
+        if self.displayedProduct.quantityInBasket != 0 {
+            deleteProductFromBasket(productID: productID)
         }
     }
     
@@ -150,8 +157,6 @@ class ProductScreenViewController: UITableViewController {
             case .success(let addProductToBasket):
                 print(addProductToBasket)
                 DispatchQueue.main.async {
-                    self.productScreenHeaderView.addOrDeleteBasketButton.setTitle("Added to basket", for: .normal)
-                    self.productScreenHeaderView.addOrDeleteBasketButton.backgroundColor = .rsnLightGreenColor
                     self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
                     self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
                 }
@@ -161,17 +166,15 @@ class ProductScreenViewController: UITableViewController {
         }
     }
     
-    func deleteProductFromBasket() {
+    func deleteProductFromBasket(productID: Int) {
         let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
-        deleteFromBasket.deleteFromBasket(productID: 123) { response in
+        deleteFromBasket.deleteFromBasket(productID: productID) { response in
             switch response.result {
             case .success(let deleteProductFromBasket):
                 print(deleteProductFromBasket)
                 DispatchQueue.main.async {
-                    self.productScreenHeaderView.addOrDeleteBasketButton.setTitle("Deleted from basket", for: .normal)
-                    self.productScreenHeaderView.addOrDeleteBasketButton.backgroundColor = .rsnPinkColor
-                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
-                    self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: 0"
+                    self.displayedProduct.quantityInBasket = 0
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -189,7 +192,7 @@ class ProductScreenViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        250.0
+        265.0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -215,5 +218,16 @@ class ProductScreenViewController: UITableViewController {
         cell.reviewTextLabel.text = "\(reviewsArray[indexPath.row].text)"
         return cell
     }
+}
+
+//MARK: - Keyboard configuration
+extension ProductScreenViewController {
+    func configureKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
+        tableView.addGestureRecognizer(tapGesture)
+    }
     
+    @objc func hideKeyboardByTap() {
+        tableView.endEditing(true)
+    }
 }

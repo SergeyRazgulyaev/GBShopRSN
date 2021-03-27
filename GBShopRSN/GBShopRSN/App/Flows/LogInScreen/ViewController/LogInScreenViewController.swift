@@ -38,12 +38,7 @@ class LogInScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        keyboardAddObserver()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        keyboardRemoveObserver()
+        configureKeyboard()
     }
     
     override func loadView() {
@@ -94,32 +89,12 @@ class LogInScreenViewController: UIViewController {
 
 //MARK: - Keyboard configuration
 extension LogInScreenViewController {
-    func keyboardAddObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    func configureKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
         logInScreenView.scrollView.addGestureRecognizer(tapGesture)
     }
     
-    func keyboardRemoveObserver() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func keyboardWillShown(notification: Notification) {
-        let info = notification.userInfo! as NSDictionary
-        let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-        logInScreenView.scrollView.contentInset = contentInsets
-        logInScreenView.scrollView.scrollIndicatorInsets = contentInsets
-    }
-    
-    @objc func keyboardWillHide(notification: Notification) {
-        logInScreenView.scrollView.contentInset = UIEdgeInsets.zero
-        logInScreenView.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-    }
-    
-    @objc func hideKeyboard() {
+    @objc func hideKeyboardByTap() {
         logInScreenView.scrollView.endEditing(true)
     }
 }

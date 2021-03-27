@@ -39,6 +39,7 @@ class ProductListScreenViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductListData()
+        configureKeyboard()
     }
     
     //MARK: - Configuration Methods
@@ -127,5 +128,17 @@ class ProductListScreenViewController: UITableViewController {
             let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory, productID: productsArray[indexPath.row].productID)
             navigationController?.pushViewController(productScreenViewController, animated: true)
         }
+    }
+}
+
+//MARK: - Keyboard configuration
+extension ProductListScreenViewController {
+    func configureKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
+        productListScreenHeaderView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func hideKeyboardByTap() {
+        productListScreenHeaderView.endEditing(true)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 class LogInScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: -80.0)
+        configureScrollView(increaseInScreenHeight: 100.0)
     }()
     
     private(set) lazy var logoLogInScreenImageView: UIImageView = {
@@ -68,6 +68,7 @@ class LogInScreenView: UIView, UIComponentsMakeable {
     //MARK: - Configuration Methods
     func configureUI() {
         accessibilityIdentifier = "logInScreenView"
+        scrollView.accessibilityIdentifier = "logInScrollView"
         userNameTextField.accessibilityIdentifier = "userNameTextField"
         passwordTextField.accessibilityIdentifier = "passwordTextField"
         sendDataForLogInButton.accessibilityIdentifier = "sendDataForLogInButton"

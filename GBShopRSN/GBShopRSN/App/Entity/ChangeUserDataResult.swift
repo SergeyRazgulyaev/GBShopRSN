@@ -9,4 +9,10 @@ import Foundation
 
 struct ChangeUserDataResult: Codable {
     let result: Int
+    let userID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case result = "result"
+        case userID = "user_id"
+    }
 }

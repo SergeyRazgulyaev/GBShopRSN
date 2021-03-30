@@ -13,13 +13,13 @@ class GetReviews: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl: URL
+    let baseURL: URL
     
     // MARK: - Init
-    init(baseUrl: URL, errorParser: AbstractErrorParser,
+    init(baseURL: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
-        self.baseUrl = baseUrl
+        self.baseURL = baseURL
         self.errorParser = errorParser
         self.sessionManager = sessionManager
         self.queue = queue
@@ -30,7 +30,7 @@ extension GetReviews: GetReviewsRequestFactory {
     func getReviews(pageNumber: Int,
                     productID: Int,
                     completionHandler: @escaping (AFDataResponse<GetReviewsResult>) -> Void) {
-        let requestModel = GetReviewsRequest(baseUrl: baseUrl,
+        let requestModel = GetReviewsRequest(baseURL: baseURL,
                                              pageNumber: pageNumber,
                                              productID: productID)
         self.request(request: requestModel,
@@ -40,7 +40,7 @@ extension GetReviews: GetReviewsRequestFactory {
 
 extension GetReviews {
     struct GetReviewsRequest: RequestRouter {
-        let baseUrl: URL
+        let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "getReviews"
         

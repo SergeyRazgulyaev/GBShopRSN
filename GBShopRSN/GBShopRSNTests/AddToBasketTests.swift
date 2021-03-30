@@ -14,16 +14,15 @@ class AddToBasketTests: XCTestCase {
     //MARK: - Positive tests
     func testAddToBasket() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let addToBasket = AddToBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let addToBasket = AddToBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let addedToBasketProduct = expectation(description: "add to basket")
-        addToBasket.addToBasket(productID: 123, quantityInBasket: 1) {response in
+        addToBasket.addToBasket(addedProductID: 123, updatedQuantityInBasket: 5) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -44,10 +43,10 @@ class AddToBasketTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let addToBasket = AddToBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let addToBasket = AddToBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedAddedToBasketProduct = expectation(description: "failed add to basket")
-        addToBasket.addToBasket(productID: 123, quantityInBasket: 1) {response in
+        addToBasket.addToBasket(addedProductID: 123, updatedQuantityInBasket: 1) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

@@ -13,17 +13,16 @@ class PayBasketTests: XCTestCase {
     
     //MARK: - Positive tests
     func testPayBasket() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let payBasket = PayBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let payBasket = PayBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let payBasketProducts = expectation(description: "pay basket")
-        payBasket.payBasket(userID: 123, payAmount: 1000) {response in
+        payBasket.payBasket(userID: 787, payAmount: 1000) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -45,10 +44,10 @@ class PayBasketTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let payBasket = PayBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let payBasket = PayBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedPayBasketProduct = expectation(description: "failed pay basket")
-        payBasket.payBasket(userID: 123, payAmount: 1000) {response in
+        payBasket.payBasket(userID: 787, payAmount: 1000) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

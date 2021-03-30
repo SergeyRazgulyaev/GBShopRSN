@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductListScreenViewController: UITableViewController {
+class ProductListScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
     private lazy var productListScreenHeaderView: ProductListScreenHeaderView = {
         return ProductListScreenHeaderView()
@@ -15,13 +15,16 @@ class ProductListScreenViewController: UITableViewController {
     
     // MARK: - Properties
     private var productsArray: Array = [Product]()
+    private let defaultPageNumber: Int = 1
+    private let user: User
     private let currencyUnit: String = "rub."
     private let reuseIdentifierTableViewCell = "ProductListScreenTableViewCell"
     private let requestFactory: RequestFactory
     
     // MARK: - Init
-    init(requestFactory: RequestFactory) {
+    init(requestFactory: RequestFactory, user: User) {
         self.requestFactory = requestFactory
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,16 +70,23 @@ class ProductListScreenViewController: UITableViewController {
     //MARK: - Interaction with Network
     func loadProductListData() {
         let getProductList = requestFactory.makeGetProductListRequestFactory()
-        getProductList.getProductList(pageNumber: 1,
+        getProductList.getProductList(pageNumber: defaultPageNumber,
                                       idCategory: ((productListScreenHeaderView.selectProductsCategoryTextField.text ?? "1") as NSString).integerValue) { response in
             switch response.result {
             case .success(let getProductList):
-                self.productsArray = getProductList.productList
                 print(getProductList)
+                self.productsArray = getProductList.productList
+                self.sendAnalyticsOpenProductListSuccess(
+                    viewController: self,
+                    productListCount: getProductList.productList.count)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "open_product_list_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
@@ -125,7 +135,10 @@ class ProductListScreenViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if productsArray.count != 0 {
-            let productScreenViewController = ProductScreenViewController(requestFactory: requestFactory, productID: productsArray[indexPath.row].productID)
+            let productScreenViewController = ProductScreenViewController(
+                requestFactory: requestFactory,
+                productID: productsArray[indexPath.row].productID,
+                user: user)
             navigationController?.pushViewController(productScreenViewController, animated: true)
         }
     }

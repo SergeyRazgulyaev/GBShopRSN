@@ -7,25 +7,32 @@
 
 import UIKit
 
-class ProductScreenViewController: UITableViewController {
+class ProductScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
     private lazy var productScreenHeaderView: ProductScreenHeaderView = {
         return ProductScreenHeaderView()
     }()
+    private lazy var assignedСommentID: Int? = {
+        self.reviewsArray.filter({$0.userID == self.user.userID}).first?.commentID
+    }()
+
     
     // MARK: - Properties
     private let requestFactory: RequestFactory
     private var reviewsArray: Array = [Review]()
+    private let defaultPageNumber: Int = 1
     private let reuseIdentifierTableViewCell = "ProductScreenTableViewCell"
     private let currencyUnit: String = "rub."
     private let productID: Int
+    private let user: User
     private var increaseDecreaseCounter: Int = 0
     private var displayedProduct = Product(productID: 0, productName: "", productPrice: 0, productDescription: "", quantityInBasket: 0)
     
     // MARK: - Init
-    init(requestFactory: RequestFactory, productID: Int) {
+    init(requestFactory: RequestFactory, productID: Int, user: User) {
         self.requestFactory = requestFactory
         self.productID = productID
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,6 +48,7 @@ class ProductScreenViewController: UITableViewController {
         configureDeleteFromBasketButton()
         configureDecreaseProductForBasketCounterButton()
         configureIncreaseProductForBasketCounterButton()
+        configureAddReviewButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,13 +73,13 @@ class ProductScreenViewController: UITableViewController {
         productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
         productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
         productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
-        productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
+        productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
         productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
         productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
     }
     
     func configureAddToBasketButton() {
-        productScreenHeaderView.addToBasketButton.addTarget(self, action: #selector(tapAddToBasketButton(_:)), for: .touchUpInside)
+        productScreenHeaderView.updateBasketButton.addTarget(self, action: #selector(tapAddToBasketButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapAddToBasketButton(_ sender: Any?) {
@@ -86,7 +94,7 @@ class ProductScreenViewController: UITableViewController {
     
     @objc func tapDeleteFromBasketButton(_ sender: Any?) {
         if self.displayedProduct.quantityInBasket != 0 {
-            deleteProductFromBasket(productID: productID)
+            deleteProductFromBasket()
         }
     }
     
@@ -112,39 +120,46 @@ class ProductScreenViewController: UITableViewController {
         productScreenHeaderView.productForBasketCounterTextField.text = "\(increaseDecreaseCounter)"
     }
     
+    func configureAddReviewButton() {
+        productScreenHeaderView.addReviewButton.addTarget(self, action: #selector(tapAddReviewButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapAddReviewButton(_ sender: Any?) {
+        if productScreenHeaderView.addReviewButton.titleLabel?.text == "Add review" {
+            if !(productScreenHeaderView.userReviewTextField.text?.isTrimmedEmpty ?? true) {
+                addUserReview()
+            } else {
+                print("You need to write a review to publish it")
+            }
+        } else {
+            deleteUserReview()
+        }
+    }
+    
     //MARK: - Interaction with Network
     func loadProductData() {
         let getProduct = requestFactory.makeGetProductRequestFactory()
         getProduct.getProduct(productID: productID) { response in
             switch response.result {
             case .success(let getProduct):
-                self.displayedProduct = getProduct.product
                 print(getProduct)
+                self.displayedProduct = getProduct.product
+                self.sendAnalyticsOpenProductSuccess(
+                    viewController: self,
+                    productID: self.productID,
+                    productName: getProduct.product.productName,
+                    productPrice: getProduct.product.productPrice,
+                    productDescription: getProduct.product.productDescription,
+                    quantityInBasket: getProduct.product.quantityInBasket)
                 DispatchQueue.main.async {
                     self.configureProductDataLabels()
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func loadReviewsData() {
-        let getReviews = requestFactory.makeGetReviewsRequestFactory()
-        getReviews.getReviews(pageNumber: 1, productID: productID) { response in
-            switch response.result {
-            case .success(let getReviews):
-                print(getReviews)
-                self.reviewsArray = getReviews.reviews
-                DispatchQueue.main.async {
-                    if self.reviewsArray.count != 0 {
-                        self.productScreenHeaderView.reviewsTitleLabel.text = "Reviews"
-                    }
-                    self.productScreenHeaderView.reviewsTitleLabel.isHidden = false
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "open_product_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
@@ -152,35 +167,130 @@ class ProductScreenViewController: UITableViewController {
     
     func addProductToBasket() {
         let addToBasket = requestFactory.makeAddToBasketRequestFactory()
-        addToBasket.addToBasket(productID: productID, quantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
+        addToBasket.addToBasket(
+            addedProductID: productID,
+            updatedQuantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
             switch response.result {
             case .success(let addProductToBasket):
                 print(addProductToBasket)
+                self.sendAnalyticsAddToBasketSuccess(
+                    viewController: self,
+                    addedProductID: self.productID,
+                    updatedQuantityInBasket: addProductToBasket.updatedQuantityInBasket)
                 DispatchQueue.main.async {
-                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
-                    self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+                    self.productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(addProductToBasket.updatedQuantityInBasket)"
+                    self.displayedProduct.quantityInBasket = addProductToBasket.updatedQuantityInBasket
                 }
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "add_to_basket_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
     }
     
-    func deleteProductFromBasket(productID: Int) {
+    func deleteProductFromBasket() {
         let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
-        deleteFromBasket.deleteFromBasket(productID: productID) { response in
+        deleteFromBasket.deleteFromBasket(deletedProductID: productID) { response in
             switch response.result {
             case .success(let deleteProductFromBasket):
                 print(deleteProductFromBasket)
+                self.sendAnalyticsDeleteFromBasketSuccess(
+                    viewController: self,
+                    deletedProductID: deleteProductFromBasket.deletedProductID,
+                    deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
                 DispatchQueue.main.async {
-                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: 0"
-                    self.displayedProduct.quantityInBasket = 0
+                    self.productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(deleteProductFromBasket.deletedProductQuantityInBasket)"
+                    self.displayedProduct.quantityInBasket = deleteProductFromBasket.deletedProductQuantityInBasket
+                    self.productScreenHeaderView.productForBasketCounterTextField.text = "0"
                 }
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "delete_from_basket_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
     }
+    
+    func loadReviewsData() {
+        let getReviews = requestFactory.makeGetReviewsRequestFactory()
+        getReviews.getReviews(pageNumber: defaultPageNumber, productID: productID) { response in
+            switch response.result {
+            case .success(let getReviews):
+                print(getReviews)
+                self.reviewsArray = getReviews.reviews
+                self.sendAnalyticsGetReviewsSuccess(
+                    viewController: self,
+                    reviewsCount: getReviews.reviews.count)
+                DispatchQueue.main.async {
+                    if self.reviewsArray.count != 0 {
+                        self.productScreenHeaderView.reviewsTitleLabel.text = "Reviews"
+                    }
+                    self.productScreenHeaderView.reviewsTitleLabel.isHidden = false
+                    if self.reviewsArray.filter({$0.userID == self.user.userID}).first?.userID != nil {
+                        self.productScreenHeaderView.addReviewButton.setTitle("Delete review", for: .normal)
+                    }
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "get_reviews_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func addUserReview() {
+        let addReview = requestFactory.makeAddReviewRequestFactory()
+        addReview.addReview(productID: productID, userID: user.userID, userName: user.userName, userLastName: user.userLastName, text: productScreenHeaderView.userReviewTextField.text ?? "no review") { response in
+            switch response.result {
+            case .success(let addReview):
+                print(addReview)
+                self.assignedСommentID = addReview.assignedСommentID
+                self.loadReviewsData()
+                self.sendAnalyticsAddReviewSuccess(
+                    viewController: self,
+                    userMessage: addReview.userMessage)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.addReviewButton.setTitle("Delete review", for: .normal)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "add_review_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteUserReview() {
+        let deleteReview = requestFactory.makeDeleteReviewRequestFactory()
+        deleteReview.deleteReview(productID: productID, commentID: assignedСommentID ?? 0) { response in
+            switch response.result {
+            case .success(let deleteReview):
+                print(deleteReview)
+                self.loadReviewsData()
+                self.sendAnalyticsDeleteReviewSuccess(viewController: self)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.addReviewButton.setTitle("Add review", for: .normal)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "delete_review_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -192,7 +302,7 @@ class ProductScreenViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        265.0
+        275.0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -214,7 +324,7 @@ class ProductScreenViewController: UITableViewController {
             return UITableViewCell()
         }
         cell.reviewIDCommentLabel.text = "Review \(reviewsArray[indexPath.row].commentID)"
-        cell.reviewUserNameAndLastnameLabel.text = "User: \(reviewsArray[indexPath.row].userName) \(reviewsArray[indexPath.row].userLastname)"
+        cell.reviewUserNameAndLastnameLabel.text = "User: \(reviewsArray[indexPath.row].userName) \(reviewsArray[indexPath.row].userLastName)"
         cell.reviewTextLabel.text = "\(reviewsArray[indexPath.row].text)"
         return cell
     }

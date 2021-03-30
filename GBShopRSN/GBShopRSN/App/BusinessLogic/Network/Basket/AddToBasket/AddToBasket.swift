@@ -13,13 +13,13 @@ class AddToBasket: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl: URL
+    let baseURL: URL
     
     // MARK: - Init
-    init(baseUrl: URL, errorParser: AbstractErrorParser,
+    init(baseURL: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
-        self.baseUrl = baseUrl
+        self.baseURL = baseURL
         self.errorParser = errorParser
         self.sessionManager = sessionManager
         self.queue = queue
@@ -27,12 +27,12 @@ class AddToBasket: AbstractRequestFactory {
 }
 
 extension AddToBasket: AddToBasketRequestFactory {
-    func addToBasket(productID: Int,
-                     quantityInBasket: Int,
+    func addToBasket(addedProductID: Int,
+                     updatedQuantityInBasket: Int,
                      completionHandler: @escaping (AFDataResponse<AddToBasketResult>) -> Void) {
-        let requestModel = AddToBasketRequest(baseUrl: baseUrl,
-                                              productID: productID,
-                                              quantityInBasket: quantityInBasket)
+        let requestModel = AddToBasketRequest(baseURL: baseURL,
+                                              addedProductID: addedProductID,
+                                              updatedQuantityInBasket: updatedQuantityInBasket)
         self.request(request: requestModel,
                      completionHandler: completionHandler)
     }
@@ -40,17 +40,17 @@ extension AddToBasket: AddToBasketRequestFactory {
 
 extension AddToBasket {
     struct AddToBasketRequest: RequestRouter {
-        let baseUrl: URL
+        let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "addToBasket"
         
-        let productID: Int
-        let quantityInBasket: Int
+        let addedProductID: Int
+        let updatedQuantityInBasket: Int
         
         var parameters: Parameters? {
             return [
-                "product_id" : productID,
-                "quantity_in_basket" : quantityInBasket,
+                "added_product_id" : addedProductID,
+                "updated_quantity_in_basket" : updatedQuantityInBasket,
             ]
         }
     }

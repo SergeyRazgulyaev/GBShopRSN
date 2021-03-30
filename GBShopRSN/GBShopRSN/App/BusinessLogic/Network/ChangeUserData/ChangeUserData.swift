@@ -13,13 +13,13 @@ class ChangeUserData: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl: URL
+    let baseURL: URL
     
     // MARK: - Init
-    init(baseUrl: URL, errorParser: AbstractErrorParser,
+    init(baseURL: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
-        self.baseUrl = baseUrl
+        self.baseURL = baseURL
         self.errorParser = errorParser
         self.sessionManager = sessionManager
         self.queue = queue
@@ -29,15 +29,17 @@ class ChangeUserData: AbstractRequestFactory {
 extension ChangeUserData: ChangeUserDataRequestFactory {
     func changeUserData(userID: Int,
                         userName: String,
+                        userLastName: String,
                         password: String,
                         email: String,
                         gender: String,
                         creditCard: String,
                         bio: String,
                         completionHandler: @escaping (AFDataResponse<ChangeUserDataResult>) -> Void) {
-        let requestModel = ChangeUserDataRequest(baseUrl: baseUrl,
+        let requestModel = ChangeUserDataRequest(baseURL: baseURL,
                                                  userID: userID,
                                                  userName: userName,
+                                                 userLastName: userLastName,
                                                  password: password,
                                                  email: email,
                                                  gender: gender,
@@ -50,12 +52,13 @@ extension ChangeUserData: ChangeUserDataRequestFactory {
 
 extension ChangeUserData {
     struct ChangeUserDataRequest: RequestRouter {
-        let baseUrl: URL
+        let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "changeUserData"
         
         let userID: Int
         let userName: String
+        let userLastName: String
         let password: String
         let email: String
         let gender: String
@@ -65,7 +68,8 @@ extension ChangeUserData {
         var parameters: Parameters? {
             return [
                 "user_id" : userID,
-                "username" : userName,
+                "user_name" : userName,
+                "user_last_name" : userLastName,
                 "password" : password,
                 "email" : email,
                 "gender": gender,

@@ -35,6 +35,12 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
                            borderStyle: .roundedRect)
     }()
     
+    private(set) lazy var userLastNameTextField: UITextField = {
+        configureTextField(placeholder: "User last name",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
+    }()
+    
     private(set) lazy var emailTextField: UITextField = {
         configureTextField(placeholder: "E-mail",
                            font: .systemFont(ofSize: 17),
@@ -95,6 +101,7 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
         scrollView.addSubview(logoUserInfoScreenLabel)
         scrollView.addSubview(changeUserInfoLabel)
         scrollView.addSubview(userNameTextField)
+        scrollView.addSubview(userLastNameTextField)
         scrollView.addSubview(emailTextField)
         scrollView.addSubview(genderTextField)
         scrollView.addSubview(creditCardTextField)
@@ -125,7 +132,13 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
             userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
             userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
             
-            emailTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 10.0),
+            userLastNameTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 15.0),
+            userLastNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            userLastNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
+            userLastNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            
+            
+            emailTextField.topAnchor.constraint(equalTo: userLastNameTextField.bottomAnchor, constant: 10.0),
             emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 25.0),
             emailTextField.widthAnchor.constraint(equalToConstant: 270.0),

@@ -14,23 +14,22 @@ class LogInTests: XCTestCase {
     //MARK: - Positive tests
     func testLogIn() throws {
         let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let logInUser = LogIn(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logInUser = LogIn(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let loggedIn = expectation(description: "logged in")
-        logInUser.logIn(userName: "Somebody", password: "myPassword") {response in
+        logInUser.logIn(userLogin: "SergeyRazgulyaev", password: "mypassword") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.user.id, 123)
-                XCTAssertEqual(model.user.login, "geekbrains")
-                XCTAssertEqual(model.user.name, "John")
-                XCTAssertEqual(model.user.lastname, "Doe")
+                XCTAssertEqual(model.user.userID, 787)
+                XCTAssertEqual(model.user.userLogin, "SergeyRazgulyaev")
+                XCTAssertEqual(model.user.userName, "Sergey")
+                XCTAssertEqual(model.user.userLastName, "Razgulyaev")
                 loggedIn.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
@@ -48,10 +47,10 @@ class LogInTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let logInUser = LogIn(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logInUser = LogIn(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedLogIn = expectation(description: "failed log in")
-        logInUser.logIn(userName: "Somebody", password: "myPassword") {response in
+        logInUser.logIn(userLogin: "SergeyRazgulyaev", password: "mypassword") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

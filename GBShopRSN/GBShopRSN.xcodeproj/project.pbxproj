@@ -80,7 +80,9 @@
 		C5F6BB33260BEE2600AE2B33 /* ProductListScreenHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB32260BEE2600AE2B33 /* ProductListScreenHeaderView.swift */; };
 		C5F6BB44260D35BF00AE2B33 /* BasketScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB43260D35BF00AE2B33 /* BasketScreenViewController.swift */; };
 		C5F6BB4F260D37B400AE2B33 /* BasketScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB4E260D37B400AE2B33 /* BasketScreenTableViewCell.swift */; };
-		C5F6BB68260E9DBC00AE2B33 /* BasketScreenHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB67260E9DBB00AE2B33 /* BasketScreenHeaderView.swift */; };
+		C5F6BB68260E9DBC00AE2B33 /* BasketScreenFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB67260E9DBB00AE2B33 /* BasketScreenFooterView.swift */; };
+		C5F6BB7A260F6A5600AE2B33 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5F6BB79260F6A5500AE2B33 /* GoogleService-Info.plist */; };
+		C5F6BB9926108DF600AE2B33 /* AnalyticsSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F6BB9826108DF500AE2B33 /* AnalyticsSendable.swift */; };
 		C5FFAED425ED0D640004BC2B /* AddToBasketRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFAED325ED0D640004BC2B /* AddToBasketRequestFactory.swift */; };
 		C5FFAED925ED0D7A0004BC2B /* AddToBasket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFAED825ED0D7A0004BC2B /* AddToBasket.swift */; };
 		C5FFAEDE25ED12630004BC2B /* AddToBasketResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FFAEDD25ED12630004BC2B /* AddToBasketResult.swift */; };
@@ -205,7 +207,9 @@
 		C5F6BB32260BEE2600AE2B33 /* ProductListScreenHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListScreenHeaderView.swift; sourceTree = "<group>"; };
 		C5F6BB43260D35BF00AE2B33 /* BasketScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketScreenViewController.swift; sourceTree = "<group>"; };
 		C5F6BB4E260D37B400AE2B33 /* BasketScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketScreenTableViewCell.swift; sourceTree = "<group>"; };
-		C5F6BB67260E9DBB00AE2B33 /* BasketScreenHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketScreenHeaderView.swift; sourceTree = "<group>"; };
+		C5F6BB67260E9DBB00AE2B33 /* BasketScreenFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketScreenFooterView.swift; sourceTree = "<group>"; };
+		C5F6BB79260F6A5500AE2B33 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C5F6BB9826108DF500AE2B33 /* AnalyticsSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsSendable.swift; sourceTree = "<group>"; };
 		C5FFAED325ED0D640004BC2B /* AddToBasketRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasketRequestFactory.swift; sourceTree = "<group>"; };
 		C5FFAED825ED0D7A0004BC2B /* AddToBasket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasket.swift; sourceTree = "<group>"; };
 		C5FFAEDD25ED12630004BC2B /* AddToBasketResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToBasketResult.swift; sourceTree = "<group>"; };
@@ -630,11 +634,13 @@
 		C5DCB79425D87D7700220690 /* GBShopRSN */ = {
 			isa = PBXGroup;
 			children = (
+				C5F6BB79260F6A5500AE2B33 /* GoogleService-Info.plist */,
 				C5DCB7C825D887D000220690 /* App */,
 				C5DCB7CD25D8880C00220690 /* Core */,
 				C5DCB7CE25D8881600220690 /* Resources */,
 				C5DCB7CF25D8882000220690 /* Environments */,
 				C58D8F2A25FA89F500C1BC22 /* DesignSystem */,
+				C5F6BB9726108D4400AE2B33 /* Analytics */,
 			);
 			path = GBShopRSN;
 			sourceTree = "<group>";
@@ -791,7 +797,7 @@
 		C5F6BB41260D353C00AE2B33 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C5F6BB67260E9DBB00AE2B33 /* BasketScreenHeaderView.swift */,
+				C5F6BB67260E9DBB00AE2B33 /* BasketScreenFooterView.swift */,
 				C5F6BB4E260D37B400AE2B33 /* BasketScreenTableViewCell.swift */,
 			);
 			path = View;
@@ -803,6 +809,14 @@
 				C5F6BB43260D35BF00AE2B33 /* BasketScreenViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C5F6BB9726108D4400AE2B33 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				C5F6BB9826108DF500AE2B33 /* AnalyticsSendable.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		C5FFAECF25ED07ED0004BC2B /* Basket */ = {
@@ -864,6 +878,7 @@
 				C5DCB78F25D87D7700220690 /* Frameworks */,
 				C5DCB79025D87D7700220690 /* Resources */,
 				4DC1AA00C710AEE3FE95D1AD /* [CP] Embed Pods Frameworks */,
+				C5F6BB90260F6E0C00AE2B33 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -962,6 +977,7 @@
 			files = (
 				C5DCB7A225D87D7A00220690 /* LaunchScreen.storyboard in Resources */,
 				C5DCB79F25D87D7A00220690 /* Assets.xcassets in Resources */,
+				C5F6BB7A260F6A5600AE2B33 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1076,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C5F6BB90260F6E0C00AE2B33 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		DE4398D16B66FFA17A3F3321 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1119,7 +1153,7 @@
 				C5DE227025E277F6002B5E7F /* GetProductResult.swift in Sources */,
 				C5B209FD25F2917900535A64 /* EntranceScreenView.swift in Sources */,
 				C58A506725DD714300D572F1 /* LogInRequestFactory.swift in Sources */,
-				C5F6BB68260E9DBC00AE2B33 /* BasketScreenHeaderView.swift in Sources */,
+				C5F6BB68260E9DBC00AE2B33 /* BasketScreenFooterView.swift in Sources */,
 				C539A61A25E8FB6200865D6E /* AddReview.swift in Sources */,
 				C5DE226B25E277D5002B5E7F /* GetProductListResult.swift in Sources */,
 				C58A509725DDBCD400D572F1 /* LogOutRequestFactory.swift in Sources */,
@@ -1150,6 +1184,7 @@
 				C5A460D025DD6A9E0089E71C /* AbstractErrorParser.swift in Sources */,
 				C5B209D225F2536B00535A64 /* EntranceScreenViewController.swift in Sources */,
 				C5A460CE25DD6A9E0089E71C /* ResponseCodable.swift in Sources */,
+				C5F6BB9926108DF600AE2B33 /* AnalyticsSendable.swift in Sources */,
 				C5B209C725F2525D00535A64 /* UserInfoScreenViewController.swift in Sources */,
 				C539A62C25E8FECC00865D6E /* DeleteReview.swift in Sources */,
 				C539A64825E938FA00865D6E /* Review.swift in Sources */,
@@ -1344,6 +1379,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = GBShopRSN/Environments/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

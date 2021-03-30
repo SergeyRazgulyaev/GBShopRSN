@@ -6,24 +6,25 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
-class BasketScreenViewController: UITableViewController {
+class BasketScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
-    private lazy var basketScreenHeaderView: BasketScreenHeaderView = {
-        return BasketScreenHeaderView()
+    private lazy var basketScreenFooterView: BasketScreenFooterView = {
+        return BasketScreenFooterView()
     }()
     
     // MARK: - Properties
     private let requestFactory: RequestFactory
-    private let userID: Int
+    private let user: User
     private var productsInBasketArray: Array = [Product]()
     private let reuseIdentifierTableViewCell = "BasketScreenTableViewCell"
     private let currencyUnit: String = "rub."
     
     // MARK: - Init
-    init(requestFactory: RequestFactory, userID: Int) {
+    init(requestFactory: RequestFactory, user: User) {
         self.requestFactory = requestFactory
-        self.userID = userID
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,7 +56,7 @@ class BasketScreenViewController: UITableViewController {
     }
     
     func configurePayBasketButton() {
-        basketScreenHeaderView.basketPayButton.addTarget(self, action: #selector(tapPayBasketButton(_:)), for: .touchUpInside)
+        basketScreenFooterView.basketPayButton.addTarget(self, action: #selector(tapPayBasketButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapPayBasketButton(_ sender: UIButton) {
@@ -85,15 +86,24 @@ class BasketScreenViewController: UITableViewController {
     //MARK: - Interaction with Network
     func loadBasketData() {
         let getBasket = requestFactory.makeGetBasketRequestFactory()
-        getBasket.getBasket(userID: userID) { response in
+        getBasket.getBasket(userID: user.userID) { response in
             switch response.result {
             case .success(let getBasket):
                 print(getBasket)
                 self.productsInBasketArray = getBasket.contents
+                self.sendAnalyticsGetBasketSuccess(
+                    viewController: self,
+                    userID: self.user.userID,
+                    amount: getBasket.amount,
+                    typeOfGoodsCount: getBasket.countGoods)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "get_basket_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
@@ -101,23 +111,39 @@ class BasketScreenViewController: UITableViewController {
     
     func payBasket(payAmount: Int) {
         let payBasket = requestFactory.makePayBasketRequestFactory()
-        payBasket.payBasket(userID: userID, payAmount: payAmount) { response in
+        payBasket.payBasket(userID: user.userID, payAmount: payAmount) { response in
             switch response.result {
             case .success(let payBasket):
                 print(payBasket)
+                self.sendAnalyticsPayBasketSuccess(
+                    viewController: self,
+                    userID: self.user.userID,
+                    payAmount: payAmount)
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "pay_basket_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
     }
-    //
+    
     func deleteProductFromBasket(productID: Int) {
         let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
-        deleteFromBasket.deleteFromBasket(productID: productID) { response in
+        deleteFromBasket.deleteFromBasket(deletedProductID: productID) { response in
             switch response.result {
             case .success(let deleteProductFromBasket):
                 print(deleteProductFromBasket)
+                self.sendAnalyticsDeleteFromBasketSuccess(
+                    viewController: self,
+                    deletedProductID: deleteProductFromBasket.deletedProductID,
+                    deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
             case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "delete_from_basket_failure",
+                    viewController: self,
+                    errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
@@ -132,7 +158,7 @@ class BasketScreenViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         60.0
     }
     
@@ -140,8 +166,8 @@ class BasketScreenViewController: UITableViewController {
         250.0
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return basketScreenHeaderView
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return basketScreenFooterView
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

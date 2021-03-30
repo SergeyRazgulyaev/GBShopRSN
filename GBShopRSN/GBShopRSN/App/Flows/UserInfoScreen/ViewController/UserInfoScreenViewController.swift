@@ -67,9 +67,7 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
         logOutUser.logOut(userID: user.userID) { response in
             switch response.result {
             case .success(let logOut):
-                self.sendAnalyticsLogOutSuccess(
-                    viewController: self,
-                    userID: self.user.userID)
+                self.sendAnalyticsLogOutSuccess(userID: self.user.userID)
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -77,7 +75,6 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "log_out_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -118,13 +115,10 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                     switch response.result {
                     case .success(let changeUserData):
                         print(changeUserData)
-                        self.sendAnalyticsChangeUserDataSuccess(
-                            viewController: self,
-                            userID: self.user.userID)
+                        self.sendAnalyticsChangeUserDataSuccess(userID: self.user.userID)
                     case .failure(let error):
                         self.sendAnalyticsFailure(
                             failureName: "change_user_data_failure",
-                            viewController: self,
                             errorDescription: error.localizedDescription)
                         print(error.localizedDescription)
                     }

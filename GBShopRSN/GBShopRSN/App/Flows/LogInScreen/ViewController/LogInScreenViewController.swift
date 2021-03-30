@@ -67,7 +67,6 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                 case .success(let login):
                     print(login)
                     self.sendAnalyticsLogInSuccess(
-                        viewController: self,
                         userID: login.user.userID,
                         userName: login.user.userName,
                         userLastname: login.user.userLastName)
@@ -79,7 +78,6 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                 case .failure(let error):
                     self.sendAnalyticsFailure(
                         failureName: "log_in_failure",
-                        viewController: self,
                         errorDescription: error.localizedDescription)
                     print(error.localizedDescription)
                 }

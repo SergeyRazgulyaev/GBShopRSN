@@ -91,7 +91,6 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
                     case .success(let signUp):
                         print(signUp)
                         self.sendAnalyticsSignUpSuccess(
-                            viewController: self,
                             assignedUserId: signUp.assignedUserId,
                             signedUpUserName: signUp.signedUpUserName,
                             signedUpUserLastName: signUp.signedUpUserLastName,
@@ -108,7 +107,6 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
                     case .failure(let error):
                         self.sendAnalyticsFailure(
                             failureName: "sign_up_failure",
-                            viewController: self,
                             errorDescription: error.localizedDescription)
                         print(error.localizedDescription)
                     }

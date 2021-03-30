@@ -9,146 +9,166 @@ import UIKit
 import FirebaseAnalytics
 
 protocol AnalyticsSendable {
-    func sendAnalyticsSignUpSuccess(viewController: SignUpScreenViewController, assignedUserId: Int, signedUpUserName: String, signedUpUserLastName: String, signedUpEmail: String, signedUpGender: String, signedUpCreditCard: String, signedUpBio: String, userMessage: String) -> Void
+    func sendAnalyticsSignUpSuccess(assignedUserId: Int,
+                                    signedUpUserName: String,
+                                    signedUpUserLastName: String,
+                                    signedUpEmail: String,
+                                    signedUpGender: String,
+                                    signedUpCreditCard: String,
+                                    signedUpBio: String,
+                                    userMessage: String) -> Void
     
-    func sendAnalyticsLogInSuccess(viewController: LogInScreenViewController, userID: Int, userName: String, userLastname: String) -> Void
+    func sendAnalyticsLogInSuccess(userID: Int,
+                                   userName: String,
+                                   userLastname: String) -> Void
     
-    func sendAnalyticsLogOutSuccess(viewController: UserInfoScreenViewController, userID: Int) -> Void
+    func sendAnalyticsLogOutSuccess(userID: Int) -> Void
 
-    func sendAnalyticsOpenProductListSuccess(viewController: ProductListScreenViewController, productListCount: Int) -> Void
+    func sendAnalyticsOpenProductListSuccess(productListCount: Int) -> Void
     
-    func sendAnalyticsOpenProductSuccess(viewController: ProductScreenViewController, productID: Int, productName: String, productPrice: Int, productDescription: String, quantityInBasket: Int) -> Void
+    func sendAnalyticsOpenProductSuccess(productID: Int,
+                                         productName: String,
+                                         productPrice: Int,
+                                         productDescription: String,
+                                         quantityInBasket: Int) -> Void
     
-    func sendAnalyticsGetBasketSuccess(viewController: BasketScreenViewController, userID: Int, amount: Int, typeOfGoodsCount: Int) -> Void
+    func sendAnalyticsGetBasketSuccess(userID: Int,
+                                       amount: Int,
+                                       typeOfGoodsCount: Int) -> Void
    
-    func sendAnalyticsAddToBasketSuccess(viewController: ProductScreenViewController, addedProductID: Int, updatedQuantityInBasket: Int) -> Void
+    func sendAnalyticsAddToBasketSuccess(addedProductID: Int,
+                                         updatedQuantityInBasket: Int) -> Void
     
-    func sendAnalyticsDeleteFromBasketSuccess(viewController: UIViewController, deletedProductID: Int, deletedProductQuantityInBasket: Int) -> Void
+    func sendAnalyticsDeleteFromBasketSuccess(deletedProductID: Int,
+                                              deletedProductQuantityInBasket: Int) -> Void
     
-    func sendAnalyticsPayBasketSuccess(viewController: BasketScreenViewController, userID: Int, payAmount: Int) -> Void
+    func sendAnalyticsPayBasketSuccess(userID: Int,
+                                       payAmount: Int) -> Void
     
-    func sendAnalyticsGetReviewsSuccess(viewController: ProductScreenViewController, reviewsCount: Int) -> Void
+    func sendAnalyticsGetReviewsSuccess(reviewsCount: Int) -> Void
     
-    func sendAnalyticsAddReviewSuccess(viewController: ProductScreenViewController, userMessage: String) -> Void
+    func sendAnalyticsAddReviewSuccess(userMessage: String) -> Void
     
-    func sendAnalyticsDeleteReviewSuccess(viewController: ProductScreenViewController) -> Void
+    func sendAnalyticsDeleteReviewSuccess(deletedReviewID: Int) -> Void
     
-    func sendAnalyticsChangeUserDataSuccess(viewController: UserInfoScreenViewController, userID: Int) -> Void
+    func sendAnalyticsChangeUserDataSuccess(userID: Int) -> Void
     
-    func sendAnalyticsFailure(failureName: String, viewController: UIViewController, errorDescription: String) -> Void
+    func sendAnalyticsFailure(failureName: String,
+                              errorDescription: String) -> Void
 }
 
 extension AnalyticsSendable {
-    func sendAnalyticsSignUpSuccess(viewController: SignUpScreenViewController, assignedUserId: Int, signedUpUserName: String, signedUpUserLastName: String, signedUpEmail: String, signedUpGender: String, signedUpCreditCard: String, signedUpBio: String, userMessage: String) -> Void {
+    func sendAnalyticsSignUpSuccess(assignedUserId: Int,
+                                    signedUpUserName: String,
+                                    signedUpUserLastName: String,
+                                    signedUpEmail: String,
+                                    signedUpGender: String,
+                                    signedUpCreditCard: String,
+                                    signedUpBio: String,
+                                    userMessage: String) -> Void {
         Analytics.logEvent("sign_up_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "assigned_user_id": assignedUserId,
-                            "signed_up_user_name": signedUpUserName,
-                            "signed_up_user_last_name": signedUpUserLastName,
-                            "signed_up_email": signedUpEmail,
-                            "signed_up_gender": signedUpGender,
-                            "signed_up_credit_card": signedUpCreditCard,
-                            "signed_up_bio": signedUpBio,
-                            "user_message": userMessage])
+                            "assigned_user_id": assignedUserId as NSObject,
+                            "signed_up_user_name": signedUpUserName as NSObject,
+                            "signed_up_user_last_name": signedUpUserLastName as NSObject,
+                            "signed_up_email": signedUpEmail as NSObject,
+                            "signed_up_gender": signedUpGender as NSObject,
+                            "signed_up_credit_card": signedUpCreditCard as NSObject,
+                            "signed_up_bio": signedUpBio as NSObject,
+                            "user_message": userMessage as NSObject])
     }
     
-    func sendAnalyticsLogInSuccess(viewController: LogInScreenViewController, userID: Int, userName: String, userLastname: String) -> Void {
+    func sendAnalyticsLogInSuccess(userID: Int,
+                                   userName: String,
+                                   userLastname: String) -> Void {
         Analytics.logEvent("log_in_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "logged_in_user_id": userID,
-                            "logged_in_user_name": userName,
-                            "logged_in_user_lastname": userLastname])
+                            "logged_in_user_id": userID as NSObject,
+                            "logged_in_user_name": userName as NSObject,
+                            "logged_in_user_lastname": userLastname as NSObject])
     }
     
-    func sendAnalyticsLogOutSuccess(viewController: UserInfoScreenViewController, userID: Int) -> Void {
+    func sendAnalyticsLogOutSuccess(userID: Int) -> Void {
         Analytics.logEvent("log_out_success",
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "user_id": userID])
+                           parameters: ["user_id": userID as NSObject])
     }
     
-    func sendAnalyticsOpenProductListSuccess(viewController: ProductListScreenViewController, productListCount: Int) -> Void {
+    func sendAnalyticsOpenProductListSuccess(productListCount: Int) -> Void {
         Analytics.logEvent("open_product_list_success",
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "product_list_count": productListCount])
+                           parameters: ["product_list_count": productListCount as NSObject])
     }
     
-    func sendAnalyticsOpenProductSuccess(viewController: ProductScreenViewController, productID: Int, productName: String, productPrice: Int, productDescription: String, quantityInBasket: Int) -> Void {
+    func sendAnalyticsOpenProductSuccess(productID: Int,
+                                         productName: String,
+                                         productPrice: Int,
+                                         productDescription: String,
+                                         quantityInBasket: Int) -> Void {
         Analytics.logEvent("open_product_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "product_id": productID,
-                            "product_name": productName,
-                            "product_price": productPrice,
-                            "product_description": productDescription,
-                            "quantity_in_basket": quantityInBasket])
+                            "product_id": productID as NSObject,
+                            "product_name": productName as NSObject,
+                            "product_price": productPrice as NSObject,
+                            "product_description": productDescription as NSObject,
+                            "quantity_in_basket": quantityInBasket as NSObject])
     }
     
-    func sendAnalyticsGetBasketSuccess(viewController: BasketScreenViewController, userID: Int, amount: Int, typeOfGoodsCount: Int) -> Void {
+    func sendAnalyticsGetBasketSuccess(userID: Int,
+                                       amount: Int,
+                                       typeOfGoodsCount: Int) -> Void {
         Analytics.logEvent("get_basket_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "user_id": userID,
-                            "amount": amount,
-                            "type_of_goods_count": typeOfGoodsCount])
+                            "user_id": userID as NSObject,
+                            "amount": amount as NSObject,
+                            "type_of_goods_count": typeOfGoodsCount as NSObject])
     }
     
-    func sendAnalyticsAddToBasketSuccess(viewController: ProductScreenViewController, addedProductID: Int, updatedQuantityInBasket: Int) -> Void {
+    func sendAnalyticsAddToBasketSuccess(addedProductID: Int,
+                                         updatedQuantityInBasket: Int) -> Void {
         Analytics.logEvent("add_to_basket_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "added_product_id": addedProductID,
-                            "updated_quantity_in_basket": updatedQuantityInBasket])
+                            "added_product_id": addedProductID as NSObject,
+                            "updated_quantity_in_basket": updatedQuantityInBasket as NSObject])
     }
     
-    func sendAnalyticsDeleteFromBasketSuccess(viewController: UIViewController, deletedProductID: Int, deletedProductQuantityInBasket: Int) -> Void {
+    func sendAnalyticsDeleteFromBasketSuccess(deletedProductID: Int,
+                                              deletedProductQuantityInBasket: Int) -> Void {
         Analytics.logEvent("delete_from_basket_success",
                            parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "deleted_product_id": deletedProductID,
-                            "deleted_product_quantity_in_basket": deletedProductQuantityInBasket])
+                            "deleted_product_id": deletedProductID as NSObject,
+                            "deleted_product_quantity_in_basket": deletedProductQuantityInBasket as NSObject])
     }
     
-    func sendAnalyticsPayBasketSuccess(viewController: BasketScreenViewController, userID: Int, payAmount: Int) -> Void {
+    func sendAnalyticsPayBasketSuccess(userID: Int,
+                                       payAmount: Int) -> Void {
         Analytics.logEvent("pay_basket_success",
-                           parameters: [AnalyticsParameterMethod: viewController.method,
-                                        "user_id": userID,
-                                        "pay_amount": payAmount])
+                           parameters: [
+                            "user_id": userID as NSObject,
+                            "pay_amount": payAmount as NSObject])
     }
     
-    func sendAnalyticsGetReviewsSuccess(viewController: ProductScreenViewController, reviewsCount: Int) -> Void {
+    func sendAnalyticsGetReviewsSuccess(reviewsCount: Int) -> Void {
         Analytics.logEvent("get_reviews_success",
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "reviews_count": reviewsCount])
+                           parameters: ["reviews_count": reviewsCount as NSObject])
     }
     
-    func sendAnalyticsAddReviewSuccess(viewController: ProductScreenViewController, userMessage: String) -> Void {
+    func sendAnalyticsAddReviewSuccess(userMessage: String) -> Void {
         Analytics.logEvent("add_review_success",
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "user_message": userMessage])
+                           parameters: ["user_message": userMessage as NSObject])
     }
     
-    func sendAnalyticsDeleteReviewSuccess(viewController: ProductScreenViewController) -> Void {
+    func sendAnalyticsDeleteReviewSuccess(deletedReviewID: Int) -> Void {
         Analytics.logEvent("delete_review_success",
-                           parameters: [AnalyticsParameterMethod: viewController.method])
+                           parameters: ["deleted_review_id": deletedReviewID as NSObject])
     }
     
-    func sendAnalyticsChangeUserDataSuccess(viewController: UserInfoScreenViewController, userID: Int) -> Void {
+    func sendAnalyticsChangeUserDataSuccess(userID: Int) -> Void {
         Analytics.logEvent("change_user_data_success",
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "user_id": userID])
+                           parameters: ["user_id": userID as NSObject])
     }
     
-    func sendAnalyticsFailure(failureName: String, viewController: UIViewController, errorDescription: String) -> Void {
+    func sendAnalyticsFailure(failureName: String,
+                              errorDescription: String) -> Void {
         Analytics.logEvent(failureName,
-                           parameters: [
-                            AnalyticsParameterMethod: viewController.method,
-                            "error_description":errorDescription])
+                           parameters: ["error_description": errorDescription as NSObject])
     }
 }

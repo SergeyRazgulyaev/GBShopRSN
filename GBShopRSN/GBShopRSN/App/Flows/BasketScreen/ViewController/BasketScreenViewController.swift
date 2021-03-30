@@ -92,7 +92,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 print(getBasket)
                 self.productsInBasketArray = getBasket.contents
                 self.sendAnalyticsGetBasketSuccess(
-                    viewController: self,
                     userID: self.user.userID,
                     amount: getBasket.amount,
                     typeOfGoodsCount: getBasket.countGoods)
@@ -102,7 +101,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "get_basket_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -116,13 +114,11 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let payBasket):
                 print(payBasket)
                 self.sendAnalyticsPayBasketSuccess(
-                    viewController: self,
                     userID: self.user.userID,
                     payAmount: payAmount)
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "pay_basket_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -136,13 +132,11 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let deleteProductFromBasket):
                 print(deleteProductFromBasket)
                 self.sendAnalyticsDeleteFromBasketSuccess(
-                    viewController: self,
                     deletedProductID: deleteProductFromBasket.deletedProductID,
                     deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "delete_from_basket_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }

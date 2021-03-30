@@ -145,7 +145,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 print(getProduct)
                 self.displayedProduct = getProduct.product
                 self.sendAnalyticsOpenProductSuccess(
-                    viewController: self,
                     productID: self.productID,
                     productName: getProduct.product.productName,
                     productPrice: getProduct.product.productPrice,
@@ -158,7 +157,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "open_product_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -174,7 +172,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let addProductToBasket):
                 print(addProductToBasket)
                 self.sendAnalyticsAddToBasketSuccess(
-                    viewController: self,
                     addedProductID: self.productID,
                     updatedQuantityInBasket: addProductToBasket.updatedQuantityInBasket)
                 DispatchQueue.main.async {
@@ -184,7 +181,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "add_to_basket_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -198,7 +194,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let deleteProductFromBasket):
                 print(deleteProductFromBasket)
                 self.sendAnalyticsDeleteFromBasketSuccess(
-                    viewController: self,
                     deletedProductID: deleteProductFromBasket.deletedProductID,
                     deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
                 DispatchQueue.main.async {
@@ -209,7 +204,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "delete_from_basket_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -224,7 +218,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 print(getReviews)
                 self.reviewsArray = getReviews.reviews
                 self.sendAnalyticsGetReviewsSuccess(
-                    viewController: self,
                     reviewsCount: getReviews.reviews.count)
                 DispatchQueue.main.async {
                     if self.reviewsArray.count != 0 {
@@ -239,7 +232,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "get_reviews_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -254,16 +246,13 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 print(addReview)
                 self.assignedСommentID = addReview.assignedСommentID
                 self.loadReviewsData()
-                self.sendAnalyticsAddReviewSuccess(
-                    viewController: self,
-                    userMessage: addReview.userMessage)
+                self.sendAnalyticsAddReviewSuccess(userMessage: addReview.userMessage)
                 DispatchQueue.main.async {
                     self.productScreenHeaderView.addReviewButton.setTitle("Delete review", for: .normal)
                 }
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "add_review_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }
@@ -277,14 +266,13 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let deleteReview):
                 print(deleteReview)
                 self.loadReviewsData()
-                self.sendAnalyticsDeleteReviewSuccess(viewController: self)
+                self.sendAnalyticsDeleteReviewSuccess(deletedReviewID: deleteReview.deletedReviewID)
                 DispatchQueue.main.async {
                     self.productScreenHeaderView.addReviewButton.setTitle("Add review", for: .normal)
                 }
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "delete_review_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }

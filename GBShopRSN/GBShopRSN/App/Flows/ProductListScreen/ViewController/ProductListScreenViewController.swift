@@ -76,16 +76,13 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
             case .success(let getProductList):
                 print(getProductList)
                 self.productsArray = getProductList.productList
-                self.sendAnalyticsOpenProductListSuccess(
-                    viewController: self,
-                    productListCount: getProductList.productList.count)
+                self.sendAnalyticsOpenProductListSuccess(productListCount: getProductList.productList.count)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "open_product_list_failure",
-                    viewController: self,
                     errorDescription: error.localizedDescription)
                 print(error.localizedDescription)
             }

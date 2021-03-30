@@ -43,7 +43,8 @@ protocol AnalyticsSendable {
                                               deletedProductQuantityInBasket: Int) -> Void
     
     func sendAnalyticsPayBasketSuccess(userID: Int,
-                                       payAmount: Int) -> Void
+                                       payAmount: Int,
+                                       accountBalance: Int) -> Void
     
     func sendAnalyticsGetReviewsSuccess(reviewsCount: Int) -> Void
     
@@ -139,11 +140,13 @@ extension AnalyticsSendable {
     }
     
     func sendAnalyticsPayBasketSuccess(userID: Int,
-                                       payAmount: Int) -> Void {
+                                       payAmount: Int,
+                                       accountBalance: Int) -> Void {
         Analytics.logEvent("pay_basket_success",
                            parameters: [
                             "user_id": userID as NSObject,
-                            "pay_amount": payAmount as NSObject])
+                            "pay_amount": payAmount as NSObject,
+                            "account_balance": accountBalance as NSObject])
     }
     
     func sendAnalyticsGetReviewsSuccess(reviewsCount: Int) -> Void {

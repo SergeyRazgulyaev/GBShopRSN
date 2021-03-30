@@ -9,4 +9,10 @@ import Foundation
 
 struct LogOutResult: Codable {
     let result: Int
+    let loggedOutUserID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case result = "result"
+        case loggedOutUserID = "logged_out_user_id"
+    }
 }

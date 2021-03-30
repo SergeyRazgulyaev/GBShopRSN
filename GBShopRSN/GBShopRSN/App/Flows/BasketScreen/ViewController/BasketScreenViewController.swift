@@ -114,7 +114,8 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
             case .success(let payBasket):
                 self.sendAnalyticsPayBasketSuccess(
                     userID: self.user.userID,
-                    payAmount: payAmount)
+                    payAmount: payAmount,
+                    accountBalance: payBasket.accountBalance)
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "pay_basket_failure",

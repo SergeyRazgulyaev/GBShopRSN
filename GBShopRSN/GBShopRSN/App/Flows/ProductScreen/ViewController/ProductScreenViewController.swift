@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os.log
 
 class ProductScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
@@ -142,7 +143,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         getProduct.getProduct(productID: productID) { response in
             switch response.result {
             case .success(let getProduct):
-                print(getProduct)
                 self.displayedProduct = getProduct.product
                 self.sendAnalyticsOpenProductSuccess(
                     productID: self.productID,
@@ -158,7 +158,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "open_product_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -170,7 +170,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             updatedQuantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
             switch response.result {
             case .success(let addProductToBasket):
-                print(addProductToBasket)
                 self.sendAnalyticsAddToBasketSuccess(
                     addedProductID: self.productID,
                     updatedQuantityInBasket: addProductToBasket.updatedQuantityInBasket)
@@ -182,7 +181,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "add_to_basket_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -192,7 +191,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         deleteFromBasket.deleteFromBasket(deletedProductID: productID) { response in
             switch response.result {
             case .success(let deleteProductFromBasket):
-                print(deleteProductFromBasket)
                 self.sendAnalyticsDeleteFromBasketSuccess(
                     deletedProductID: deleteProductFromBasket.deletedProductID,
                     deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
@@ -205,7 +203,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "delete_from_basket_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -215,7 +213,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         getReviews.getReviews(pageNumber: defaultPageNumber, productID: productID) { response in
             switch response.result {
             case .success(let getReviews):
-                print(getReviews)
                 self.reviewsArray = getReviews.reviews
                 self.sendAnalyticsGetReviewsSuccess(
                     reviewsCount: getReviews.reviews.count)
@@ -233,7 +230,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "get_reviews_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -243,7 +240,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         addReview.addReview(productID: productID, userID: user.userID, userName: user.userName, userLastName: user.userLastName, text: productScreenHeaderView.userReviewTextField.text ?? "no review") { response in
             switch response.result {
             case .success(let addReview):
-                print(addReview)
                 self.assignedСommentID = addReview.assignedСommentID
                 self.loadReviewsData()
                 self.sendAnalyticsAddReviewSuccess(userMessage: addReview.userMessage)
@@ -254,7 +250,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "add_review_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -264,7 +260,6 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         deleteReview.deleteReview(productID: productID, commentID: assignedСommentID ?? 0) { response in
             switch response.result {
             case .success(let deleteReview):
-                print(deleteReview)
                 self.loadReviewsData()
                 self.sendAnalyticsDeleteReviewSuccess(deletedReviewID: deleteReview.deletedReviewID)
                 DispatchQueue.main.async {
@@ -274,7 +269,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "delete_review_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -307,10 +302,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
     
     func configureTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierTableViewCell, for: indexPath) as? ProductScreenTableViewCell
-        guard let cell = tableViewCell else {
-            print("Error with Cell")
-            return UITableViewCell()
-        }
+        guard let cell = tableViewCell else { return UITableViewCell() }
         cell.reviewIDCommentLabel.text = "Review \(reviewsArray[indexPath.row].commentID)"
         cell.reviewUserNameAndLastnameLabel.text = "User: \(reviewsArray[indexPath.row].userName) \(reviewsArray[indexPath.row].userLastName)"
         cell.reviewTextLabel.text = "\(reviewsArray[indexPath.row].text)"

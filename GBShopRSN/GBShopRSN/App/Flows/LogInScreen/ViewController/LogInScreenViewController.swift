@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAnalytics
+import os.log
 
 class LogInScreenViewController: UIViewController, AnalyticsSendable {
     // MARK: - UI components
@@ -65,7 +66,6 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                 response in
                 switch response.result {
                 case .success(let login):
-                    print(login)
                     self.sendAnalyticsLogInSuccess(
                         userID: login.user.userID,
                         userName: login.user.userName,
@@ -79,7 +79,7 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                     self.sendAnalyticsFailure(
                         failureName: "log_in_failure",
                         errorDescription: error.localizedDescription)
-                    print(error.localizedDescription)
+                    Logger.viewCycle.debug("\(error.localizedDescription)")
                 }
             }
         } else {

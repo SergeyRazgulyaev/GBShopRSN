@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os.log
 
 class ProductListScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
@@ -74,7 +75,6 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
                                       idCategory: ((productListScreenHeaderView.selectProductsCategoryTextField.text ?? "1") as NSString).integerValue) { response in
             switch response.result {
             case .success(let getProductList):
-                print(getProductList)
                 self.productsArray = getProductList.productList
                 self.sendAnalyticsOpenProductListSuccess(productListCount: getProductList.productList.count)
                 DispatchQueue.main.async {
@@ -84,7 +84,7 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
                 self.sendAnalyticsFailure(
                     failureName: "open_product_list_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -116,10 +116,7 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
     
     func configureTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierTableViewCell, for: indexPath) as? ProductListScreenTableViewCell
-        guard let cell = tableViewCell else {
-            print("Error with Cell")
-            return UITableViewCell()
-        }
+        guard let cell = tableViewCell else { return UITableViewCell() }
         if productsArray.count != 0 {
             cell.productIDLabel.text = "Product ID: \(productsArray[indexPath.row].productID)"
             cell.productNameLabel.text = "Name: \(productsArray[indexPath.row].productName)"

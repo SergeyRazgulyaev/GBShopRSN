@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAnalytics
+import os.log
 
 class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
     // MARK: - UI components
@@ -71,12 +72,11 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
-                print(logOut)
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "log_out_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -114,13 +114,12 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                     response in
                     switch response.result {
                     case .success(let changeUserData):
-                        print(changeUserData)
                         self.sendAnalyticsChangeUserDataSuccess(userID: self.user.userID)
                     case .failure(let error):
                         self.sendAnalyticsFailure(
                             failureName: "change_user_data_failure",
                             errorDescription: error.localizedDescription)
-                        print(error.localizedDescription)
+                        Logger.viewCycle.debug("\(error.localizedDescription)")
                     }
                 }
             } else {

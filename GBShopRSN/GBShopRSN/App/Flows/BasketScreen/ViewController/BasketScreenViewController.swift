@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAnalytics
+import os.log
 
 class BasketScreenViewController: UITableViewController, AnalyticsSendable {
     // MARK: - UI components
@@ -89,7 +90,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
         getBasket.getBasket(userID: user.userID) { response in
             switch response.result {
             case .success(let getBasket):
-                print(getBasket)
                 self.productsInBasketArray = getBasket.contents
                 self.sendAnalyticsGetBasketSuccess(
                     userID: self.user.userID,
@@ -102,7 +102,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "get_basket_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -112,7 +112,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
         payBasket.payBasket(userID: user.userID, payAmount: payAmount) { response in
             switch response.result {
             case .success(let payBasket):
-                print(payBasket)
                 self.sendAnalyticsPayBasketSuccess(
                     userID: self.user.userID,
                     payAmount: payAmount)
@@ -120,7 +119,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "pay_basket_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -130,7 +129,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
         deleteFromBasket.deleteFromBasket(deletedProductID: productID) { response in
             switch response.result {
             case .success(let deleteProductFromBasket):
-                print(deleteProductFromBasket)
                 self.sendAnalyticsDeleteFromBasketSuccess(
                     deletedProductID: deleteProductFromBasket.deletedProductID,
                     deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
@@ -138,7 +136,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsFailure(
                     failureName: "delete_from_basket_failure",
                     errorDescription: error.localizedDescription)
-                print(error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
     }
@@ -170,10 +168,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
     
     func configureTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierTableViewCell, for: indexPath) as? BasketScreenTableViewCell
-        guard let cell = tableViewCell else {
-            print("Error with Cell")
-            return UITableViewCell()
-        }
+        guard let cell = tableViewCell else { return UITableViewCell() }
         cell.basketProductIDLabel.text = "Product ID: \(productsInBasketArray[indexPath.row].productID)"
         cell.basketProductNameLabel.text = "Name: \(productsInBasketArray[indexPath.row].productName)"
         cell.basketProductPriceLabel.text = "Price: \(productsInBasketArray[indexPath.row].productPrice) \(currencyUnit)"

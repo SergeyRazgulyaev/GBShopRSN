@@ -112,10 +112,12 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
                     }
                 }
             } else {
-                print("Password and password confirmation do not match")
+                self.showAlert(title: "Attention",
+                               message: "Password and password confirmation do not match")
             }
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAlert(title: "Attention",
+                           message: "You need to fill in all the fields for sign up")
         }
     }
     
@@ -124,7 +126,8 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
     }
     
     @objc func tapCancelAndReturnButton(_ sender: Any?) {
-        fatalError() //Installed specifically for sending analytics in Firebase about an application crash
+        // fatalError() may be installed specifically for sending analytics in Firebase about an application crash
+        // fatalError()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -149,5 +152,18 @@ extension SignUpScreenViewController {
   
     @objc func hideKeyboardByTap() {
         signUpScreenView.scrollView.endEditing(true)
+    }
+}
+
+//MARK: - Alert
+extension SignUpScreenViewController {
+    private func showAlert(title: String? = nil,
+                           message: String? = nil,
+                           handler: ((UIAlertAction) -> ())? = nil,
+                           completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: completion)
     }
 }

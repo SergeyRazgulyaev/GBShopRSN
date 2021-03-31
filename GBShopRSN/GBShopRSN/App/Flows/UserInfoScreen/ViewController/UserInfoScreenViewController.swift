@@ -123,10 +123,12 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                     }
                 }
             } else {
-                print("Password and password confirmation do not match")
+                self.showAlert(title: "Attention",
+                               message: "Password and password confirmation do not match")
             }
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAlert(title: "Attention",
+                           message: "You need to fill in all the fields for change user info")
         }
     }
 }
@@ -140,5 +142,18 @@ extension UserInfoScreenViewController {
     
     @objc func hideKeyboardByTap() {
         userInfoScreenView.scrollView.endEditing(true)
+    }
+}
+
+//MARK: - Alert
+extension UserInfoScreenViewController {
+    private func showAlert(title: String? = nil,
+                           message: String? = nil,
+                           handler: ((UIAlertAction) -> ())? = nil,
+                           completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: completion)
     }
 }

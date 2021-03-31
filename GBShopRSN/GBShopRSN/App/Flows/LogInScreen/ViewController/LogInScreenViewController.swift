@@ -71,9 +71,14 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                         userName: login.user.userName,
                         userLastname: login.user.userLastName)
                     DispatchQueue.main.async {
-                        let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
-                        tabBarController.modalPresentationStyle = .fullScreen
-                        self.present(tabBarController, animated: true, completion: nil)
+                        if login.result == 1 {
+                            let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
+                            tabBarController.modalPresentationStyle = .fullScreen
+                            self.present(tabBarController, animated: true, completion: nil)
+                        } else {
+                            self.showAlert(title: "Attention",
+                                           message: "Invalid login or password")
+                        }
                     }
                 case .failure(let error):
                     self.sendAnalyticsFailure(

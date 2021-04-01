@@ -130,7 +130,8 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             if !(productScreenHeaderView.userReviewTextField.text?.isTrimmedEmpty ?? true) {
                 addUserReview()
             } else {
-                print("You need to write a review to publish it")
+                self.showAlert(title: "Attention",
+                               message: "You need to write a review to publish it")
             }
         } else {
             deleteUserReview()
@@ -319,5 +320,18 @@ extension ProductScreenViewController {
     
     @objc func hideKeyboardByTap() {
         tableView.endEditing(true)
+    }
+}
+
+//MARK: - Alert
+extension ProductScreenViewController {
+    private func showAlert(title: String? = nil,
+                           message: String? = nil,
+                           handler: ((UIAlertAction) -> ())? = nil,
+                           completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: completion)
     }
 }

@@ -71,9 +71,14 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                         userName: login.user.userName,
                         userLastname: login.user.userLastName)
                     DispatchQueue.main.async {
-                        let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
-                        tabBarController.modalPresentationStyle = .fullScreen
-                        self.present(tabBarController, animated: true, completion: nil)
+                        if login.result == 1 {
+                            let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
+                            tabBarController.modalPresentationStyle = .fullScreen
+                            self.present(tabBarController, animated: true, completion: nil)
+                        } else {
+                            self.showAlert(title: "Attention",
+                                           message: "Invalid login or password")
+                        }
                     }
                 case .failure(let error):
                     self.sendAnalyticsFailure(
@@ -83,7 +88,8 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                 }
             }
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAlert(title: "Attention",
+                           message: "You need to fill in all the fields for log in")
         }
     }
     
@@ -110,5 +116,18 @@ extension LogInScreenViewController {
     
     @objc func hideKeyboardByTap() {
         logInScreenView.scrollView.endEditing(true)
+    }
+}
+
+//MARK: - Alert
+extension LogInScreenViewController {
+    private func showAlert(title: String? = nil,
+                           message: String? = nil,
+                           handler: ((UIAlertAction) -> ())? = nil,
+                           completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: completion)
     }
 }

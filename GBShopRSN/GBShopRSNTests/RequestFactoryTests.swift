@@ -12,9 +12,7 @@ import Alamofire
 class RequestFactoryTests: XCTestCase {
     
     func testLogIn() throws {
-//        let baseURL = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
-        let baseURL = URL(string: "http://127.0.0.1:8080/")!
-
+        let baseURL = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
         let requestFactory = RequestFactory(baseURL: baseURL)
         let logInUser = requestFactory.makeLogInRequestFactory()
         

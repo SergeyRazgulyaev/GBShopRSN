@@ -22,7 +22,7 @@ class SignUpTests: XCTestCase {
         let registerUser = SignUp(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let registered = expectation(description: "registered user")
-        registerUser.signUp(userID: 787, userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "razgulyaev.sergey@gmail.com", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        registerUser.signUp(userID: 787, userLogin: "SergeyRazgulyaev", userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "razgulyaev.sergey@gmail.com", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -47,7 +47,7 @@ class SignUpTests: XCTestCase {
         let registerUser = SignUp(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedRegister = expectation(description: "failed register user")
-        registerUser.signUp(userID: 787, userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "razgulyaev.sergey@gmail.com", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        registerUser.signUp(userID: 787, userLogin: "SergeyRazgulyaev", userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "razgulyaev.sergey@gmail.com", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

@@ -57,6 +57,17 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable, Aler
         tableView.register(BasketScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
     }
     
+    func updatePayBasketButtonText() {
+        if productsInBasketArray.count == 0 {
+            basketScreenFooterView.basketPayButton.setTitle("Basket is empty", for: .normal)
+            basketScreenFooterView.basketPayButton.backgroundColor = .lightGray
+        } else {
+            basketScreenFooterView.basketPayButton.setTitle("Pay basket of \(calculatePayAmount()) rub.", for: .normal)
+            basketScreenFooterView.basketPayButton.backgroundColor = .rsnLightGreenColor
+        }
+        self.payAmount = 0
+    }
+    
     func configurePayBasketButton() {
         basketScreenFooterView.basketPayButton.addTarget(self, action: #selector(tapPayBasketButton(_:)), for: .touchUpInside)
     }
@@ -163,17 +174,6 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable, Aler
                 Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
-    }
-    
-    func updatePayBasketButtonText() {
-        if productsInBasketArray.count == 0 {
-            basketScreenFooterView.basketPayButton.setTitle("Basket is empty", for: .normal)
-            basketScreenFooterView.basketPayButton.backgroundColor = .lightGray
-        } else {
-            basketScreenFooterView.basketPayButton.setTitle("Pay basket of \(calculatePayAmount()) rub.", for: .normal)
-            basketScreenFooterView.basketPayButton.backgroundColor = .rsnLightGreenColor
-        }
-        self.payAmount = 0
     }
     
     // MARK: - Table view data source

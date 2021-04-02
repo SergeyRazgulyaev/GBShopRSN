@@ -17,14 +17,14 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
     private lazy var logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(tapLogOutButton))
     
     // MARK: - Properties
+    private let requestFactory: RequestFactory
     private let defaultUserName = "Sergey"
     private let defaultUserLastName = "Razgulyaev"
     private let defaultEmail = "razgulyaev.sergey@gmail.com"
     private let defaultGender = "m"
     private let defaultCreditCard = "9872389-2424-234224-234"
     private let defaultBio = "This is good! I think I will switch to another language"
-    private let defaultPassword = "mypassword"
-    private let requestFactory: RequestFactory
+    private let defaultPassword = ""
     private let user: User
     
     // MARK: - Init
@@ -41,9 +41,8 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
     //MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTextFields()
-        configureSaveUserInfoButton()
         configureViewController()
+        configureUIComponents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,45 +62,27 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
         navigationItem.rightBarButtonItem = logOutButton
     }
     
-    @objc func tapLogOutButton() {
-        let logOutUser = requestFactory.makeLogOutRequestFactory()
-        logOutUser.logOut(userID: user.userID) { response in
-            switch response.result {
-            case .success(let logOut):
-                self.sendAnalyticsLogOutSuccess(userID: logOut.loggedOutUserID)
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            case .failure(let error):
-                self.sendAnalyticsFailure(
-                    failureName: "log_out_failure",
-                    errorDescription: error.localizedDescription)
-                Logger.viewCycle.debug("\(error.localizedDescription)")
-            }
-        }
+    func configureUIComponents() {
+        configureTextFields()
+        configureSaveUserInfoButton()
     }
     
     func configureTextFields() {
-        userInfoScreenView.userNameTextField.text = defaultUserName
-        userInfoScreenView.userLastNameTextField.text = defaultUserLastName
-        userInfoScreenView.emailTextField.text = defaultEmail
-        userInfoScreenView.genderTextField.text = defaultGender
-        userInfoScreenView.creditCardTextField.text = defaultCreditCard
-        userInfoScreenView.bioTextField.text = defaultBio
+        userInfoScreenView.logoUserInfoScreenLabel.text = user.userLogin
+        userInfoScreenView.userNameTextField.text = user.userName
+        userInfoScreenView.userLastNameTextField.text = user.userLastName
+        userInfoScreenView.emailTextField.text = user.email
+        userInfoScreenView.genderTextField.text = user.gender
+        userInfoScreenView.creditCardTextField.text = user.creditCard
+        userInfoScreenView.bioTextField.text = user.bio
     }
     
     func configureSaveUserInfoButton() {
         userInfoScreenView.changeAndSaveUserInfoButton.addTarget(self, action: #selector(tapSaveUserInfoButton(_:)), for: .touchUpInside)
     }
-    
     @objc func tapSaveUserInfoButton(_ sender: Any?) {
-        if (!(userInfoScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
-                !(userInfoScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
-                !(userInfoScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
-                !(userInfoScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
-                !(userInfoScreenView.bioTextField.text?.isTrimmedEmpty ?? true)) {
-            if userInfoScreenView.passwordTextField.text ==
-                userInfoScreenView.repeatedPasswordTextField.text {
+        if isFilledTextFields() {
+            if areEqualPasswordAndConfirmationPassword() {
                 let changeData = requestFactory.makeChangeUserDataRequestFactory()
                 changeData.changeUserData(userID: user.userID,
                                           userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
@@ -136,6 +117,43 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
             self.showAttantionAlert(
                 viewController: self,
                 message: "You need to fill in all the fields for change user info")
+        }
+    }
+    
+    @objc func tapLogOutButton() {
+        let logOutUser = requestFactory.makeLogOutRequestFactory()
+        logOutUser.logOut(userID: user.userID) { response in
+            switch response.result {
+            case .success(let logOut):
+                self.sendAnalyticsLogOutSuccess(userID: logOut.loggedOutUserID)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "log_out_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func isFilledTextFields() -> Bool {
+        if (!(userInfoScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
+                !(userInfoScreenView.bioTextField.text?.isTrimmedEmpty ?? true)) {
+            return true
+        } else { return false }
+    }
+    
+    func areEqualPasswordAndConfirmationPassword() -> Bool {
+        if userInfoScreenView.passwordTextField.text ==
+            userInfoScreenView.repeatedPasswordTextField.text {
+            return true
+        } else {
+            return false
         }
     }
 }

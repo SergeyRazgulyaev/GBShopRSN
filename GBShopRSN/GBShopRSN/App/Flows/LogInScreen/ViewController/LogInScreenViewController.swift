@@ -17,7 +17,7 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable 
     
     // MARK: - Properties
     private let defaultUserLogInName = "SergeyRazgulyaev"
-    private let defaultPassword = "mypassword"
+    private let defaultPassword = ""
     private let requestFactory: RequestFactory
     
     // MARK: - Init
@@ -57,42 +57,18 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable 
         configureCancelAndReturnButton()
     }
     
+    func clearLogInScreenTextFields() {
+        logInScreenView.userLoginTextField.text = ""
+        logInScreenView.passwordTextField.text = ""
+    }
+    
     func configureSendDataForLogInButton() {
         logInScreenView.sendDataForLogInButton.addTarget(self, action: #selector(tapSendDataForLogInButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapSendDataForLogInButton(_ sender: Any?) {
         if isFilledTextFields() {
-            let logInUser = requestFactory.makeLogInRequestFactory()
-            logInUser.logIn(userLogin: logInScreenView.userLoginTextField.text ?? defaultUserLogInName,
-                            password: logInScreenView.passwordTextField.text ?? defaultPassword) {
-                response in
-                switch response.result {
-                case .success(let login):
-                    self.sendAnalyticsLogInSuccess(
-                        userID: login.user.userID,
-                        userName: login.user.userName,
-                        userLastname: login.user.userLastName)
-                    DispatchQueue.main.async {
-                        if login.result == 1 {
-                            let tabBarController = TabBarController(
-                                requestFactory: self.requestFactory,
-                                user: login.user)
-                            tabBarController.modalPresentationStyle = .fullScreen
-                            self.present(tabBarController, animated: true, completion: nil)
-                        } else {
-                            self.showAttantionAlert(
-                                viewController: self,
-                                message: "Invalid login or password")
-                        }
-                    }
-                case .failure(let error):
-                    self.sendAnalyticsFailure(
-                        failureName: "log_in_failure",
-                        errorDescription: error.localizedDescription)
-                    Logger.viewCycle.debug("\(error.localizedDescription)")
-                }
-            }
+            sendDataForLogIn()
         } else {
             self.showAttantionAlert(
                 viewController: self,
@@ -114,9 +90,38 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable 
         self.dismiss(animated: true, completion: nil)
     }
     
-    func clearLogInScreenTextFields() {
-        logInScreenView.userLoginTextField.text = ""
-        logInScreenView.passwordTextField.text = ""
+    //MARK: - Interaction with Network
+    func sendDataForLogIn() {
+        let logInUser = requestFactory.makeLogInRequestFactory()
+        logInUser.logIn(userLogin: logInScreenView.userLoginTextField.text ?? defaultUserLogInName,
+                        password: logInScreenView.passwordTextField.text ?? defaultPassword) {
+            response in
+            switch response.result {
+            case .success(let login):
+                self.sendAnalyticsLogInSuccess(
+                    userID: login.user.userID,
+                    userName: login.user.userName,
+                    userLastname: login.user.userLastName)
+                DispatchQueue.main.async {
+                    if login.result == 1 {
+                        let tabBarController = TabBarController(
+                            requestFactory: self.requestFactory,
+                            user: login.user)
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self.present(tabBarController, animated: true, completion: nil)
+                    } else {
+                        self.showAttantionAlert(
+                            viewController: self,
+                            message: "Invalid login or password")
+                    }
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "log_in_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
+        }
     }
 }
 

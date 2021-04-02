@@ -21,11 +21,11 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
     private let defaultUserLogin = "SergeyRazgulyaev"
     private let defaultUserName = "Sergey"
     private let defaultUserLastName = "Razgulyaev"
-    private let defaultEmail = "razgulyaev.sergey@gmail.com"
-    private let defaultGender = "m"
-    private let defaultCreditCard = "9872389-2424-234224-234"
-    private let defaultBio = "I'm from Ukhta"
-    private let defaultPassword = ""
+    private let defaultUserEmail = "razgulyaev.sergey@gmail.com"
+    private let defaultUserGender = "m"
+    private let defaultUserCreditCard = "9872389-2424-234224-234"
+    private let defaultUserBio = "I'm from Ukhta"
+    private let defaultUserPassword = ""
     
     // MARK: - Init
     init(requestFactory: RequestFactory) {
@@ -64,8 +64,30 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
     }
     
     func configureUIComponents() {
+        configureTextFields()
         configureSendDataForSignUpButton()
         configureCancelAndReturnButton()
+    }
+    
+    func configureTextFields() {
+        signUpScreenView.userLoginTextField.text = defaultUserLogin
+        signUpScreenView.userNameTextField.text = defaultUserName
+        signUpScreenView.userLastNameTextField.text = defaultUserLastName
+        signUpScreenView.emailTextField.text = defaultUserEmail
+        signUpScreenView.genderTextField.text = defaultUserGender
+        signUpScreenView.creditCardTextField.text = defaultUserCreditCard
+        signUpScreenView.bioTextField.text = defaultUserBio
+    }
+    
+    func clearSignUpScreenTextFields() {
+        signUpScreenView.userNameTextField.text = ""
+        signUpScreenView.userLastNameTextField.text = ""
+        signUpScreenView.emailTextField.text = ""
+        signUpScreenView.genderTextField.text = ""
+        signUpScreenView.creditCardTextField.text = ""
+        signUpScreenView.bioTextField.text = ""
+        signUpScreenView.passwordTextField.text = ""
+        signUpScreenView.repeatedPasswordTextField.text = ""
     }
     
     func configureSendDataForSignUpButton() {
@@ -73,44 +95,9 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
     }
     
     @objc func tapSendDataForSignUpButton(_ sender: Any?) {
-        
         if isFilledTextFields() {
             if areEqualPasswordAndConfirmationPassword() {
-                let registerUser = requestFactory.makeSignUpRequestFactory()
-                registerUser.signUp(userID: defaultUserID,
-                                    userLogin: signUpScreenView.userLoginTextField.text ?? defaultUserLogin,
-                                    userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
-                                    userLastName: signUpScreenView.userLastNameTextField.text ?? defaultUserLastName,
-                                    password: signUpScreenView.passwordTextField.text ?? defaultPassword,
-                                    email: signUpScreenView.emailTextField.text ?? defaultEmail,
-                                    gender: signUpScreenView.genderTextField.text ?? defaultGender,
-                                    creditCard: signUpScreenView.creditCardTextField.text ?? defaultCreditCard,
-                                    bio: signUpScreenView.bioTextField.text ?? defaultBio) {
-                    response in
-                    switch response.result {
-                    case .success(let signUp):
-                        self.sendAnalyticsSignUpSuccess(
-                            assignedUserId: signUp.assignedUserId,
-                            signedUpUserLogin: signUp.signedUpUserLogin,
-                            signedUpUserName: signUp.signedUpUserName,
-                            signedUpUserLastName: signUp.signedUpUserLastName,
-                            signedUpEmail:signUp.signedUpEmail,
-                            signedUpGender:signUp.signedUpBio,
-                            signedUpCreditCard: signUp.signedUpCreditCard,
-                            signedUpBio: signUp.signedUpBio,
-                            userMessage: signUp.userMessage)
-                        DispatchQueue.main.async {
-                            let logInScreenViewController = LogInScreenViewController(requestFactory: self.requestFactory)
-                            logInScreenViewController.modalPresentationStyle = .fullScreen
-                            self.present(logInScreenViewController, animated: true, completion: nil)
-                        }
-                    case .failure(let error):
-                        self.sendAnalyticsFailure(
-                            failureName: "sign_up_failure",
-                            errorDescription: error.localizedDescription)
-                        Logger.viewCycle.debug("\(error.localizedDescription)")
-                    }
-                }
+                sendDataForSignUp()
             } else {
                 self.showAttantionAlert(
                     viewController: self,
@@ -154,15 +141,43 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
         self.dismiss(animated: true, completion: nil)
     }
     
-    func clearSignUpScreenTextFields() {
-        signUpScreenView.userNameTextField.text = ""
-        signUpScreenView.userLastNameTextField.text = ""
-        signUpScreenView.emailTextField.text = ""
-        signUpScreenView.genderTextField.text = ""
-        signUpScreenView.creditCardTextField.text = ""
-        signUpScreenView.bioTextField.text = ""
-        signUpScreenView.passwordTextField.text = ""
-        signUpScreenView.repeatedPasswordTextField.text = ""
+    //MARK: - Interaction with Network
+    func sendDataForSignUp() {
+        let registerUser = requestFactory.makeSignUpRequestFactory()
+        registerUser.signUp(userID: defaultUserID,
+                            userLogin: signUpScreenView.userLoginTextField.text ?? defaultUserLogin,
+                            userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
+                            userLastName: signUpScreenView.userLastNameTextField.text ?? defaultUserLastName,
+                            password: signUpScreenView.passwordTextField.text ?? defaultUserPassword,
+                            email: signUpScreenView.emailTextField.text ?? defaultUserEmail,
+                            gender: signUpScreenView.genderTextField.text ?? defaultUserGender,
+                            creditCard: signUpScreenView.creditCardTextField.text ?? defaultUserCreditCard,
+                            bio: signUpScreenView.bioTextField.text ?? defaultUserBio) {
+            response in
+            switch response.result {
+            case .success(let signUp):
+                self.sendAnalyticsSignUpSuccess(
+                    assignedUserId: signUp.assignedUserId,
+                    signedUpUserLogin: signUp.signedUpUserLogin,
+                    signedUpUserName: signUp.signedUpUserName,
+                    signedUpUserLastName: signUp.signedUpUserLastName,
+                    signedUpEmail:signUp.signedUpEmail,
+                    signedUpGender:signUp.signedUpBio,
+                    signedUpCreditCard: signUp.signedUpCreditCard,
+                    signedUpBio: signUp.signedUpBio,
+                    userMessage: signUp.userMessage)
+                DispatchQueue.main.async {
+                    let logInScreenViewController = LogInScreenViewController(requestFactory: self.requestFactory)
+                    logInScreenViewController.modalPresentationStyle = .fullScreen
+                    self.present(logInScreenViewController, animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "sign_up_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
+        }
     }
 }
 

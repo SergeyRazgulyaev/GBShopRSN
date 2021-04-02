@@ -111,67 +111,127 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
         scrollView.addSubview(changeAndSaveUserInfoButton)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            scrollView.topAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leftAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leftAnchor),
+            scrollView.rightAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.rightAnchor),
             
-            logoUserInfoScreenImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20.0),
-            logoUserInfoScreenImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoUserInfoScreenImageView.heightAnchor.constraint(equalToConstant: 150.0),
-            logoUserInfoScreenImageView.widthAnchor.constraint(equalToConstant: 160.0),
+            logoUserInfoScreenImageView.topAnchor.constraint(
+                equalTo: scrollView.topAnchor,
+                constant: 20.0),
+            logoUserInfoScreenImageView.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            logoUserInfoScreenImageView.heightAnchor.constraint(
+                equalToConstant: 150.0),
+            logoUserInfoScreenImageView.widthAnchor.constraint(
+                equalToConstant: 160.0),
             
-            logoUserInfoScreenLabel.topAnchor.constraint(equalTo: logoUserInfoScreenImageView.bottomAnchor, constant: 10.0),
-            logoUserInfoScreenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoUserInfoScreenLabel.topAnchor.constraint(
+                equalTo: logoUserInfoScreenImageView.bottomAnchor,
+                constant: 10.0),
+            logoUserInfoScreenLabel.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
 
-            changeUserInfoLabel.topAnchor.constraint(equalTo: logoUserInfoScreenLabel.bottomAnchor, constant: 10.0),
-            changeUserInfoLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            changeUserInfoLabel.topAnchor.constraint(
+                equalTo: logoUserInfoScreenLabel.bottomAnchor,
+                constant: 10.0),
+            changeUserInfoLabel.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
 
-            userNameTextField.topAnchor.constraint(equalTo: changeUserInfoLabel.bottomAnchor, constant: 15.0),
-            userNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            userNameTextField.topAnchor.constraint(
+                equalTo: changeUserInfoLabel.bottomAnchor,
+                constant: 15.0),
+            userNameTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            userNameTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            userNameTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            userLastNameTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 15.0),
-            userLastNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userLastNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            userLastNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            userLastNameTextField.topAnchor.constraint(
+                equalTo: userNameTextField.bottomAnchor,
+                constant: 15.0),
+            userLastNameTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            userLastNameTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            userLastNameTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
             
-            emailTextField.topAnchor.constraint(equalTo: userLastNameTextField.bottomAnchor, constant: 10.0),
-            emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            emailTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            emailTextField.topAnchor.constraint(
+                equalTo: userLastNameTextField.bottomAnchor,
+                constant: 10.0),
+            emailTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            emailTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            emailTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            genderTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10.0),
-            genderTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            genderTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            genderTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            genderTextField.topAnchor.constraint(
+                equalTo: emailTextField.bottomAnchor,
+                constant: 10.0),
+            genderTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            genderTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            genderTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            creditCardTextField.topAnchor.constraint(equalTo: genderTextField.bottomAnchor, constant: 10.0),
-            creditCardTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            creditCardTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            creditCardTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            creditCardTextField.topAnchor.constraint(
+                equalTo: genderTextField.bottomAnchor,
+                constant: 10.0),
+            creditCardTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            creditCardTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            creditCardTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            bioTextField.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor, constant: 10.0),
-            bioTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            bioTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            bioTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            bioTextField.topAnchor.constraint(
+                equalTo: creditCardTextField.bottomAnchor,
+                constant: 10.0),
+            bioTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            bioTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            bioTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            passwordTextField.topAnchor.constraint(equalTo: bioTextField.bottomAnchor, constant: 10.0),
-            passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            passwordTextField.topAnchor.constraint(
+                equalTo: bioTextField.bottomAnchor, 
+                constant: 10.0),
+            passwordTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            passwordTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            passwordTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            repeatedPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10.0),
-            repeatedPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            repeatedPasswordTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            repeatedPasswordTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            repeatedPasswordTextField.topAnchor.constraint(
+                equalTo: passwordTextField.bottomAnchor, 
+                constant: 10.0),
+            repeatedPasswordTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            repeatedPasswordTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            repeatedPasswordTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            changeAndSaveUserInfoButton.topAnchor.constraint(equalTo: repeatedPasswordTextField.bottomAnchor, constant: 20.0),
-            changeAndSaveUserInfoButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            changeAndSaveUserInfoButton.heightAnchor.constraint(equalToConstant: 30.0),
-            changeAndSaveUserInfoButton.widthAnchor.constraint(equalToConstant: 270.0)
+            changeAndSaveUserInfoButton.topAnchor.constraint(
+                equalTo: repeatedPasswordTextField.bottomAnchor, 
+                constant: 20.0),
+            changeAndSaveUserInfoButton.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            changeAndSaveUserInfoButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            changeAndSaveUserInfoButton.widthAnchor.constraint(
+                equalToConstant: 270.0)
         ])
     }
 }

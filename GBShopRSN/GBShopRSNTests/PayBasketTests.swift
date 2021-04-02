@@ -26,7 +26,7 @@ class PayBasketTests: XCTestCase {
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.accountBalance, 345)
+                XCTAssertEqual(model.accountBalance, 999000)
                 payBasketProducts.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

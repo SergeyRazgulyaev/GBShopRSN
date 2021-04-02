@@ -125,7 +125,9 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable, Ale
             if !(productScreenHeaderView.userReviewTextField.text?.isTrimmedEmpty ?? true) {
                 addUserReview()
             } else {
-                print("You need to write a review to publish it")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "You need to write a review to publish it")
             }
         } else {
             deleteUserReview()

@@ -109,10 +109,14 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
                     }
                 }
             } else {
-                print("Password and password confirmation do not match")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "Password and password confirmation do not match")
             }
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in all the fields for change user info")
         }
     }
     

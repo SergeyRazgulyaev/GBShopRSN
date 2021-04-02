@@ -67,32 +67,12 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable 
     }
     
     @objc func tapSendDataForLogInButton(_ sender: Any?) {
-        if (!(logInScreenView.userLoginTextField.text?.isTrimmedEmpty ?? true) &&
-                !(logInScreenView.passwordTextField.text?.isTrimmedEmpty ?? true)) {
-            let logInUser = requestFactory.makeLogInRequestFactory()
-            logInUser.logIn(userLogin: logInScreenView.userLoginTextField.text ?? defaultUserLogInName,
-                            password: logInScreenView.passwordTextField.text ?? defaultPassword) {
-                response in
-                switch response.result {
-                case .success(let login):
-                    self.sendAnalyticsLogInSuccess(
-                        userID: login.user.userID,
-                        userName: login.user.userName,
-                        userLastname: login.user.userLastName)
-                    DispatchQueue.main.async {
-                        let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
-                        tabBarController.modalPresentationStyle = .fullScreen
-                        self.present(tabBarController, animated: true, completion: nil)
-                    }
-                case .failure(let error):
-                    self.sendAnalyticsFailure(
-                        failureName: "log_in_failure",
-                        errorDescription: error.localizedDescription)
-                    Logger.viewCycle.debug("\(error.localizedDescription)")
-                }
-            }
+        if isFilledTextFields() {
+            sendDataForLogIn()
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in all the fields for log in")
         }
     }
     

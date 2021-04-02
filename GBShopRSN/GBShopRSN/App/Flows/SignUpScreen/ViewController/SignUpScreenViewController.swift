@@ -118,46 +118,16 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
                 !(signUpScreenView.bioTextField.text?.isTrimmedEmpty ?? true) &&
                 !(signUpScreenView.passwordTextField.text?.isTrimmedEmpty ?? true) &&
                 !(signUpScreenView.repeatedPasswordTextField.text?.isTrimmedEmpty ?? true)) {
-            if signUpScreenView.passwordTextField.text ==
-                signUpScreenView.repeatedPasswordTextField.text {
-                let registerUser = requestFactory.makeSignUpRequestFactory()
-                registerUser.signUp(userID: defaultUserID,
-                                    userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
-                                    userLastName: signUpScreenView.userLastNameTextField.text ?? defaultUserLastName,
-                                    password: signUpScreenView.passwordTextField.text ?? defaultPassword,
-                                    email: signUpScreenView.emailTextField.text ?? defaultEmail,
-                                    gender: signUpScreenView.genderTextField.text ?? defaultGender,
-                                    creditCard: signUpScreenView.creditCardTextField.text ?? defaultCreditCard,
-                                    bio: signUpScreenView.bioTextField.text ?? defaultBio) {
-                    response in
-                    switch response.result {
-                    case .success(let signUp):
-                        self.sendAnalyticsSignUpSuccess(
-                            assignedUserId: signUp.assignedUserId,
-                            signedUpUserName: signUp.signedUpUserName,
-                            signedUpUserLastName: signUp.signedUpUserLastName,
-                            signedUpEmail:signUp.signedUpEmail,
-                            signedUpGender:signUp.signedUpBio,
-                            signedUpCreditCard: signUp.signedUpCreditCard,
-                            signedUpBio: signUp.signedUpBio,
-                            userMessage: signUp.userMessage)
-                        DispatchQueue.main.async {
-                            let logInScreenViewController = LogInScreenViewController(requestFactory: self.requestFactory)
-                            logInScreenViewController.modalPresentationStyle = .fullScreen
-                            self.present(logInScreenViewController, animated: true, completion: nil)
-                        }
-                    case .failure(let error):
-                        self.sendAnalyticsFailure(
-                            failureName: "sign_up_failure",
-                            errorDescription: error.localizedDescription)
-                        Logger.viewCycle.debug("\(error.localizedDescription)")
-                    }
-                }
-            } else {
-                print("Password and password confirmation do not match")
-            }
+            return true
+        } else { return false }
+    }
+    
+    func areEqualPasswordAndConfirmationPassword() -> Bool {
+        if signUpScreenView.passwordTextField.text ==
+            signUpScreenView.repeatedPasswordTextField.text {
+            return true
         } else {
-            print("You need to fill in all the fields for sign up")
+            return false
         }
     }
     

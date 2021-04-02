@@ -64,9 +64,7 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable,
         if isFilledProductsCategoryTextField() {
             loadProductListData()
         } else {
-            self.showAttantionAlert(
-                viewController: self,
-                message: "You need to fill in the text field to upload the product list")
+            print("You need to fill in all the fields for sign up")
         }
     }
     

@@ -9,22 +9,23 @@ import UIKit
 import FirebaseAnalytics
 import os.log
 
-class SignUpScreenViewController: UIViewController, AnalyticsSendable {
+class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var signUpScreenView: SignUpScreenView = {
         return SignUpScreenView()
     }()
     
     // MARK: - Properties
+    private let requestFactory: RequestFactory
+    private let defaultUserID = 787
+    private let defaultUserLogin = "SergeyRazgulyaev"
     private let defaultUserName = "Sergey"
     private let defaultUserLastName = "Razgulyaev"
     private let defaultEmail = "razgulyaev.sergey@gmail.com"
     private let defaultGender = "m"
     private let defaultCreditCard = "9872389-2424-234224-234"
-    private let defaultBio = "This is good! I think I will switch to another language"
-    private let defaultPassword = "mypassword"
-    private let defaultUserID = 787
-    private let requestFactory: RequestFactory
+    private let defaultBio = "I'm from Ukhta"
+    private let defaultPassword = ""
     
     // MARK: - Init
     init(requestFactory: RequestFactory) {
@@ -40,8 +41,7 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        configureSendDataForSignUpButton()
-        configureCancelAndReturnButton()
+        configureUIComponents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,23 +63,22 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
         view.backgroundColor = .rsnLightBlueColor
     }
     
+    func configureUIComponents() {
+        configureSendDataForSignUpButton()
+        configureCancelAndReturnButton()
+    }
+    
     func configureSendDataForSignUpButton() {
         signUpScreenView.sendDataForSignUpButton.addTarget(self, action: #selector(tapSendDataForSignUpButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapSendDataForSignUpButton(_ sender: Any?) {
         
-        if (!(signUpScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.bioTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.passwordTextField.text?.isTrimmedEmpty ?? true) &&
-                !(signUpScreenView.repeatedPasswordTextField.text?.isTrimmedEmpty ?? true)) {
-            if signUpScreenView.passwordTextField.text ==
-                signUpScreenView.repeatedPasswordTextField.text {
+        if isFilledTextFields() {
+            if areEqualPasswordAndConfirmationPassword() {
                 let registerUser = requestFactory.makeSignUpRequestFactory()
                 registerUser.signUp(userID: defaultUserID,
+                                    userLogin: signUpScreenView.userLoginTextField.text ?? defaultUserLogin,
                                     userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
                                     userLastName: signUpScreenView.userLastNameTextField.text ?? defaultUserLastName,
                                     password: signUpScreenView.passwordTextField.text ?? defaultPassword,
@@ -92,6 +91,7 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
                     case .success(let signUp):
                         self.sendAnalyticsSignUpSuccess(
                             assignedUserId: signUp.assignedUserId,
+                            signedUpUserLogin: signUp.signedUpUserLogin,
                             signedUpUserName: signUp.signedUpUserName,
                             signedUpUserLastName: signUp.signedUpUserLastName,
                             signedUpEmail:signUp.signedUpEmail,
@@ -112,12 +112,35 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
                     }
                 }
             } else {
-                self.showAlert(title: "Attention",
-                               message: "Password and password confirmation do not match")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "Password and password confirmation do not match")
             }
         } else {
-            self.showAlert(title: "Attention",
-                           message: "You need to fill in all the fields for sign up")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in all the fields for sign up")
+        }
+    }
+    
+    func isFilledTextFields() -> Bool {
+        if (!(signUpScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.creditCardTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.bioTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.passwordTextField.text?.isTrimmedEmpty ?? true) &&
+                !(signUpScreenView.repeatedPasswordTextField.text?.isTrimmedEmpty ?? true)) {
+            return true
+        } else { return false }
+    }
+    
+    func areEqualPasswordAndConfirmationPassword() -> Bool {
+        if signUpScreenView.passwordTextField.text ==
+            signUpScreenView.repeatedPasswordTextField.text {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -126,7 +149,7 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable {
     }
     
     @objc func tapCancelAndReturnButton(_ sender: Any?) {
-        // fatalError() may be installed specifically for sending analytics in Firebase about an application crash
+        // fatalError() may be installed there specifically for sending analytics in Firebase about an application crash
         // fatalError()
         self.dismiss(animated: true, completion: nil)
     }
@@ -152,18 +175,5 @@ extension SignUpScreenViewController {
   
     @objc func hideKeyboardByTap() {
         signUpScreenView.scrollView.endEditing(true)
-    }
-}
-
-//MARK: - Alert
-extension SignUpScreenViewController {
-    private func showAlert(title: String? = nil,
-                           message: String? = nil,
-                           handler: ((UIAlertAction) -> ())? = nil,
-                           completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: completion)
     }
 }

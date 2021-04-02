@@ -62,6 +62,7 @@
 		C5B987DE2600BF410077CD08 /* ProductListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B987DD2600BF410077CD08 /* ProductListScreenViewController.swift */; };
 		C5B987E82600BF8D0077CD08 /* ProductListScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B987E72600BF8D0077CD08 /* ProductListScreenTableViewCell.swift */; };
 		C5C2EB562613406D00CEBE61 /* LoggerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2EB552613406C00CEBE61 /* LoggerExtension.swift */; };
+		C5D094B726166DFF00DF5B52 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D094B626166DFF00DF5B52 /* Alertable.swift */; };
 		C5DCB79625D87D7700220690 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79525D87D7700220690 /* AppDelegate.swift */; };
 		C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DCB79725D87D7700220690 /* SceneDelegate.swift */; };
 		C5DCB79F25D87D7A00220690 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5DCB79E25D87D7A00220690 /* Assets.xcassets */; };
@@ -184,6 +185,7 @@
 		C5B987DD2600BF410077CD08 /* ProductListScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListScreenViewController.swift; sourceTree = "<group>"; };
 		C5B987E72600BF8D0077CD08 /* ProductListScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListScreenTableViewCell.swift; sourceTree = "<group>"; };
 		C5C2EB552613406C00CEBE61 /* LoggerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerExtension.swift; sourceTree = "<group>"; };
+		C5D094B626166DFF00DF5B52 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		C5DCB79225D87D7700220690 /* GBShopRSN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GBShopRSN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5DCB79525D87D7700220690 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5DCB79725D87D7700220690 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		C58D8F2A25FA89F500C1BC22 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				C5D094B526166D8600DF5B52 /* Alerts */,
 				C57ED2682603D193001C6EFA /* UIComponents */,
 				C58D8F3125FA990C00C1BC22 /* String */,
 				C58D8F2B25FA89FE00C1BC22 /* UIColor */,
@@ -616,6 +619,14 @@
 				C5C2EB552613406C00CEBE61 /* LoggerExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C5D094B526166D8600DF5B52 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				C5D094B626166DFF00DF5B52 /* Alertable.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		C5DCB78925D87D7600220690 = {
@@ -1206,6 +1217,7 @@
 				C57ED26A2603D25B001C6EFA /* UIComponentsMakeable.swift in Sources */,
 				C5B987DE2600BF410077CD08 /* ProductListScreenViewController.swift in Sources */,
 				C5DCB79825D87D7700220690 /* SceneDelegate.swift in Sources */,
+				C5D094B726166DFF00DF5B52 /* Alertable.swift in Sources */,
 				C5F6BB4F260D37B400AE2B33 /* BasketScreenTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

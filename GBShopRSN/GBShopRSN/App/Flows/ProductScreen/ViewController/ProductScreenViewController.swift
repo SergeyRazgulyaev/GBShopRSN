@@ -8,7 +8,7 @@
 import UIKit
 import os.log
 
-class ProductScreenViewController: UITableViewController, AnalyticsSendable {
+class ProductScreenViewController: UITableViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var productScreenHeaderView: ProductScreenHeaderView = {
         return ProductScreenHeaderView()
@@ -45,11 +45,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
-        configureAddToBasketButton()
-        configureDeleteFromBasketButton()
-        configureDecreaseProductForBasketCounterButton()
-        configureIncreaseProductForBasketCounterButton()
-        configureAddReviewButton()
+        configureUIComponents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,13 +66,12 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         tableView.register(ProductScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
     }
     
-    func configureProductDataLabels() {
-        productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
-        productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
-        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
-        productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
-        productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
-        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
+    func configureUIComponents() {
+        configureAddToBasketButton()
+        configureDeleteFromBasketButton()
+        configureDecreaseProductForBasketCounterButton()
+        configureIncreaseProductForBasketCounterButton()
+        configureAddReviewButton()
     }
     
     func configureAddToBasketButton() {
@@ -130,12 +125,22 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             if !(productScreenHeaderView.userReviewTextField.text?.isTrimmedEmpty ?? true) {
                 addUserReview()
             } else {
-                self.showAlert(title: "Attention",
-                               message: "You need to write a review to publish it")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "You need to write a review to publish it")
             }
         } else {
             deleteUserReview()
         }
+    }
+    
+    func configureProductDataLabels() {
+        productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
+        productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
+        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)"
+        productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)"
+        productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
     }
     
     //MARK: - Interaction with Network
@@ -320,18 +325,5 @@ extension ProductScreenViewController {
     
     @objc func hideKeyboardByTap() {
         tableView.endEditing(true)
-    }
-}
-
-//MARK: - Alert
-extension ProductScreenViewController {
-    private func showAlert(title: String? = nil,
-                           message: String? = nil,
-                           handler: ((UIAlertAction) -> ())? = nil,
-                           completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: completion)
     }
 }

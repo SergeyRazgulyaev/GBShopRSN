@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAnalytics
 import os.log
 
-class LogInScreenViewController: UIViewController, AnalyticsSendable {
+class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var logInScreenView: LogInScreenView = {
         return LogInScreenView()
@@ -34,8 +34,7 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        configureSendDataForLogInButton()
-        configureCancelAndReturnButton()
+        configureUIComponents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +52,17 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
         view.backgroundColor = .rsnLightBlueColor
     }
     
+    func configureUIComponents() {
+        configureSendDataForLogInButton()
+        configureCancelAndReturnButton()
+    }
+    
     func configureSendDataForLogInButton() {
         logInScreenView.sendDataForLogInButton.addTarget(self, action: #selector(tapSendDataForLogInButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapSendDataForLogInButton(_ sender: Any?) {
-        if (!(logInScreenView.userLoginTextField.text?.isTrimmedEmpty ?? true) &&
-                !(logInScreenView.passwordTextField.text?.isTrimmedEmpty ?? true)) {
+        if isFilledTextFields() {
             let logInUser = requestFactory.makeLogInRequestFactory()
             logInUser.logIn(userLogin: logInScreenView.userLoginTextField.text ?? defaultUserLogInName,
                             password: logInScreenView.passwordTextField.text ?? defaultPassword) {
@@ -72,12 +75,15 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                         userLastname: login.user.userLastName)
                     DispatchQueue.main.async {
                         if login.result == 1 {
-                            let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
+                            let tabBarController = TabBarController(
+                                requestFactory: self.requestFactory,
+                                user: login.user)
                             tabBarController.modalPresentationStyle = .fullScreen
                             self.present(tabBarController, animated: true, completion: nil)
                         } else {
-                            self.showAlert(title: "Attention",
-                                           message: "Invalid login or password")
+                            self.showAttantionAlert(
+                                viewController: self,
+                                message: "Invalid login or password")
                         }
                     }
                 case .failure(let error):
@@ -88,9 +94,16 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable {
                 }
             }
         } else {
-            self.showAlert(title: "Attention",
-                           message: "You need to fill in all the fields for log in")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in all the fields for log in")
         }
+    }
+    
+    func isFilledTextFields() -> Bool {
+        if (!(logInScreenView.userLoginTextField.text?.isTrimmedEmpty ?? true) && !(logInScreenView.passwordTextField.text?.isTrimmedEmpty ?? true)) {
+            return true
+        } else { return false }
     }
     
     func configureCancelAndReturnButton() {
@@ -116,18 +129,5 @@ extension LogInScreenViewController {
     
     @objc func hideKeyboardByTap() {
         logInScreenView.scrollView.endEditing(true)
-    }
-}
-
-//MARK: - Alert
-extension LogInScreenViewController {
-    private func showAlert(title: String? = nil,
-                           message: String? = nil,
-                           handler: ((UIAlertAction) -> ())? = nil,
-                           completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: completion)
     }
 }

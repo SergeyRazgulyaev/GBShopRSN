@@ -10,6 +10,7 @@ import Foundation
 struct SignUpResult: Codable {
     let result: Int
     let assignedUserId: Int
+    let signedUpUserLogin: String
     let signedUpUserName: String
     let signedUpUserLastName: String
     let signedUpEmail: String
@@ -21,6 +22,7 @@ struct SignUpResult: Codable {
     enum CodingKeys: String, CodingKey {
         case result = "result"
         case assignedUserId = "assigned_user_id"
+        case signedUpUserLogin = "signed_up_user_login"
         case signedUpUserName = "signed_up_user_name"
         case signedUpUserLastName = "signed_up_user_last_name"
         case signedUpEmail = "signed_up_email"

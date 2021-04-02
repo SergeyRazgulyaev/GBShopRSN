@@ -10,7 +10,8 @@ import UIKit
 class EntranceScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var logoEntranceScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "sparkles")!, tintColor: .rsnPurpleColor)
+        configureSystemImageView(systemImage: UIImage(systemName: "sparkles")!,
+                                 tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoEntranceScreenLabel: UILabel = {
@@ -52,6 +53,7 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
     //MARK: - Configuration Methods
     func configureUI() {
         logInButton.accessibilityIdentifier = "showLogInScreenButton"
+        
         addSubview(logoEntranceScreenImageView)
         addSubview(logoEntranceScreenLabel)
         addSubview(signUpOrLogOnLabel)
@@ -59,26 +61,48 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
         addSubview(logInButton)
         
         NSLayoutConstraint.activate([
-            logoEntranceScreenImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50.0),
-            logoEntranceScreenImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoEntranceScreenImageView.heightAnchor.constraint(equalToConstant: 270.0),
-            logoEntranceScreenImageView.widthAnchor.constraint(equalToConstant: 270.0),
+            logoEntranceScreenImageView.topAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.topAnchor,
+                constant: 50.0),
+            logoEntranceScreenImageView.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            logoEntranceScreenImageView.heightAnchor.constraint(
+                equalToConstant: 270.0),
+            logoEntranceScreenImageView.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            logoEntranceScreenLabel.topAnchor.constraint(equalTo: logoEntranceScreenImageView.bottomAnchor, constant: 10.0),
-            logoEntranceScreenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoEntranceScreenLabel.topAnchor.constraint(
+                equalTo: logoEntranceScreenImageView.bottomAnchor,
+                constant: 10.0),
+            logoEntranceScreenLabel.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
             
-            signUpOrLogOnLabel.topAnchor.constraint(equalTo: logoEntranceScreenLabel.bottomAnchor, constant: 100.0),
-            signUpOrLogOnLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            signUpOrLogOnLabel.topAnchor.constraint(
+                equalTo: logoEntranceScreenLabel.bottomAnchor,
+                constant: 100.0),
+            signUpOrLogOnLabel.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
             
-            signUpButton.topAnchor.constraint(equalTo: signUpOrLogOnLabel.bottomAnchor, constant: 30.0),
-            signUpButton.heightAnchor.constraint(equalToConstant: 30.0),
-            signUpButton.widthAnchor.constraint(equalToConstant: 100.0),
-            signUpButton.leftAnchor.constraint(equalTo: centerXAnchor, constant: -115.0),
+            signUpButton.topAnchor.constraint(
+                equalTo: signUpOrLogOnLabel.bottomAnchor,
+                constant: 30.0),
+            signUpButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            signUpButton.widthAnchor.constraint(
+                equalToConstant: 100.0),
+            signUpButton.leftAnchor.constraint(
+                equalTo: centerXAnchor, constant: -115.0),
             
-            logInButton.topAnchor.constraint(equalTo: signUpOrLogOnLabel.bottomAnchor, constant: 30.0),
-            logInButton.heightAnchor.constraint(equalToConstant: 30.0),
-            logInButton.widthAnchor.constraint(equalToConstant: 100.0),
-            logInButton.leftAnchor.constraint(equalTo: centerXAnchor, constant: 15.0),
+            logInButton.topAnchor.constraint(
+                equalTo: signUpOrLogOnLabel.bottomAnchor,
+                constant: 30.0),
+            logInButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            logInButton.widthAnchor.constraint(
+                equalToConstant: 100.0),
+            logInButton.leftAnchor.constraint(
+                equalTo: centerXAnchor,
+                constant: 15.0),
 
         ])
     }

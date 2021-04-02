@@ -8,7 +8,7 @@
 import UIKit
 import os.log
 
-class ProductListScreenViewController: UITableViewController, AnalyticsSendable {
+class ProductListScreenViewController: UITableViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var productListScreenHeaderView: ProductListScreenHeaderView = {
         return ProductListScreenHeaderView()
@@ -61,12 +61,19 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
     }
     
     @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
-        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
+        if isFilledProductsCategoryTextField() {
             loadProductListData()
         } else {
-            self.showAlert(title: "Attention",
-                           message: "You need to fill in the text field to upload the product list")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in the text field to upload the product list")
         }
+    }
+    
+    func isFilledProductsCategoryTextField() -> Bool {
+        if !(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true) {
+            return true
+        } else { return false }
     }
     
     //MARK: - Interaction with Network
@@ -148,18 +155,5 @@ extension ProductListScreenViewController {
     
     @objc func hideKeyboardByTap() {
         productListScreenHeaderView.endEditing(true)
-    }
-}
-
-//MARK: - Alert
-extension ProductListScreenViewController {
-    private func showAlert(title: String? = nil,
-                           message: String? = nil,
-                           handler: ((UIAlertAction) -> ())? = nil,
-                           completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: completion)
     }
 }

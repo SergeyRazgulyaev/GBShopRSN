@@ -45,9 +45,7 @@ extension DeleteFromBasket {
         let deletedProductID: Int
         
         var parameters: Parameters? {
-            return [
-                "deleted_product_id" : deletedProductID
-            ]
+            return ["deleted_product_id" : deletedProductID]
         }
     }
 }

@@ -45,9 +45,7 @@ extension GetBasket {
         let userID: Int
 
         var parameters: Parameters? {
-            return [
-                "user_id" : userID
-            ]
+            return ["user_id" : userID]
         }
     }
 }

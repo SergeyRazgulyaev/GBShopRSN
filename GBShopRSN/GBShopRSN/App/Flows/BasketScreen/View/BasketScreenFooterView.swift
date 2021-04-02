@@ -32,10 +32,14 @@ class BasketScreenFooterView: UIView, UIComponentsMakeable {
         addSubview(basketPayButton)
         
         NSLayoutConstraint.activate([
-        basketPayButton.heightAnchor.constraint(equalToConstant: 30.0),
-        basketPayButton.widthAnchor.constraint(equalToConstant: 200.0),
-        basketPayButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            basketPayButton.centerYAnchor.constraint(equalTo: centerYAnchor)
+            basketPayButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            basketPayButton.widthAnchor.constraint(
+                equalToConstant: 300.0),
+            basketPayButton.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            basketPayButton.centerYAnchor.constraint(
+                equalTo: centerYAnchor)
         ])
     }
 }

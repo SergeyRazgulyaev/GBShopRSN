@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAnalytics
 import os.log
 
-class BasketScreenViewController: UITableViewController, AnalyticsSendable {
+class BasketScreenViewController: UITableViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var basketScreenFooterView: BasketScreenFooterView = {
         return BasketScreenFooterView()
@@ -19,6 +19,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
     private let requestFactory: RequestFactory
     private let user: User
     private var productsInBasketArray: Array = [Product]()
+    private var payAmount = 0
     private let reuseIdentifierTableViewCell = "BasketScreenTableViewCell"
     private let currencyUnit: String = "rub."
     
@@ -63,13 +64,16 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
     @objc func tapPayBasketButton(_ sender: UIButton) {
         if productsInBasketArray.count != 0 {
             payBasket(payAmount: calculatePayAmount())
+        } else {
+            self.showAttantionAlert(
+                viewController: self,
+                message: "There are no purchases in your basket")
         }
     }
     
     func calculatePayAmount() -> Int {
-        var payAmount = 0
         productsInBasketArray.forEach { product in
-            payAmount += product.productPrice
+            payAmount += (product.productPrice * product.quantityInBasket)
         }
         return payAmount
     }
@@ -96,6 +100,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                     amount: getBasket.amount,
                     typeOfGoodsCount: getBasket.countGoods)
                 DispatchQueue.main.async {
+                    self.updatePayBasketButtonText()
                     self.tableView.reloadData()
                 }
             case .failure(let error):
@@ -116,6 +121,20 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                     userID: self.user.userID,
                     payAmount: payAmount,
                     accountBalance: payBasket.accountBalance)
+                DispatchQueue.main.async {
+                    if payBasket.result == 1 {
+                        self.showAttantionAlert(
+                            viewController: self,
+                            message: "You paid for purchases\nin the amount of \(payAmount) rub.\nNow your balance is \(payBasket.accountBalance) rub.")
+                        self.updatePayBasketButtonText()
+                        self.tableView.reloadData()
+                    } else {
+                        self.showAttantionAlert(
+                            viewController: self,
+                            message: "You don't have enough money to pay for items in your basket")
+                    }
+                }
+                self.payAmount = 0
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "pay_basket_failure",
@@ -133,6 +152,10 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 self.sendAnalyticsDeleteFromBasketSuccess(
                     deletedProductID: deleteProductFromBasket.deletedProductID,
                     deletedProductQuantityInBasket: deleteProductFromBasket.deletedProductQuantityInBasket)
+                DispatchQueue.main.async {
+                    self.updatePayBasketButtonText()
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 self.sendAnalyticsFailure(
                     failureName: "delete_from_basket_failure",
@@ -140,6 +163,17 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable {
                 Logger.viewCycle.debug("\(error.localizedDescription)")
             }
         }
+    }
+    
+    func updatePayBasketButtonText() {
+        if productsInBasketArray.count == 0 {
+            basketScreenFooterView.basketPayButton.setTitle("Basket is empty", for: .normal)
+            basketScreenFooterView.basketPayButton.backgroundColor = .lightGray
+        } else {
+            basketScreenFooterView.basketPayButton.setTitle("Pay basket of \(calculatePayAmount()) rub.", for: .normal)
+            basketScreenFooterView.basketPayButton.backgroundColor = .rsnLightGreenColor
+        }
+        self.payAmount = 0
     }
     
     // MARK: - Table view data source

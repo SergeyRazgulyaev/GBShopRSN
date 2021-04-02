@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAnalytics
 import os.log
 
-class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
+class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var userInfoScreenView: UserInfoScreenView = {
         return UserInfoScreenView()
@@ -115,6 +115,11 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                     switch response.result {
                     case .success(let changeUserData):
                         self.sendAnalyticsChangeUserDataSuccess(userID: changeUserData.userID)
+                        DispatchQueue.main.async {
+                            self.showAttantionAlert(
+                                viewController: self,
+                                message: "User info changed")
+                        }
                     case .failure(let error):
                         self.sendAnalyticsFailure(
                             failureName: "change_user_data_failure",
@@ -123,12 +128,14 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
                     }
                 }
             } else {
-                self.showAlert(title: "Attention",
-                               message: "Password and password confirmation do not match")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "Password and password confirmation do not match")
             }
         } else {
-            self.showAlert(title: "Attention",
-                           message: "You need to fill in all the fields for change user info")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in all the fields for change user info")
         }
     }
 }
@@ -142,18 +149,5 @@ extension UserInfoScreenViewController {
     
     @objc func hideKeyboardByTap() {
         userInfoScreenView.scrollView.endEditing(true)
-    }
-}
-
-//MARK: - Alert
-extension UserInfoScreenViewController {
-    private func showAlert(title: String? = nil,
-                           message: String? = nil,
-                           handler: ((UIAlertAction) -> ())? = nil,
-                           completion: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: completion)
     }
 }

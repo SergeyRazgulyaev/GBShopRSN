@@ -83,31 +83,7 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
     @objc func tapSaveUserInfoButton(_ sender: Any?) {
         if isFilledTextFields() {
             if areEqualPasswordAndConfirmationPassword() {
-                let changeData = requestFactory.makeChangeUserDataRequestFactory()
-                changeData.changeUserData(userID: user.userID,
-                                          userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
-                                          userLastName: userInfoScreenView.userLastNameTextField.text ?? defaultUserLastName,
-                                          password: userInfoScreenView.passwordTextField.text ?? defaultPassword,
-                                          email: userInfoScreenView.emailTextField.text ?? defaultEmail,
-                                          gender: userInfoScreenView.genderTextField.text ?? defaultGender,
-                                          creditCard: userInfoScreenView.creditCardTextField.text ?? defaultCreditCard,
-                                          bio: userInfoScreenView.bioTextField.text ?? defaultBio) {
-                    response in
-                    switch response.result {
-                    case .success(let changeUserData):
-                        self.sendAnalyticsChangeUserDataSuccess(userID: changeUserData.userID)
-                        DispatchQueue.main.async {
-                            self.showAttantionAlert(
-                                viewController: self,
-                                message: "User info changed")
-                        }
-                    case .failure(let error):
-                        self.sendAnalyticsFailure(
-                            failureName: "change_user_data_failure",
-                            errorDescription: error.localizedDescription)
-                        Logger.viewCycle.debug("\(error.localizedDescription)")
-                    }
-                }
+                changeUserData()
             } else {
                 self.showAttantionAlert(
                     viewController: self,
@@ -117,24 +93,6 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
             self.showAttantionAlert(
                 viewController: self,
                 message: "You need to fill in all the fields for change user info")
-        }
-    }
-    
-    @objc func tapLogOutButton() {
-        let logOutUser = requestFactory.makeLogOutRequestFactory()
-        logOutUser.logOut(userID: user.userID) { response in
-            switch response.result {
-            case .success(let logOut):
-                self.sendAnalyticsLogOutSuccess(userID: logOut.loggedOutUserID)
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            case .failure(let error):
-                self.sendAnalyticsFailure(
-                    failureName: "log_out_failure",
-                    errorDescription: error.localizedDescription)
-                Logger.viewCycle.debug("\(error.localizedDescription)")
-            }
         }
     }
     
@@ -154,6 +112,57 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
             return true
         } else {
             return false
+        }
+    }
+    
+    @objc func tapLogOutButton() {
+        logOutUser()
+    }
+    
+    //MARK: - Interaction with Network
+    func changeUserData() {
+        let changeData = requestFactory.makeChangeUserDataRequestFactory()
+        changeData.changeUserData(userID: user.userID,
+                                  userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
+                                  userLastName: userInfoScreenView.userLastNameTextField.text ?? defaultUserLastName,
+                                  password: userInfoScreenView.passwordTextField.text ?? defaultPassword,
+                                  email: userInfoScreenView.emailTextField.text ?? defaultEmail,
+                                  gender: userInfoScreenView.genderTextField.text ?? defaultGender,
+                                  creditCard: userInfoScreenView.creditCardTextField.text ?? defaultCreditCard,
+                                  bio: userInfoScreenView.bioTextField.text ?? defaultBio) {
+            response in
+            switch response.result {
+            case .success(let changeUserData):
+                self.sendAnalyticsChangeUserDataSuccess(userID: changeUserData.userID)
+                DispatchQueue.main.async {
+                    self.showAttantionAlert(
+                        viewController: self,
+                        message: "User info changed")
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "change_user_data_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func logOutUser() {
+        let logOutUser = requestFactory.makeLogOutRequestFactory()
+        logOutUser.logOut(userID: user.userID) { response in
+            switch response.result {
+            case .success(let logOut):
+                self.sendAnalyticsLogOutSuccess(userID: logOut.loggedOutUserID)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "log_out_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
         }
     }
 }

@@ -12,7 +12,9 @@ class ErrorParser: AbstractErrorParser {
         return result
     }
     
-    func parse(response: HTTPURLResponse?, data: Data?, error: Error?) -> Error? {
+    func parse(response: HTTPURLResponse?,
+               data: Data?,
+               error: Error?) -> Error? {
         return error
     }
 }

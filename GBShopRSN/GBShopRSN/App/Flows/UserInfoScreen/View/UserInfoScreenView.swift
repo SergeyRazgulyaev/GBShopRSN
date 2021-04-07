@@ -25,7 +25,7 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var changeUserInfoLabel: UILabel = {
         configureLabel(text: "Change user info if needed:",
-                       textColor: .black,
+                       textColor: .lightGray,
                        font: .boldSystemFont(ofSize: 20.0))
     }()
     
@@ -71,10 +71,11 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
                            borderStyle: .roundedRect)
     }()
     
-    private(set) lazy var saveUserInfoButton: UIButton = {
-        configureButton(title: "Save user info",
-                        backgroundColor: .rsnPinkColor,
-                        cornerRadius: 12.0)
+    private(set) lazy var changeAndSaveUserInfoButton: UIButton = {
+        configureButton(title: "Change and Save user info",
+                        font: .boldSystemFont(ofSize: 17),
+                        backgroundColor: .rsnLightGreenColor,
+                        cornerRadius: 8.0)
     }()
     
     // MARK: - Init
@@ -100,7 +101,7 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
         scrollView.addSubview(bioTextField)
         scrollView.addSubview(passwordTextField)
         scrollView.addSubview(repeatedPasswordTextField)
-        scrollView.addSubview(saveUserInfoButton)
+        scrollView.addSubview(changeAndSaveUserInfoButton)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -119,7 +120,7 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
             changeUserInfoLabel.topAnchor.constraint(equalTo: logoUserInfoScreenLabel.bottomAnchor, constant: 10.0),
             changeUserInfoLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            userNameTextField.topAnchor.constraint(equalTo: changeUserInfoLabel.bottomAnchor, constant: 10.0),
+            userNameTextField.topAnchor.constraint(equalTo: changeUserInfoLabel.bottomAnchor, constant: 15.0),
             userNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
             userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
@@ -154,10 +155,10 @@ class UserInfoScreenView: UIView, UIComponentsMakeable {
             repeatedPasswordTextField.heightAnchor.constraint(equalToConstant: 25.0),
             repeatedPasswordTextField.widthAnchor.constraint(equalToConstant: 270.0),
             
-            saveUserInfoButton.topAnchor.constraint(equalTo: repeatedPasswordTextField.bottomAnchor, constant: 20.0),
-            saveUserInfoButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            saveUserInfoButton.heightAnchor.constraint(equalToConstant: 40.0),
-            saveUserInfoButton.widthAnchor.constraint(equalToConstant: 150.0)
+            changeAndSaveUserInfoButton.topAnchor.constraint(equalTo: repeatedPasswordTextField.bottomAnchor, constant: 20.0),
+            changeAndSaveUserInfoButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            changeAndSaveUserInfoButton.heightAnchor.constraint(equalToConstant: 30.0),
+            changeAndSaveUserInfoButton.widthAnchor.constraint(equalToConstant: 270.0)
         ])
     }
 }

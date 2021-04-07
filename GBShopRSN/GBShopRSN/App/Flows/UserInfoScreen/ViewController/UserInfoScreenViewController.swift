@@ -69,7 +69,7 @@ class UserInfoScreenViewController: UIViewController {
     }
     
     func configureSaveUserInfoButton() {
-        userInfoScreenView.saveUserInfoButton.addTarget(self, action: #selector(tapSaveUserInfoButton(_:)), for: .touchUpInside)
+        userInfoScreenView.changeAndSaveUserInfoButton.addTarget(self, action: #selector(tapSaveUserInfoButton(_:)), for: .touchUpInside)
     }
     
     @objc func tapSaveUserInfoButton(_ sender: Any?) {

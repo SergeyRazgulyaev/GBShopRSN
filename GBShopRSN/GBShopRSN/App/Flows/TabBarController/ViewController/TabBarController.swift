@@ -36,7 +36,18 @@ class TabBarController: UITabBarController {
     func createViewControllers() -> [UIViewController] {
         var viewControllers = [UIViewController]()
         
-        //1. UserInfoScreenViewController
+        //1. ProductListScreen
+        let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory)
+        productListScreenViewController.tabBarItem = UITabBarItem(title: "Product", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
+        
+        let productListNavigationController = UINavigationController(rootViewController: productListScreenViewController)
+        productListNavigationController.navigationBar.tintColor = .rsnPurpleColor
+        productListNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
+        productListNavigationController.navigationBar.prefersLargeTitles = false;
+        
+        viewControllers.append(productListNavigationController)
+        
+        //2. UserInfoScreen
         let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
         userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
         
@@ -46,17 +57,6 @@ class TabBarController: UITabBarController {
         userInfoNavigationController.navigationBar.prefersLargeTitles = false;
         
         viewControllers.append(userInfoNavigationController)
-        
-        //2. ProductListScreenViewController
-        let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory)
-        productListScreenViewController.tabBarItem = UITabBarItem(title: "Product list", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
-        
-        let productListNavigationController = UINavigationController(rootViewController: productListScreenViewController)
-        productListNavigationController.navigationBar.tintColor = .rsnPurpleColor
-        productListNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
-        productListNavigationController.navigationBar.prefersLargeTitles = false;
-        
-        viewControllers.append(productListNavigationController)
         
         return viewControllers
     }

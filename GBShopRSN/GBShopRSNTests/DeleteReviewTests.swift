@@ -23,7 +23,7 @@ class DeleteReviewTests: XCTestCase {
         let deleteReview = DeleteReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let deletedReview = expectation(description: "deleted review")
-        deleteReview.deleteReview(idComment: 123) {response in
+        deleteReview.deleteReview(commentID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -47,7 +47,7 @@ class DeleteReviewTests: XCTestCase {
         let deleteReview = DeleteReview(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedDeleteReview = expectation(description: "failed delete review")
-        deleteReview.deleteReview(idComment: 123) {response in
+        deleteReview.deleteReview(commentID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

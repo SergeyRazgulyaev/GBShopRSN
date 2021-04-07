@@ -26,6 +26,9 @@
 		C539A65825E948AC00865D6E /* AddReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539A65725E948AC00865D6E /* AddReviewTests.swift */; };
 		C539A66025E94BFB00865D6E /* DeleteReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C539A65F25E94BFB00865D6E /* DeleteReviewTests.swift */; };
 		C57ED26A2603D25B001C6EFA /* UIComponentsMakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */; };
+		C57ED2862607FF02001C6EFA /* ProductScreenHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57ED2852607FF02001C6EFA /* ProductScreenHeaderView.swift */; };
+		C57ED28E2607FF2E001C6EFA /* ProductScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57ED28D2607FF2E001C6EFA /* ProductScreenTableViewCell.swift */; };
+		C57ED2932607FF48001C6EFA /* ProductScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57ED2922607FF48001C6EFA /* ProductScreenViewController.swift */; };
 		C58A506725DD714300D572F1 /* LogInRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506625DD714300D572F1 /* LogInRequestFactory.swift */; };
 		C58A506C25DD71A100D572F1 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A506B25DD71A100D572F1 /* LogIn.swift */; };
 		C58A507125DD733500D572F1 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58A507025DD733500D572F1 /* RequestFactory.swift */; };
@@ -137,6 +140,9 @@
 		C539A65F25E94BFB00865D6E /* DeleteReviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteReviewTests.swift; sourceTree = "<group>"; };
 		C539ECB7B02C488EA8BC03CE /* Pods-GBShopRSNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBShopRSNTests.release.xcconfig"; path = "Target Support Files/Pods-GBShopRSNTests/Pods-GBShopRSNTests.release.xcconfig"; sourceTree = "<group>"; };
 		C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComponentsMakeable.swift; sourceTree = "<group>"; };
+		C57ED2852607FF02001C6EFA /* ProductScreenHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductScreenHeaderView.swift; sourceTree = "<group>"; };
+		C57ED28D2607FF2E001C6EFA /* ProductScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductScreenTableViewCell.swift; sourceTree = "<group>"; };
+		C57ED2922607FF48001C6EFA /* ProductScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductScreenViewController.swift; sourceTree = "<group>"; };
 		C58A506625DD714300D572F1 /* LogInRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInRequestFactory.swift; sourceTree = "<group>"; };
 		C58A506B25DD71A100D572F1 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		C58A507025DD733500D572F1 /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
@@ -308,12 +314,46 @@
 			path = GetReviews;
 			sourceTree = "<group>";
 		};
-		C57ED2682603D193001C6EFA /* UIConfigure */ = {
+		C57ED2682603D193001C6EFA /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				C57ED2692603D25B001C6EFA /* UIComponentsMakeable.swift */,
 			);
-			path = UIConfigure;
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		C57ED2812607FE9D001C6EFA /* ProductScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C57ED2822607FEAC001C6EFA /* View */,
+				C57ED2842607FEC3001C6EFA /* TableViewCell */,
+				C57ED2832607FEB3001C6EFA /* ViewController */,
+			);
+			path = ProductScreen;
+			sourceTree = "<group>";
+		};
+		C57ED2822607FEAC001C6EFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C57ED2852607FF02001C6EFA /* ProductScreenHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C57ED2832607FEB3001C6EFA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C57ED2922607FF48001C6EFA /* ProductScreenViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C57ED2842607FEC3001C6EFA /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C57ED28D2607FF2E001C6EFA /* ProductScreenTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		C58A508725DD84D500D572F1 /* LogIn */ = {
@@ -363,7 +403,7 @@
 		C58D8F2A25FA89F500C1BC22 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
-				C57ED2682603D193001C6EFA /* UIConfigure */,
+				C57ED2682603D193001C6EFA /* UIComponents */,
 				C58D8F3125FA990C00C1BC22 /* String */,
 				C58D8F2B25FA89FE00C1BC22 /* UIColor */,
 			);
@@ -421,13 +461,13 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
-		C5B209C525F2524D00535A64 /* UserInfoScreenViewController */ = {
+		C5B209C525F2524D00535A64 /* UserInfoScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209FB25F2915400535A64 /* View */,
 				C5B209F725F2912D00535A64 /* ViewController */,
 			);
-			path = UserInfoScreenViewController;
+			path = UserInfoScreen;
 			sourceTree = "<group>";
 		};
 		C5B209CE25F252BD00535A64 /* EntranceScreen */ = {
@@ -439,22 +479,22 @@
 			path = EntranceScreen;
 			sourceTree = "<group>";
 		};
-		C5B209CF25F2534000535A64 /* SignUpScreenViewController */ = {
+		C5B209CF25F2534000535A64 /* SignUpScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209F925F2914900535A64 /* View */,
 				C5B209F425F2912500535A64 /* ViewController */,
 			);
-			path = SignUpScreenViewController;
+			path = SignUpScreen;
 			sourceTree = "<group>";
 		};
-		C5B209D025F2534900535A64 /* LogInScreenViewController */ = {
+		C5B209D025F2534900535A64 /* LogInScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C5B209FA25F2914C00535A64 /* View */,
 				C5B209F525F2912700535A64 /* ViewController */,
 			);
-			path = LogInScreenViewController;
+			path = LogInScreen;
 			sourceTree = "<group>";
 		};
 		C5B209F325F2911F00535A64 /* ViewController */ = {
@@ -691,11 +731,12 @@
 			isa = PBXGroup;
 			children = (
 				C5B209CE25F252BD00535A64 /* EntranceScreen */,
-				C5B209CF25F2534000535A64 /* SignUpScreenViewController */,
-				C5B209D025F2534900535A64 /* LogInScreenViewController */,
-				C5B209A725F2420D00535A64 /* TabBarController */,
-				C5B209C525F2524D00535A64 /* UserInfoScreenViewController */,
+				C5B209CF25F2534000535A64 /* SignUpScreen */,
+				C5B209D025F2534900535A64 /* LogInScreen */,
+				C5B209C525F2524D00535A64 /* UserInfoScreen */,
 				C5B987D62600BE1C0077CD08 /* ProductListScreen */,
+				C57ED2812607FE9D001C6EFA /* ProductScreen */,
+				C5B209A725F2420D00535A64 /* TabBarController */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1031,6 +1072,7 @@
 				C58A50B225DDCD2800D572F1 /* LogOut.swift in Sources */,
 				C58D8F0F25F80E1C00C1BC22 /* LogInScreenView.swift in Sources */,
 				C5A460CF25DD6A9E0089E71C /* ErrorParser.swift in Sources */,
+				C57ED2932607FF48001C6EFA /* ProductScreenViewController.swift in Sources */,
 				C5FFAEF925EE7D980004BC2B /* GetBasketRequestFactory.swift in Sources */,
 				C5B987E32600BF730077CD08 /* ProductListScreenHeaderView.swift in Sources */,
 				C5B987E82600BF8D0077CD08 /* ProductListScreenTableViewCell.swift in Sources */,
@@ -1068,6 +1110,7 @@
 				C539A62725E8FE4500865D6E /* DeleteReviewRequestFactory.swift in Sources */,
 				C5FFAEFE25EE7DEA0004BC2B /* GetBasket.swift in Sources */,
 				C5DE21D725E15DF0002B5E7F /* GetProductList.swift in Sources */,
+				C57ED2862607FF02001C6EFA /* ProductScreenHeaderView.swift in Sources */,
 				C58A509225DD869700D572F1 /* ChangeUserDataRequestFactory.swift in Sources */,
 				C5FFAED425ED0D640004BC2B /* AddToBasketRequestFactory.swift in Sources */,
 				C539A61525E8FB4D00865D6E /* AddReviewRequestFactory.swift in Sources */,
@@ -1077,6 +1120,7 @@
 				C5A460E725DD6FD40089E71C /* LogInResult.swift in Sources */,
 				C58A506C25DD71A100D572F1 /* LogIn.swift in Sources */,
 				C5A460EC25DD6FE40089E71C /* User.swift in Sources */,
+				C57ED28E2607FF2E001C6EFA /* ProductScreenTableViewCell.swift in Sources */,
 				C58D8F2D25FA8A3100C1BC22 /* UIColorExtension.swift in Sources */,
 				C58A50A425DDC4B300D572F1 /* ChangeUserData.swift in Sources */,
 				C5FFAEE725EE77A40004BC2B /* DeleteFromBasketRequestFactory.swift in Sources */,

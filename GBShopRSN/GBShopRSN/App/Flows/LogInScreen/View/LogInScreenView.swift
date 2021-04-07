@@ -43,14 +43,16 @@ class LogInScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var sendDataForLogInButton: UIButton = {
         configureButton(title: "Log in",
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
         configureButton(title: "Сancel and return",
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .lightGray,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     // MARK: - Init
@@ -103,12 +105,12 @@ class LogInScreenView: UIView, UIComponentsMakeable {
             
             sendDataForLogInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20.0),
             sendDataForLogInButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sendDataForLogInButton.heightAnchor.constraint(equalToConstant: 40.0),
+            sendDataForLogInButton.heightAnchor.constraint(equalToConstant: 30.0),
             sendDataForLogInButton.widthAnchor.constraint(equalToConstant: 100.0),
             
             cancelAndReturnButton.topAnchor.constraint(equalTo: sendDataForLogInButton.bottomAnchor, constant: 20.0),
             cancelAndReturnButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cancelAndReturnButton.heightAnchor.constraint(equalToConstant: 40.0),
+            cancelAndReturnButton.heightAnchor.constraint(equalToConstant: 30.0),
             cancelAndReturnButton.widthAnchor.constraint(equalToConstant: 180.0)
         ])
     }

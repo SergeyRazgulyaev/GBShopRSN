@@ -9,6 +9,6 @@ import Foundation
 import Alamofire
 
 protocol DeleteReviewRequestFactory {
-    func deleteReview(idComment: Int,
+    func deleteReview(commentID: Int,
                       completionHandler: @escaping (AFDataResponse<DeleteReviewResult>) -> Void)
 }

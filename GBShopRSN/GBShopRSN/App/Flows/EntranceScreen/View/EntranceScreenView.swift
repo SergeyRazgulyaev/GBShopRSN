@@ -27,14 +27,16 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
     
     private(set) lazy var signUpButton: UIButton = {
         configureButton(title: "Sign up",
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     private(set) lazy var logInButton: UIButton = {
         configureButton(title: "Log in",
+                        font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
-                        cornerRadius: 12.0)
+                        cornerRadius: 8.0)
     }()
     
     // MARK: - Init
@@ -68,12 +70,12 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
             signUpOrLogOnLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             signUpButton.topAnchor.constraint(equalTo: signUpOrLogOnLabel.bottomAnchor, constant: 30.0),
-            signUpButton.heightAnchor.constraint(equalToConstant: 40.0),
+            signUpButton.heightAnchor.constraint(equalToConstant: 30.0),
             signUpButton.widthAnchor.constraint(equalToConstant: 100.0),
             signUpButton.leftAnchor.constraint(equalTo: centerXAnchor, constant: -115.0),
             
             logInButton.topAnchor.constraint(equalTo: signUpOrLogOnLabel.bottomAnchor, constant: 30.0),
-            logInButton.heightAnchor.constraint(equalToConstant: 40.0),
+            logInButton.heightAnchor.constraint(equalToConstant: 30.0),
             logInButton.widthAnchor.constraint(equalToConstant: 100.0),
             logInButton.leftAnchor.constraint(equalTo: centerXAnchor, constant: 15.0),
 

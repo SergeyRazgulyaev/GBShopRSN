@@ -8,13 +8,19 @@
 import Foundation
 
 struct Review: Codable {
-    let idComment: Int
+    let commentID: Int
+    let productID: Int
     let userID: Int
+    let userName: String
+    let userLastname: String
     let text: String
     
     enum CodingKeys: String, CodingKey {
-        case idComment = "id_comment"
+        case commentID = "comment_id"
+        case productID = "product_id"
         case userID = "user_id"
+        case userName = "user_name"
+        case userLastname = "user_lastname"
         case text = "text"
     }
 }

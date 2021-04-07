@@ -10,89 +10,89 @@ import UIKit
 class ProductScreenHeaderView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var barcodeImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "barcode")!,
+        makeSystemImageView(systemImage: UIImage(systemName: "barcode")!,
                                  tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var productForBasketCounterTextField: UITextField = {
-        configureTextField(placeholder: "",
+        makeTextField(placeholder: "",
                            font: .systemFont(ofSize: 14),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var decreaseProductForBasketCounterButton: UIButton = {
-        configureButton(title: "",
+        makeButton(title: "",
                         font: .boldSystemFont(ofSize: 12),
                         backgroundColor: .white,
                         cornerRadius: 0.0)
     }()
     
     private(set) lazy var increaseProductForBasketCounterButton: UIButton = {
-        configureButton(title: "",
+        makeButton(title: "",
                         font: .boldSystemFont(ofSize: 12),
                         backgroundColor: .white,
                         cornerRadius: 0.0)
     }()
     
     private(set) lazy var updateBasketButton: UIButton = {
-        configureButton(title: "Update basket",
+        makeButton(title: "Update basket",
                         font: .boldSystemFont(ofSize: 12),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var deleteFromBasketButton: UIButton = {
-        configureButton(title: "Delete from basket",
+        makeButton(title: "Delete from basket",
                         font: .boldSystemFont(ofSize: 12),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var addReviewButton: UIButton = {
-        configureButton(title: "Add review",
+        makeButton(title: "Add review",
                         font: .boldSystemFont(ofSize: 12),
                         backgroundColor: .lightGray,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var productIDLabel: UILabel = {
-        configureLabel(text: "Product ID: ",
+        makeLabel(text: "Product ID: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productNameLabel: UILabel = {
-        configureLabel(text: "Name: ",
+        makeLabel(text: "Name: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productPriceLabel: UILabel = {
-        configureLabel(text: "Price: ",
+        makeLabel(text: "Price: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var quantityInBasketLabel: UILabel = {
-        configureLabel(text: "Quantity in basket: ",
+        makeLabel(text: "Quantity in basket: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var productDescriptionLabel: UILabel = {
-        configureLabel(text: "Description: ",
+        makeLabel(text: "Description: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var userReviewTextField: UITextField = {
-        configureTextField(placeholder: "Enter your review",
+        makeTextField(placeholder: "Enter your review",
                            font: .systemFont(ofSize: 14),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var reviewsTitleLabel: UILabel = {
-        configureLabel(text: "No reviews",
+        makeLabel(text: "No reviews",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()

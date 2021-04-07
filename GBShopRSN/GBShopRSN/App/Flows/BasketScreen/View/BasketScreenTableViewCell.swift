@@ -10,42 +10,42 @@ import UIKit
 class BasketScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var basketProductBarcodeImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "barcode")!,
+        makeSystemImageView(systemImage: UIImage(systemName: "barcode")!,
                                  tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var basketProductIDLabel: UILabel = {
-        configureLabel(text: "Product ID: ",
+        makeLabel(text: "Product ID: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var basketProductNameLabel: UILabel = {
-        configureLabel(text: "Name: ",
+        makeLabel(text: "Name: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var basketProductPriceLabel: UILabel = {
-        configureLabel(text: "Price: ",
+        makeLabel(text: "Price: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var basketProductQuantityInBasketLabel: UILabel = {
-        configureLabel(text: "Quantity in basket: ",
+        makeLabel(text: "Quantity in basket: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var basketProductDescriptionLabel: UILabel = {
-        configureLabel(text: "Description: ",
+        makeLabel(text: "Description: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var basketDeleteButton: UIButton = {
-        configureButton(title: "Delete from basket",
+        makeButton(title: "Delete from basket",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 8.0)

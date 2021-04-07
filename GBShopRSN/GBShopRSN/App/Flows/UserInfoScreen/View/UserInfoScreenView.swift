@@ -10,75 +10,75 @@ import UIKit
 class UserInfoScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 0.0)
+        makeScrollView()
     }()
     
     private(set) lazy var logoUserInfoScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "person.circle")!, tintColor: .rsnPurpleColor)
+        makeSystemImageView(systemImage: UIImage(systemName: "person.circle")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoUserInfoScreenLabel: UILabel = {
-        configureLabel(text: "User info",
+        makeLabel(text: "User info",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var changeUserInfoLabel: UILabel = {
-        configureLabel(text: "Change user info if needed:",
+        makeLabel(text: "Change user info if needed:",
                        textColor: .lightGray,
                        font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var userNameTextField: UITextField = {
-        configureTextField(placeholder: "User name",
+        makeTextField(placeholder: "User name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var userLastNameTextField: UITextField = {
-        configureTextField(placeholder: "User last name",
+        makeTextField(placeholder: "User last name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var emailTextField: UITextField = {
-        configureTextField(placeholder: "E-mail",
+        makeTextField(placeholder: "E-mail",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var genderTextField: UITextField = {
-        configureTextField(placeholder: "Your gender (m/w)",
+        makeTextField(placeholder: "Your gender (m/w)",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var creditCardTextField: UITextField = {
-        configureTextField(placeholder: "Credit card number",
+        makeTextField(placeholder: "Credit card number",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var bioTextField: UITextField = {
-        configureTextField(placeholder: "Your bio",
+        makeTextField(placeholder: "Your bio",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        configureTextField(placeholder: "New password",
+        makeTextField(placeholder: "New password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var repeatedPasswordTextField: UITextField = {
-        configureTextField(placeholder: "Repeat new password",
+        makeTextField(placeholder: "Repeat new password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var changeAndSaveUserInfoButton: UIButton = {
-        configureButton(title: "Change and Save user info",
+        makeButton(title: "Change and Save user info",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)

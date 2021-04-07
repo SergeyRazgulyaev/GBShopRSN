@@ -17,14 +17,14 @@ class SignUpScreenViewController: UIViewController, AnalyticsSendable, Alertable
     
     // MARK: - Properties
     private let requestFactory: RequestFactory
-    private let defaultUserID = 787
-    private let defaultUserLogin = "SergeyRazgulyaev"
-    private let defaultUserName = "Sergey"
-    private let defaultUserLastName = "Razgulyaev"
-    private let defaultUserEmail = "razgulyaev.sergey@gmail.com"
-    private let defaultUserGender = "m"
-    private let defaultUserCreditCard = "9872389-2424-234224-234"
-    private let defaultUserBio = "I'm from Ukhta"
+    private let defaultUserID = 0
+    private let defaultUserLogin = ""
+    private let defaultUserName = ""
+    private let defaultUserLastName = ""
+    private let defaultUserEmail = ""
+    private let defaultUserGender = ""
+    private let defaultUserCreditCard = ""
+    private let defaultUserBio = ""
     private let defaultUserPassword = ""
     
     // MARK: - Init

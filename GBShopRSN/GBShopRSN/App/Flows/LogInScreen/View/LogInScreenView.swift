@@ -10,47 +10,47 @@ import UIKit
 class LogInScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 0.0)
+        makeScrollView()
     }()
     
     private(set) lazy var logoLogInScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "network")!,
+        makeSystemImageView(systemImage: UIImage(systemName: "network")!,
                                  tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoLogInScreenLabel: UILabel = {
-        configureLabel(text: "Let's log in",
+        makeLabel(text: "Let's log in",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var enterDataForLogInLabel: UILabel = {
-        configureLabel(text: "Enter data for log in:",
+        makeLabel(text: "Enter data for log in:",
                        textColor: .white,
                        font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var userLoginTextField: UITextField = {
-        configureTextField(placeholder: "User login",
+        makeTextField(placeholder: "User login",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        configureTextField(placeholder: "Password",
+        makeTextField(placeholder: "Password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var sendDataForLogInButton: UIButton = {
-        configureButton(title: "Log in",
+        makeButton(title: "Log in",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
-        configureButton(title: "Сancel and return",
+        makeButton(title: "Сancel and return",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .lightGray,
                         cornerRadius: 8.0)

@@ -10,19 +10,19 @@ import UIKit
 class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var reviewIDCommentLabel: UILabel = {
-        configureLabel(text: "Review ",
+        makeLabel(text: "Review ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var reviewUserNameAndLastnameLabel: UILabel = {
-        configureLabel(text: "User: ",
+        makeLabel(text: "User: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 14.0))
     }()
     
     private(set) lazy var reviewTextLabel: UILabel = {
-        configureLabel(text: "",
+        makeLabel(text: "",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()

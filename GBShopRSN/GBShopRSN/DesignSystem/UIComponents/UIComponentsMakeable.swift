@@ -8,37 +8,37 @@
 import UIKit
 
 protocol UIComponentsMakeable: UIView {
-    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView
+    func makeScrollView() -> UIScrollView
     
-    func configureSystemImageView(systemImage: UIImage,
+    func makeSystemImageView(systemImage: UIImage,
                                   tintColor: UIColor) -> UIImageView
     
-    func configureLabel(text: String,
+    func makeLabel(text: String,
                         textColor: UIColor,
                         font: UIFont) -> UILabel
     
-    func configureTextField(placeholder: String,
+    func makeTextField(placeholder: String,
                             font: UIFont,
                             borderStyle: UITextField.BorderStyle) -> UITextField
     
-    func configureButton(title: String,
+    func makeButton(title: String,
                          font: UIFont,
                          backgroundColor: UIColor,
                          cornerRadius: CGFloat) -> UIButton
 }
 
 extension UIComponentsMakeable {
-    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView {
+    func makeScrollView() -> UIScrollView {
         let screensize: CGRect = UIScreen.main.bounds
         let screenWidth = screensize.width
         let screenHeight = screensize.height
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + increaseInScreenHeight)
+        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight)
         return scrollView
     }
     
-    func configureSystemImageView(systemImage: UIImage,
+    func makeSystemImageView(systemImage: UIImage,
                                   tintColor: UIColor) -> UIImageView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ extension UIComponentsMakeable {
         return imageView
     }
     
-    func configureLabel(text: String,
+    func makeLabel(text: String,
                         textColor: UIColor,
                         font: UIFont) -> UILabel {
         let label = UILabel()
@@ -59,7 +59,7 @@ extension UIComponentsMakeable {
         return label
     }
     
-    func configureTextField(placeholder: String,
+    func makeTextField(placeholder: String,
                             font: UIFont,
                             borderStyle: UITextField.BorderStyle) -> UITextField {
         let textField = UITextField()
@@ -73,7 +73,7 @@ extension UIComponentsMakeable {
         return textField
     }
     
-    func configureButton(title: String,
+    func makeButton(title: String,
                          font: UIFont,
                          backgroundColor: UIColor,
                          cornerRadius: CGFloat) -> UIButton {

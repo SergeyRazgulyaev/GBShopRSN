@@ -18,12 +18,12 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
     
     // MARK: - Properties
     private let requestFactory: RequestFactory
-    private let defaultUserName = "Sergey"
-    private let defaultUserLastName = "Razgulyaev"
-    private let defaultEmail = "razgulyaev.sergey@gmail.com"
-    private let defaultGender = "m"
-    private let defaultCreditCard = "9872389-2424-234224-234"
-    private let defaultBio = "This is good! I think I will switch to another language"
+    private let defaultUserName = ""
+    private let defaultUserLastName = ""
+    private let defaultEmail = ""
+    private let defaultGender = ""
+    private let defaultCreditCard = ""
+    private let defaultBio = ""
     private let defaultPassword = ""
     private let user: User
     

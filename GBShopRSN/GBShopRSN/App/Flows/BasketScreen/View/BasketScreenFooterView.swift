@@ -10,7 +10,7 @@ import UIKit
 class BasketScreenFooterView: UIView, UIComponentsMakeable {
     // MARK: - UI components    
     private(set) lazy var basketPayButton: UIButton = {
-        configureButton(title: "Pay basket",
+        makeButton(title: "Pay basket",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)

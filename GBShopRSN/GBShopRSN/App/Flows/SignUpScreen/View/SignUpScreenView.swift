@@ -10,83 +10,83 @@ import UIKit
 class SignUpScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 0)
+        makeScrollView()
     }()
     
     private(set) lazy var logoSignUpScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "figure.wave")!,
+        makeSystemImageView(systemImage: UIImage(systemName: "figure.wave")!,
                                  tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoSignUpScreenLabel: UILabel = {
-        configureLabel(text: "Let's sign up",
+        makeLabel(text: "Let's sign up",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var userLoginTextField: UITextField = {
-        configureTextField(placeholder: "User login",
+        makeTextField(placeholder: "User login",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var userNameTextField: UITextField = {
-        configureTextField(placeholder: "User name",
+        makeTextField(placeholder: "User name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var userLastNameTextField: UITextField = {
-        configureTextField(placeholder: "User last name",
+        makeTextField(placeholder: "User last name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var emailTextField: UITextField = {
-        configureTextField(placeholder: "E-mail",
+        makeTextField(placeholder: "E-mail",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var genderTextField: UITextField = {
-        configureTextField(placeholder: "Your gender (m/w)",
+        makeTextField(placeholder: "Your gender (m/w)",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var creditCardTextField: UITextField = {
-        configureTextField(placeholder: "Credit card number",
+        makeTextField(placeholder: "Credit card number",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var bioTextField: UITextField = {
-        configureTextField(placeholder: "Your bio",
+        makeTextField(placeholder: "Your bio",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        configureTextField(placeholder: "Сreate and enter a password",
+        makeTextField(placeholder: "Сreate and enter a password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var repeatedPasswordTextField: UITextField = {
-        configureTextField(placeholder: "Repeat password",
+        makeTextField(placeholder: "Repeat password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var sendDataForSignUpButton: UIButton = {
-        configureButton(title: "Sign up",
+        makeButton(title: "Sign up",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
-        configureButton(title: "Сancel and return",
+        makeButton(title: "Сancel and return",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .lightGray,
                         cornerRadius: 8.0)

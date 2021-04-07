@@ -10,17 +10,17 @@ import UIKit
 class ProductListScreenHeaderView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var selectProductsCategoryImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "cube.box.fill")!, tintColor: .rsnPurpleColor)
+        makeSystemImageView(systemImage: UIImage(systemName: "cube.box.fill")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var selectProductsCategoryTextField: UITextField = {
-        configureTextField(placeholder: "Select products category",
+        makeTextField(placeholder: "Select products category",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var selectProductsCategoryButton: UIButton = {
-        configureButton(title: "Show",
+        makeButton(title: "Show",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)

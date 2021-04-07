@@ -16,7 +16,7 @@ class LogInScreenViewController: UIViewController, AnalyticsSendable, Alertable 
     }()
     
     // MARK: - Properties
-    private let defaultUserLogInName = "SergeyRazgulyaev"
+    private let defaultUserLogInName = ""
     private let defaultPassword = ""
     private let requestFactory: RequestFactory
     

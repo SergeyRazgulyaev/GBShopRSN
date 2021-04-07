@@ -10,31 +10,31 @@ import UIKit
 class EntranceScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var logoEntranceScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "sparkles")!,
+        makeSystemImageView(systemImage: UIImage(systemName: "sparkles")!,
                                  tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoEntranceScreenLabel: UILabel = {
-        configureLabel(text: "GBShopRSN",
+        makeLabel(text: "GBShopRSN",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
     private(set) lazy var signUpOrLogOnLabel: UILabel = {
-        configureLabel(text: "Select sign up or log in",
+        makeLabel(text: "Select sign up or log in",
                        textColor: .white,
                        font: .boldSystemFont(ofSize: 20.0))
     }()
     
     private(set) lazy var signUpButton: UIButton = {
-        configureButton(title: "Sign up",
+        makeButton(title: "Sign up",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var logInButton: UIButton = {
-        configureButton(title: "Log in",
+        makeButton(title: "Log in",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)

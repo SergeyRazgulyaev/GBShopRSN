@@ -99,11 +99,7 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable,
         
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if productsArray.count == 0 {
-            return 0
-        } else {
-            return productsArray.count
-        }
+        return productsArray.count
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -125,24 +121,20 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable,
     func configureTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierTableViewCell, for: indexPath) as? ProductListScreenTableViewCell
         guard let cell = tableViewCell else { return UITableViewCell() }
-        if productsArray.count != 0 {
-            cell.productIDLabel.text = "Product ID: \(productsArray[indexPath.row].productID)"
-            cell.productNameLabel.text = "Name: \(productsArray[indexPath.row].productName)"
-            cell.productPriceLabel.text = "Price: \(productsArray[indexPath.row].productPrice) \(currencyUnit)"
-            cell.productQuantityInBasketLabel.text = "Quantity in basket: \(productsArray[indexPath.row].quantityInBasket)"
-            cell.productDescriptionLabel.text = "Description: \(productsArray[indexPath.row].productDescription)"
-        }
+        cell.productIDLabel.text = "Product ID: \(productsArray[indexPath.row].productID)"
+        cell.productNameLabel.text = "Name: \(productsArray[indexPath.row].productName)"
+        cell.productPriceLabel.text = "Price: \(productsArray[indexPath.row].productPrice) \(currencyUnit)"
+        cell.productQuantityInBasketLabel.text = "Quantity in basket: \(productsArray[indexPath.row].quantityInBasket)"
+        cell.productDescriptionLabel.text = "Description: \(productsArray[indexPath.row].productDescription)"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if productsArray.count != 0 {
-            let productScreenViewController = ProductScreenViewController(
-                requestFactory: requestFactory,
-                productID: productsArray[indexPath.row].productID,
-                user: user)
-            navigationController?.pushViewController(productScreenViewController, animated: true)
-        }
+        let productScreenViewController = ProductScreenViewController(
+            requestFactory: requestFactory,
+            productID: productsArray[indexPath.row].productID,
+            user: user)
+        navigationController?.pushViewController(productScreenViewController, animated: true)
     }
 }
 

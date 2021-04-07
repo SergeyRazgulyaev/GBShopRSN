@@ -178,11 +178,7 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable, Aler
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if productsInBasketArray.count == 0 {
-            return 0
-        } else {
-            return productsInBasketArray.count
-        }
+        return productsInBasketArray.count
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

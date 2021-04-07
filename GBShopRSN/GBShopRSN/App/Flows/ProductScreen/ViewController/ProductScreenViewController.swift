@@ -283,11 +283,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable, Ale
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if reviewsArray.count == 0 {
-            return 0
-        } else {
-            return reviewsArray.count
-        }
+        return reviewsArray.count
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

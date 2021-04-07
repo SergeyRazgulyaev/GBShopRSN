@@ -83,9 +83,9 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable,
                                       idCategory: ((productListScreenHeaderView.selectProductsCategoryTextField.text ?? "1") as NSString).integerValue) { response in
             switch response.result {
             case .success(let getProductList):
-                self.productsArray = getProductList.productList
                 self.sendAnalyticsOpenProductListSuccess(productListCount: getProductList.productList.count)
                 DispatchQueue.main.async {
+                    self.productsArray = getProductList.productList
                     self.tableView.reloadData()
                 }
             case .failure(let error):

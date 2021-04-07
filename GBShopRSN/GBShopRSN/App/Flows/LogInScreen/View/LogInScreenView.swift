@@ -10,7 +10,7 @@ import UIKit
 class LogInScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 100.0)
+        configureScrollView(increaseInScreenHeight: 0.0)
     }()
     
     private(set) lazy var logoLogInScreenImageView: UIImageView = {

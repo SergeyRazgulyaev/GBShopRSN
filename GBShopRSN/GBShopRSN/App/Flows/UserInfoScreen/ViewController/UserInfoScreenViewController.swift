@@ -47,7 +47,12 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureKeyboard()
+        keyboardAddObserver()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        keyboardRemoveObserver()
     }
     
     override func loadView() {
@@ -169,12 +174,32 @@ class UserInfoScreenViewController: UIViewController, AnalyticsSendable, Alertab
 
 //MARK: - Keyboard configuration
 extension UserInfoScreenViewController {
-    func configureKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
+    func keyboardAddObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         userInfoScreenView.scrollView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func hideKeyboardByTap() {
+    func keyboardRemoveObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShown(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let keyboardSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        userInfoScreenView.scrollView.contentInset = contentInsets
+        userInfoScreenView.scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        userInfoScreenView.scrollView.contentInset = UIEdgeInsets.zero
+        userInfoScreenView.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+    
+    @objc func hideKeyboard() {
         userInfoScreenView.scrollView.endEditing(true)
     }
 }

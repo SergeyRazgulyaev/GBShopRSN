@@ -105,12 +105,12 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable, Aler
         getBasket.getBasket(userID: user.userID) { response in
             switch response.result {
             case .success(let getBasket):
-                self.productsInBasketArray = getBasket.contents
                 self.sendAnalyticsGetBasketSuccess(
                     userID: self.user.userID,
                     amount: getBasket.amount,
                     typeOfGoodsCount: getBasket.countGoods)
                 DispatchQueue.main.async {
+                    self.productsInBasketArray = getBasket.contents
                     self.updatePayBasketButtonText()
                     self.tableView.reloadData()
                 }

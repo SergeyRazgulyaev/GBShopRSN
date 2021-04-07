@@ -219,10 +219,10 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable, Ale
         getReviews.getReviews(pageNumber: defaultPageNumber, productID: productID) { response in
             switch response.result {
             case .success(let getReviews):
-                self.reviewsArray = getReviews.reviews
                 self.sendAnalyticsGetReviewsSuccess(
                     reviewsCount: getReviews.reviews.count)
                 DispatchQueue.main.async {
+                    self.reviewsArray = getReviews.reviews
                     if self.reviewsArray.count != 0 {
                         self.productScreenHeaderView.reviewsTitleLabel.text = "Reviews"
                     }

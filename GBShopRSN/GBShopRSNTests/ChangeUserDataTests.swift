@@ -13,17 +13,16 @@ class ChangeUserDataTests: XCTestCase {
     
     //MARK: - Positive tests
     func testChangeUserData() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let changeData = ChangeUserData(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let changeData = ChangeUserData(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let changedUserData = expectation(description: "changed user data")
-        changeData.changeUserData(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        changeData.changeUserData(userID: 787, userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -44,10 +43,10 @@ class ChangeUserDataTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let changeData = ChangeUserData(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let changeData = ChangeUserData(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedChangedUserData = expectation(description: "failed change user data")
-        changeData.changeUserData(userID: 123, userName: "Somebody", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
+        changeData.changeUserData(userID: 787, userName: "Sergey", userLastName: "Razgulyaev", password: "mypassword", email: "some@some.ru", gender: "m", creditCard: "9872389-2424-234224-234", bio: "This is good! I think I will switch to another language") {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

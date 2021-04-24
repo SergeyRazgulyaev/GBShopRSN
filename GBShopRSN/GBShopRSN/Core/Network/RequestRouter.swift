@@ -13,7 +13,7 @@ enum RequestRouterEncoding {
 }
 
 protocol RequestRouter: URLRequestConvertible {
-    var baseUrl: URL { get }
+    var baseURL: URL { get }
     var method: HTTPMethod { get }
     var path: String { get }
     var parameters: Parameters? { get }
@@ -23,7 +23,7 @@ protocol RequestRouter: URLRequestConvertible {
 
 extension RequestRouter {
     var fullUrl: URL {
-        return baseUrl.appendingPathComponent(path)
+        return baseURL.appendingPathComponent(path)
     }
     
     var encoding: RequestRouterEncoding {

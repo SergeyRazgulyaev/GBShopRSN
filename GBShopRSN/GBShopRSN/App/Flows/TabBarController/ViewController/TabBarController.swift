@@ -10,12 +10,12 @@ import UIKit
 class TabBarController: UITabBarController {
     // MARK: - Properties
     private let requestFactory: RequestFactory
-    private let userID: Int
+    private let user: User
     
     // MARK: - Init
-    init(requestFactory: RequestFactory, userID: Int) {
+    init(requestFactory: RequestFactory, user: User) {
         self.requestFactory = requestFactory
-        self.userID = userID
+        self.user = user
         super.init(nibName: nil, bundle: nil)
         self.viewControllers = createViewControllers()
     }
@@ -39,7 +39,7 @@ class TabBarController: UITabBarController {
         var viewControllers = [UIViewController]()
         
         //1. ProductListScreen
-        let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory)
+        let productListScreenViewController = ProductListScreenViewController(requestFactory: requestFactory, user: user)
         productListScreenViewController.tabBarItem = UITabBarItem(title: "Product", image: UIImage(systemName: "cube.box"), selectedImage: UIImage(systemName: "cube.box.fill"))
         
         let productListNavigationController = UINavigationController(rootViewController: productListScreenViewController)
@@ -50,7 +50,7 @@ class TabBarController: UITabBarController {
         viewControllers.append(productListNavigationController)
         
         //2. BasketScreen
-        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory, userID: userID)
+        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory, user: user)
         basketScreenViewController.tabBarItem = UITabBarItem(title: "Basket", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
         
         let basketNavigationController = UINavigationController(rootViewController: basketScreenViewController)
@@ -61,7 +61,7 @@ class TabBarController: UITabBarController {
         viewControllers.append(basketNavigationController)
         
         //3. UserInfoScreen
-        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory, userID: userID)
+        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory, user: user)
         userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
         
         let userInfoNavigationController = UINavigationController(rootViewController: userInfoScreenViewController)

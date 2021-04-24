@@ -11,6 +11,7 @@ import Alamofire
 protocol ChangeUserDataRequestFactory {
     func changeUserData(userID: Int,
                         userName: String,
+                        userLastName: String,
                         password: String,
                         email: String,
                         gender: String,

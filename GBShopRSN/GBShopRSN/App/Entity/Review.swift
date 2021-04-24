@@ -12,7 +12,7 @@ struct Review: Codable {
     let productID: Int
     let userID: Int
     let userName: String
-    let userLastname: String
+    let userLastName: String
     let text: String
     
     enum CodingKeys: String, CodingKey {
@@ -20,7 +20,7 @@ struct Review: Codable {
         case productID = "product_id"
         case userID = "user_id"
         case userName = "user_name"
-        case userLastname = "user_lastname"
+        case userLastName = "user_last_name"
         case text = "text"
     }
 }

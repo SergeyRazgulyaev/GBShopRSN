@@ -23,14 +23,14 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
-    private(set) lazy var enterDataForSignUpLabel: UILabel = {
-        configureLabel(text: "Enter data for sign up:",
-                       textColor: .white,
-                       font: .boldSystemFont(ofSize: 20.0))
-    }()
-    
     private(set) lazy var userNameTextField: UITextField = {
         configureTextField(placeholder: "User name",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
+    }()
+    
+    private(set) lazy var userLastNameTextField: UITextField = {
+        configureTextField(placeholder: "User last name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
@@ -100,8 +100,8 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
         addSubview(scrollView)
         scrollView.addSubview(logoSignUpScreenImageView)
         scrollView.addSubview(logoSignUpScreenLabel)
-        scrollView.addSubview(enterDataForSignUpLabel)
         scrollView.addSubview(userNameTextField)
+        scrollView.addSubview(userLastNameTextField)
         scrollView.addSubview(emailTextField)
         scrollView.addSubview(genderTextField)
         scrollView.addSubview(creditCardTextField)
@@ -125,15 +125,18 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
             logoSignUpScreenLabel.topAnchor.constraint(equalTo: logoSignUpScreenImageView.bottomAnchor, constant: 10.0),
             logoSignUpScreenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
 
-            enterDataForSignUpLabel.topAnchor.constraint(equalTo: logoSignUpScreenLabel.bottomAnchor, constant: 10.0),
-            enterDataForSignUpLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-
-            userNameTextField.topAnchor.constraint(equalTo: enterDataForSignUpLabel.bottomAnchor, constant: 10.0),
+            userNameTextField.topAnchor.constraint(equalTo: logoSignUpScreenLabel.bottomAnchor, constant: 10.0),
             userNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
             userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
             
-            emailTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 10.0),
+            userLastNameTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 10.0),
+            userLastNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            userLastNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
+            userLastNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            
+            
+            emailTextField.topAnchor.constraint(equalTo: userLastNameTextField.bottomAnchor, constant: 10.0),
             emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: 25.0),
             emailTextField.widthAnchor.constraint(equalToConstant: 270.0),

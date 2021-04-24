@@ -13,17 +13,16 @@ class LogOutTests: XCTestCase {
 
     //MARK: - Positive tests
     func testLogOutUser() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let logOutUser = LogOut(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logOutUser = LogOut(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let logOut = expectation(description: "log out user")
-        logOutUser.logOut(userID: 123) {response in
+        logOutUser.logOut(userID: 787) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -44,10 +43,10 @@ class LogOutTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let logOutUser = LogOut(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let logOutUser = LogOut(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedLogOut = expectation(description: "failed log out user")
-        logOutUser.logOut(userID: 123) {response in
+        logOutUser.logOut(userID: 787) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

@@ -13,13 +13,13 @@ class GetBasket: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl: URL
+    let baseURL: URL
 
     // MARK: - Init
-    init(baseUrl: URL, errorParser: AbstractErrorParser,
+    init(baseURL: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
-        self.baseUrl = baseUrl
+        self.baseURL = baseURL
         self.errorParser = errorParser
         self.sessionManager = sessionManager
         self.queue = queue
@@ -29,7 +29,7 @@ class GetBasket: AbstractRequestFactory {
 extension GetBasket: GetBasketRequestFactory {
     func getBasket(userID: Int,
                    completionHandler: @escaping (AFDataResponse<GetBasketResult>) -> Void) {
-        let requestModel = GetBasketRequest(baseUrl: baseUrl,
+        let requestModel = GetBasketRequest(baseURL: baseURL,
                                             userID: userID)
         self.request(request: requestModel,
                      completionHandler: completionHandler)
@@ -38,7 +38,7 @@ extension GetBasket: GetBasketRequestFactory {
 
 extension GetBasket {
     struct GetBasketRequest: RequestRouter {
-        let baseUrl: URL
+        let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "getBasket"
 

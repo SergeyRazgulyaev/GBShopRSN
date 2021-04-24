@@ -29,8 +29,8 @@ class LogInScreenView: UIView, UIComponentsMakeable {
                        font: .boldSystemFont(ofSize: 20.0))
     }()
     
-    private(set) lazy var userNameTextField: UITextField = {
-        configureTextField(placeholder: "User name",
+    private(set) lazy var userLoginTextField: UITextField = {
+        configureTextField(placeholder: "User login",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
@@ -69,7 +69,7 @@ class LogInScreenView: UIView, UIComponentsMakeable {
     func configureUI() {
         accessibilityIdentifier = "logInScreenView"
         scrollView.accessibilityIdentifier = "logInScrollView"
-        userNameTextField.accessibilityIdentifier = "userNameTextField"
+        userLoginTextField.accessibilityIdentifier = "userLoginTextField"
         passwordTextField.accessibilityIdentifier = "passwordTextField"
         sendDataForLogInButton.accessibilityIdentifier = "sendDataForLogInButton"
         
@@ -77,7 +77,7 @@ class LogInScreenView: UIView, UIComponentsMakeable {
         scrollView.addSubview(logoLogInScreenImageView)
         scrollView.addSubview(logoLogInScreenLabel)
         scrollView.addSubview(enterDataForLogInLabel)
-        scrollView.addSubview(userNameTextField)
+        scrollView.addSubview(userLoginTextField)
         scrollView.addSubview(passwordTextField)
         scrollView.addSubview(sendDataForLogInButton)
         scrollView.addSubview(cancelAndReturnButton)
@@ -99,12 +99,12 @@ class LogInScreenView: UIView, UIComponentsMakeable {
             enterDataForLogInLabel.topAnchor.constraint(equalTo: logoLogInScreenLabel.bottomAnchor, constant: 100.0),
             enterDataForLogInLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            userNameTextField.topAnchor.constraint(equalTo: enterDataForLogInLabel.bottomAnchor, constant: 10.0),
-            userNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            userLoginTextField.topAnchor.constraint(equalTo: enterDataForLogInLabel.bottomAnchor, constant: 10.0),
+            userLoginTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
+            userLoginTextField.heightAnchor.constraint(equalToConstant: 25.0),
+            userLoginTextField.widthAnchor.constraint(equalToConstant: 270.0),
             
-            passwordTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 10.0),
+            passwordTextField.topAnchor.constraint(equalTo: userLoginTextField.bottomAnchor, constant: 10.0),
             passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 25.0),
             passwordTextField.widthAnchor.constraint(equalToConstant: 270.0),

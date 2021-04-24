@@ -13,17 +13,16 @@ class DeleteFromBasketTests: XCTestCase {
     
     //MARK: - Positive tests
     func testDeleteFromBasket() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let deleteFromBasket = DeleteFromBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let deleteFromBasket = DeleteFromBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let deletedFromBasketProduct = expectation(description: "delete from basket")
-        deleteFromBasket.deleteFromBasket(productID: 123) {response in
+        deleteFromBasket.deleteFromBasket(deletedProductID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
@@ -44,10 +43,10 @@ class DeleteFromBasketTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let deleteFromBasket = DeleteFromBasket(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let deleteFromBasket = DeleteFromBasket(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedDeletedFromBasketProduct = expectation(description: "failed delete from basket")
-        deleteFromBasket.deleteFromBasket(productID: 123) {response in
+        deleteFromBasket.deleteFromBasket(deletedProductID: 123) {response in
             switch response.result {
             case .success(let model):
                 XCTFail("Must have failed: \(model)")

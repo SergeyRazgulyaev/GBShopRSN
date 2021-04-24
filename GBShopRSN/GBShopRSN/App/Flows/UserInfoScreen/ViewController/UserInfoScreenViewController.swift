@@ -6,27 +6,31 @@
 //
 
 import UIKit
+import FirebaseAnalytics
+import os.log
 
-class UserInfoScreenViewController: UIViewController {
+class UserInfoScreenViewController: UIViewController, AnalyticsSendable {
     // MARK: - UI components
     private lazy var userInfoScreenView: UserInfoScreenView = {
         return UserInfoScreenView()
     }()
+    private lazy var logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(tapLogOutButton))
     
     // MARK: - Properties
-    private let defaultUserName = "Somebody"
-    private let defaultEmail = "some@some.ru"
+    private let defaultUserName = "Sergey"
+    private let defaultUserLastName = "Razgulyaev"
+    private let defaultEmail = "razgulyaev.sergey@gmail.com"
     private let defaultGender = "m"
     private let defaultCreditCard = "9872389-2424-234224-234"
     private let defaultBio = "This is good! I think I will switch to another language"
     private let defaultPassword = "mypassword"
     private let requestFactory: RequestFactory
-    private let userID: Int
+    private let user: User
     
     // MARK: - Init
-    init(requestFactory: RequestFactory, userID: Int) {
+    init(requestFactory: RequestFactory, user: User) {
         self.requestFactory = requestFactory
-        self.userID = userID
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,9 +41,9 @@ class UserInfoScreenViewController: UIViewController {
     //MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewController()
         configureTextFields()
         configureSaveUserInfoButton()
+        configureViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,12 +57,33 @@ class UserInfoScreenViewController: UIViewController {
     
     //MARK: - Configuration Methods
     func configureViewController() {
+        title = "User info"
         view.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
+        navigationItem.rightBarButtonItem = logOutButton
+    }
+    
+    @objc func tapLogOutButton() {
+        let logOutUser = requestFactory.makeLogOutRequestFactory()
+        logOutUser.logOut(userID: user.userID) { response in
+            switch response.result {
+            case .success(let logOut):
+                self.sendAnalyticsLogOutSuccess(userID: logOut.loggedOutUserID)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            case .failure(let error):
+                self.sendAnalyticsFailure(
+                    failureName: "log_out_failure",
+                    errorDescription: error.localizedDescription)
+                Logger.viewCycle.debug("\(error.localizedDescription)")
+            }
+        }
     }
     
     func configureTextFields() {
         userInfoScreenView.userNameTextField.text = defaultUserName
+        userInfoScreenView.userLastNameTextField.text = defaultUserLastName
         userInfoScreenView.emailTextField.text = defaultEmail
         userInfoScreenView.genderTextField.text = defaultGender
         userInfoScreenView.creditCardTextField.text = defaultCreditCard
@@ -78,8 +103,9 @@ class UserInfoScreenViewController: UIViewController {
             if userInfoScreenView.passwordTextField.text ==
                 userInfoScreenView.repeatedPasswordTextField.text {
                 let changeData = requestFactory.makeChangeUserDataRequestFactory()
-                changeData.changeUserData(userID: userID,
+                changeData.changeUserData(userID: user.userID,
                                           userName: userInfoScreenView.userNameTextField.text ?? defaultUserName,
+                                          userLastName: userInfoScreenView.userLastNameTextField.text ?? defaultUserLastName,
                                           password: userInfoScreenView.passwordTextField.text ?? defaultPassword,
                                           email: userInfoScreenView.emailTextField.text ?? defaultEmail,
                                           gender: userInfoScreenView.genderTextField.text ?? defaultGender,
@@ -88,9 +114,12 @@ class UserInfoScreenViewController: UIViewController {
                     response in
                     switch response.result {
                     case .success(let changeUserData):
-                        print(changeUserData)
+                        self.sendAnalyticsChangeUserDataSuccess(userID: changeUserData.userID)
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        self.sendAnalyticsFailure(
+                            failureName: "change_user_data_failure",
+                            errorDescription: error.localizedDescription)
+                        Logger.viewCycle.debug("\(error.localizedDescription)")
                     }
                 }
             } else {

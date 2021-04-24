@@ -1,5 +1,5 @@
 //
-//  BasketScreenHeaderView.swift
+//  BasketScreenFooterView.swift
 //  GBShopRSN
 //
 //  Created by Sergey Razgulyaev on 27.03.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BasketScreenHeaderView: UIView, UIComponentsMakeable {
+class BasketScreenFooterView: UIView, UIComponentsMakeable {
     // MARK: - UI components    
     private(set) lazy var basketPayButton: UIButton = {
         configureButton(title: "Pay basket",

@@ -19,11 +19,11 @@ class RequestFactory {
     }()
     
     let sessionQueue = DispatchQueue.global(qos: .utility)
-    let baseUrl: URL
+    let baseURL: URL
     
     //MARK: - Init
-    init(baseUrl: URL) {
-        self.baseUrl = baseUrl
+    init(baseURL: URL) {
+        self.baseURL = baseURL
     }
     
     func makeErrorParser() -> AbstractErrorParser {
@@ -32,7 +32,7 @@ class RequestFactory {
     
     func makeSignUpRequestFactory() -> SignUpRequestFactory {
         let errorParser = makeErrorParser()
-        return SignUp(baseUrl: baseUrl,
+        return SignUp(baseURL: baseURL,
                       errorParser: errorParser,
                       sessionManager: commonSession,
                       queue: sessionQueue)
@@ -40,7 +40,7 @@ class RequestFactory {
     
     func makeLogInRequestFactory() -> LogInRequestFactory {
         let errorParser = makeErrorParser()
-        return LogIn(baseUrl: baseUrl,
+        return LogIn(baseURL: baseURL,
                      errorParser: errorParser,
                      sessionManager: commonSession,
                      queue: sessionQueue)
@@ -48,7 +48,7 @@ class RequestFactory {
     
     func makeChangeUserDataRequestFactory() -> ChangeUserDataRequestFactory {
         let errorParser = makeErrorParser()
-        return ChangeUserData(baseUrl: baseUrl,
+        return ChangeUserData(baseURL: baseURL,
                               errorParser: errorParser,
                               sessionManager: commonSession,
                               queue: sessionQueue)
@@ -56,7 +56,7 @@ class RequestFactory {
     
     func makeAddToBasketRequestFactory() -> AddToBasketRequestFactory {
         let errorParser = makeErrorParser()
-        return AddToBasket(baseUrl: baseUrl,
+        return AddToBasket(baseURL: baseURL,
                            errorParser: errorParser,
                            sessionManager: commonSession,
                            queue: sessionQueue)
@@ -64,7 +64,7 @@ class RequestFactory {
     
     func makeDeleteFromBasketRequestFactory() -> DeleteFromBasketRequestFactory {
         let errorParser = makeErrorParser()
-        return DeleteFromBasket(baseUrl: baseUrl,
+        return DeleteFromBasket(baseURL: baseURL,
                                 errorParser: errorParser,
                                 sessionManager: commonSession,
                                 queue: sessionQueue)
@@ -72,7 +72,7 @@ class RequestFactory {
     
     func makeGetBasketRequestFactory() -> GetBasketRequestFactory {
         let errorParser = makeErrorParser()
-        return GetBasket(baseUrl: baseUrl,
+        return GetBasket(baseURL: baseURL,
                          errorParser: errorParser,
                          sessionManager: commonSession,
                          queue: sessionQueue)
@@ -80,7 +80,7 @@ class RequestFactory {
     
         func makePayBasketRequestFactory() -> PayBasketRequestFactory {
             let errorParser = makeErrorParser()
-            return PayBasket(baseUrl: baseUrl,
+            return PayBasket(baseURL: baseURL,
                              errorParser: errorParser,
                              sessionManager: commonSession,
                              queue: sessionQueue)
@@ -88,7 +88,7 @@ class RequestFactory {
     
     func makeGetProductRequestFactory() -> GetProductRequestFactory {
         let errorParser = makeErrorParser()
-        return GetProduct(baseUrl: baseUrl,
+        return GetProduct(baseURL: baseURL,
                           errorParser: errorParser,
                           sessionManager: commonSession,
                           queue: sessionQueue)
@@ -96,7 +96,7 @@ class RequestFactory {
     
     func makeGetProductListRequestFactory() -> GetProductListRequestFactory {
         let errorParser = makeErrorParser()
-        return GetProductList(baseUrl: baseUrl,
+        return GetProductList(baseURL: baseURL,
                               errorParser: errorParser,
                               sessionManager: commonSession,
                               queue: sessionQueue)
@@ -104,7 +104,7 @@ class RequestFactory {
     
     func makeAddReviewRequestFactory() -> AddReviewRequestFactory {
         let errorParser = makeErrorParser()
-        return AddReview(baseUrl: baseUrl,
+        return AddReview(baseURL: baseURL,
                          errorParser: errorParser,
                          sessionManager: commonSession,
                          queue: sessionQueue)
@@ -112,7 +112,7 @@ class RequestFactory {
     
     func makeDeleteReviewRequestFactory() -> DeleteReviewRequestFactory {
         let errorParser = makeErrorParser()
-        return DeleteReview(baseUrl: baseUrl,
+        return DeleteReview(baseURL: baseURL,
                             errorParser: errorParser,
                             sessionManager: commonSession,
                             queue: sessionQueue)
@@ -120,7 +120,7 @@ class RequestFactory {
     
     func makeGetReviewsRequestFactory() -> GetReviewsRequestFactory {
         let errorParser = makeErrorParser()
-        return GetReviews(baseUrl: baseUrl,
+        return GetReviews(baseURL: baseURL,
                           errorParser: errorParser,
                           sessionManager: commonSession,
                           queue: sessionQueue)
@@ -128,7 +128,7 @@ class RequestFactory {
     
     func makeLogOutRequestFactory() -> LogOutRequestFactory {
         let errorParser = makeErrorParser()
-        return LogOut(baseUrl: baseUrl,
+        return LogOut(baseURL: baseURL,
                       errorParser: errorParser,
                       sessionManager: commonSession,
                       queue: sessionQueue)

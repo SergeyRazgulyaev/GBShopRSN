@@ -12,15 +12,15 @@ import Alamofire
 class RequestFactoryTests: XCTestCase {
     
     func testLogIn() throws {
-        let baseUrl = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
-        let requestFactory = RequestFactory(baseUrl: baseUrl)
+        let baseURL = URL(string: "https://thawing-wildwood-54540.herokuapp.com/")!
+        let requestFactory = RequestFactory(baseURL: baseURL)
         let logInUser = requestFactory.makeLogInRequestFactory()
         
         let signedIn = expectation(description: "log in")
-        logInUser.logIn(userName: "Somebody", password: "mypassword") { response in
+        logInUser.logIn(userLogin: "SergeyRazgulyaev", password: "mypassword") { response in
             switch response.result {
             case .success(let model):
-                XCTAssertEqual(model.user.id, 123)
+                XCTAssertEqual(model.user.userID, 787)
                 signedIn.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

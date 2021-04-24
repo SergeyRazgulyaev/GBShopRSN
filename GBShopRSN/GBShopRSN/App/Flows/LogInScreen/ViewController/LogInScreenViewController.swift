@@ -6,15 +6,17 @@
 //
 
 import UIKit
+import FirebaseAnalytics
+import os.log
 
-class LogInScreenViewController: UIViewController {
+class LogInScreenViewController: UIViewController, AnalyticsSendable {
     // MARK: - UI components
     private lazy var logInScreenView: LogInScreenView = {
         return LogInScreenView()
     }()
     
     // MARK: - Properties
-    private let defaultUserName = "Somebody"
+    private let defaultUserLogInName = "SergeyRazgulyaev"
     private let defaultPassword = "mypassword"
     private let requestFactory: RequestFactory
     
@@ -38,6 +40,7 @@ class LogInScreenViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        clearLogInScreenTextFields()
         configureKeyboard()
     }
     
@@ -53,25 +56,30 @@ class LogInScreenViewController: UIViewController {
     func configureSendDataForLogInButton() {
         logInScreenView.sendDataForLogInButton.addTarget(self, action: #selector(tapSendDataForLogInButton(_:)), for: .touchUpInside)
     }
-    //
+    
     @objc func tapSendDataForLogInButton(_ sender: Any?) {
-        if (!(logInScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
+        if (!(logInScreenView.userLoginTextField.text?.isTrimmedEmpty ?? true) &&
                 !(logInScreenView.passwordTextField.text?.isTrimmedEmpty ?? true)) {
             let logInUser = requestFactory.makeLogInRequestFactory()
-            logInUser.logIn(userName: logInScreenView.userNameTextField.text ?? defaultUserName,
+            logInUser.logIn(userLogin: logInScreenView.userLoginTextField.text ?? defaultUserLogInName,
                             password: logInScreenView.passwordTextField.text ?? defaultPassword) {
                 response in
                 switch response.result {
                 case .success(let login):
+                    self.sendAnalyticsLogInSuccess(
+                        userID: login.user.userID,
+                        userName: login.user.userName,
+                        userLastname: login.user.userLastName)
                     DispatchQueue.main.async {
-                        let tabBarController = TabBarController(requestFactory: self.requestFactory, userID: login.user.id)
-                        print("userID \(login.user.id)")
+                        let tabBarController = TabBarController(requestFactory: self.requestFactory, user: login.user)
                         tabBarController.modalPresentationStyle = .fullScreen
                         self.present(tabBarController, animated: true, completion: nil)
                     }
-                    print(login)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.sendAnalyticsFailure(
+                        failureName: "log_in_failure",
+                        errorDescription: error.localizedDescription)
+                    Logger.viewCycle.debug("\(error.localizedDescription)")
                 }
             }
         } else {
@@ -85,6 +93,11 @@ class LogInScreenViewController: UIViewController {
     
     @objc func tapCancelAndReturnButton(_ sender: Any?) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func clearLogInScreenTextFields() {
+        logInScreenView.userLoginTextField.text = ""
+        logInScreenView.passwordTextField.text = ""
     }
 }
 

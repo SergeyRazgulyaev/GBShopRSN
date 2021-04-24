@@ -6,20 +6,24 @@
 //
 
 import UIKit
+import FirebaseAnalytics
+import os.log
 
-class SignUpScreenViewController: UIViewController {
+class SignUpScreenViewController: UIViewController, AnalyticsSendable {
     // MARK: - UI components
     private lazy var signUpScreenView: SignUpScreenView = {
         return SignUpScreenView()
     }()
     
     // MARK: - Properties
-    private let defaultUserName = "Somebody"
-    private let defaultEmail = "some@some.ru"
+    private let defaultUserName = "Sergey"
+    private let defaultUserLastName = "Razgulyaev"
+    private let defaultEmail = "razgulyaev.sergey@gmail.com"
     private let defaultGender = "m"
     private let defaultCreditCard = "9872389-2424-234224-234"
     private let defaultBio = "This is good! I think I will switch to another language"
     private let defaultPassword = "mypassword"
+    private let defaultUserID = 787
     private let requestFactory: RequestFactory
     
     // MARK: - Init
@@ -64,6 +68,7 @@ class SignUpScreenViewController: UIViewController {
     }
     
     @objc func tapSendDataForSignUpButton(_ sender: Any?) {
+        
         if (!(signUpScreenView.userNameTextField.text?.isTrimmedEmpty ?? true) &&
                 !(signUpScreenView.emailTextField.text?.isTrimmedEmpty ?? true) &&
                 !(signUpScreenView.genderTextField.text?.isTrimmedEmpty ?? true) &&
@@ -74,8 +79,9 @@ class SignUpScreenViewController: UIViewController {
             if signUpScreenView.passwordTextField.text ==
                 signUpScreenView.repeatedPasswordTextField.text {
                 let registerUser = requestFactory.makeSignUpRequestFactory()
-                registerUser.signUp(userID: 123,
+                registerUser.signUp(userID: defaultUserID,
                                     userName: signUpScreenView.userNameTextField.text ?? defaultUserName,
+                                    userLastName: signUpScreenView.userLastNameTextField.text ?? defaultUserLastName,
                                     password: signUpScreenView.passwordTextField.text ?? defaultPassword,
                                     email: signUpScreenView.emailTextField.text ?? defaultEmail,
                                     gender: signUpScreenView.genderTextField.text ?? defaultGender,
@@ -84,14 +90,25 @@ class SignUpScreenViewController: UIViewController {
                     response in
                     switch response.result {
                     case .success(let signUp):
+                        self.sendAnalyticsSignUpSuccess(
+                            assignedUserId: signUp.assignedUserId,
+                            signedUpUserName: signUp.signedUpUserName,
+                            signedUpUserLastName: signUp.signedUpUserLastName,
+                            signedUpEmail:signUp.signedUpEmail,
+                            signedUpGender:signUp.signedUpBio,
+                            signedUpCreditCard: signUp.signedUpCreditCard,
+                            signedUpBio: signUp.signedUpBio,
+                            userMessage: signUp.userMessage)
                         DispatchQueue.main.async {
                             let logInScreenViewController = LogInScreenViewController(requestFactory: self.requestFactory)
                             logInScreenViewController.modalPresentationStyle = .fullScreen
                             self.present(logInScreenViewController, animated: true, completion: nil)
                         }
-                        print(signUp)
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        self.sendAnalyticsFailure(
+                            failureName: "sign_up_failure",
+                            errorDescription: error.localizedDescription)
+                        Logger.viewCycle.debug("\(error.localizedDescription)")
                     }
                 }
             } else {
@@ -107,11 +124,13 @@ class SignUpScreenViewController: UIViewController {
     }
     
     @objc func tapCancelAndReturnButton(_ sender: Any?) {
+        fatalError() //Installed specifically for sending analytics in Firebase about an application crash
         self.dismiss(animated: true, completion: nil)
     }
     
     func clearSignUpScreenTextFields() {
         signUpScreenView.userNameTextField.text = ""
+        signUpScreenView.userLastNameTextField.text = ""
         signUpScreenView.emailTextField.text = ""
         signUpScreenView.genderTextField.text = ""
         signUpScreenView.creditCardTextField.text = ""

@@ -9,7 +9,10 @@ import Foundation
 import Alamofire
 
 protocol AddReviewRequestFactory {
-    func addReview(userID: Int,
+    func addReview(productID: Int,
+                   userID: Int,
+                   userName: String,
+                   userLastName: String,
                    text: String,
                    completionHandler: @escaping (AFDataResponse<AddReviewResult>) -> Void)
 }

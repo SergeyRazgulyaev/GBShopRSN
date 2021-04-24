@@ -13,13 +13,13 @@ class SignUp: AbstractRequestFactory {
     let errorParser: AbstractErrorParser
     let sessionManager: Session
     let queue: DispatchQueue
-    let baseUrl: URL
+    let baseURL: URL
     
     // MARK: - Init
-    init(baseUrl: URL, errorParser: AbstractErrorParser,
+    init(baseURL: URL, errorParser: AbstractErrorParser,
          sessionManager: Session,
          queue: DispatchQueue = DispatchQueue.global(qos: .utility)) {
-        self.baseUrl = baseUrl
+        self.baseURL = baseURL
         self.errorParser = errorParser
         self.sessionManager = sessionManager
         self.queue = queue
@@ -29,20 +29,22 @@ class SignUp: AbstractRequestFactory {
 extension SignUp: SignUpRequestFactory {
     func signUp(userID: Int,
                 userName: String,
+                userLastName: String,
                 password: String,
                 email: String,
                 gender: String,
                 creditCard: String,
                 bio: String,
                 completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
-        let requestModel = SignUpRequest(baseUrl: baseUrl,
+        let requestModel = SignUpRequest(baseURL: baseURL,
                                          userID: userID,
                                          userName: userName,
-                                         password: password,
+                                         userLastName: userLastName,
                                          email: email,
                                          gender: gender,
                                          creditCard: creditCard,
-                                         bio: bio)
+                                         bio: bio,
+                                         password: password)
         self.request(request: requestModel,
                      completionHandler: completionHandler)
     }
@@ -50,27 +52,29 @@ extension SignUp: SignUpRequestFactory {
 
 extension SignUp {
     struct SignUpRequest: RequestRouter {
-        let baseUrl: URL
+        let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "signUp"
         
         let userID: Int
         let userName: String
-        let password: String
+        let userLastName: String
         let email: String
         let gender: String
         let creditCard: String
         let bio: String
-        
+        let password: String
+
         var parameters: Parameters? {
             return [
-                "user_id" : userID,
-                "username" : userName,
-                "password" : password,
-                "email" : email,
+                "user_id": userID,
+                "user_name": userName,
+                "user_last_name": userLastName,
+                "email": email,
                 "gender": gender,
-                "credit_card" : creditCard,
-                "bio" : bio
+                "credit_card": creditCard,
+                "bio": bio,
+                "password": password
             ]
         }
     }

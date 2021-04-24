@@ -8,15 +8,15 @@
 import Foundation
 
 struct User: Codable {
-    let id: Int
-    let login: String
-    let name: String
-    let lastname: String
+    let userID: Int
+    let userLogin: String
+    let userName: String
+    let userLastName: String
     
     enum CodingKeys: String, CodingKey {
-        case id = "user_id"
-        case login = "user_login"
-        case name = "user_name"
-        case lastname = "user_lastname"
+        case userID = "user_id"
+        case userLogin = "user_login"
+        case userName = "user_name"
+        case userLastName = "user_last_name"
     }
 }

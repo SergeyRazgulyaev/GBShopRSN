@@ -13,14 +13,13 @@ class GetProductListTests: XCTestCase {
     
     //MARK: - Positive tests
     func testGetProductList() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
-        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let getProductList = GetProductList(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let getProductList = GetProductList(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let receivedProductList = expectation(description: "received product list")
         getProductList.getProductList(pageNumber: 1, idCategory: 1) {response in
@@ -50,7 +49,7 @@ class GetProductListTests: XCTestCase {
         configuration.headers = .default
         let session = Session(configuration: configuration)
         
-        let getProductList = GetProductList(baseUrl: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
+        let getProductList = GetProductList(baseURL: baseURL, errorParser: ErrorParser(), sessionManager: session, queue: DispatchQueue.global(qos: .utility))
         
         let failedReceiveProductList = expectation(description: "failed receive product list")
         getProductList.getProductList(pageNumber: 1, idCategory: 1) {response in

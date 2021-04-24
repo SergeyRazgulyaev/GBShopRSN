@@ -12,7 +12,7 @@ struct Product: Codable {
     let productName: String
     let productPrice: Int
     let productDescription: String
-    let quantityInBasket: Int
+    var quantityInBasket: Int
     
     enum CodingKeys: String, CodingKey {
         case productID = "product_id"

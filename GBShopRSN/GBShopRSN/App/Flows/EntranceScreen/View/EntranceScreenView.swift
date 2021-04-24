@@ -51,6 +51,7 @@ class EntranceScreenView: UIView, UIComponentsMakeable {
     
     //MARK: - Configuration Methods
     func configureUI() {
+        logInButton.accessibilityIdentifier = "showLogInScreenButton"
         addSubview(logoEntranceScreenImageView)
         addSubview(logoEntranceScreenLabel)
         addSubview(signUpOrLogOnLabel)

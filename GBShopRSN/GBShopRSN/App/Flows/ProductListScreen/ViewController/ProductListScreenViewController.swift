@@ -39,6 +39,7 @@ class ProductListScreenViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductListData()
+        configureKeyboard()
     }
     
     //MARK: - Configuration Methods
@@ -49,6 +50,18 @@ class ProductListScreenViewController: UITableViewController {
     
     func configureTableView() {
         tableView.register(ProductListScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
+    }
+    
+    func configureSelectProductsCategoryButton() {
+        productListScreenHeaderView.selectProductsCategoryButton.addTarget(self, action: #selector(tapSelectProductsCategoryButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
+        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
+            loadProductListData()
+        } else {
+            print("You need to fill in all the fields for sign up")
+        }
     }
     
     //MARK: - Interaction with Network
@@ -116,16 +129,16 @@ class ProductListScreenViewController: UITableViewController {
             navigationController?.pushViewController(productScreenViewController, animated: true)
         }
     }
-    
-    func configureSelectProductsCategoryButton() {
-        productListScreenHeaderView.selectProductsCategoryButton.addTarget(self, action: #selector(tapSelectProductsCategoryButton(_:)), for: .touchUpInside)
+}
+
+//MARK: - Keyboard configuration
+extension ProductListScreenViewController {
+    func configureKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
+        productListScreenHeaderView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
-        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
-            loadProductListData()
-        } else {
-            print("You need to fill in all the fields for sign up")
-        }
+    @objc func hideKeyboardByTap() {
+        productListScreenHeaderView.endEditing(true)
     }
 }

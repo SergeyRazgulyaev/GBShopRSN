@@ -10,7 +10,7 @@ import UIKit
 class SignUpScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 0.0)
+        configureScrollView(increaseInScreenHeight: 200)
     }()
     
     private(set) lazy var logoSignUpScreenImageView: UIImageView = {

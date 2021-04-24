@@ -38,6 +38,7 @@ class ProductListScreenHeaderView: UIView, UIComponentsMakeable {
     
     //MARK: - Configuration Methods
     func configureUI() {
+        accessibilityIdentifier = "productListScreenView"
         backgroundColor = .white
         addSubview(selectProductsCategoryImageView)
         addSubview(selectProductsCategoryTextField)

@@ -31,19 +31,19 @@ class GetBasketTests: XCTestCase {
                 XCTAssertEqual(model.contents[0].productID, 123)
                 XCTAssertEqual(model.contents[0].productPrice, 45600)
                 XCTAssertEqual(model.contents[0].productName, "Notebook")
-                XCTAssertEqual(model.contents[0].productDescription, "Powerful gaming notebook")
+                XCTAssertEqual(model.contents[0].productDescription, "Powerful AMD gaming laptop with 4K resolution and long battery life")
                 XCTAssertEqual(model.contents[0].quantityInBasket, 1)
                 XCTAssertEqual(model.contents[1].productID, 456)
                 XCTAssertEqual(model.contents[1].productPrice, 1000)
                 XCTAssertEqual(model.contents[1].productName, "Mouse")
-                XCTAssertEqual(model.contents[1].productDescription, "High-precision mouse for 3D graphics")
+                XCTAssertEqual(model.contents[1].productDescription, "High-precision wireless mouse for 3D graphics with customizable each button")
                 XCTAssertEqual(model.contents[1].quantityInBasket, 1)
                 getBasketProducts.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
     
     //MARK: - Negative tests
@@ -66,6 +66,6 @@ class GetBasketTests: XCTestCase {
                 failedGetBasketProduct.fulfill()
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
 }

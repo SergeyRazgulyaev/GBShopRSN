@@ -41,9 +41,9 @@ class ProductScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     //MARK: - Configuration Methods
     func configureUI() {
         reviewTextLabel.numberOfLines = 0
-        addSubview(reviewIDCommentLabel)
-        addSubview(reviewUserNameAndLastnameLabel)
-        addSubview(reviewTextLabel)
+        contentView.addSubview(reviewIDCommentLabel)
+        contentView.addSubview(reviewUserNameAndLastnameLabel)
+        contentView.addSubview(reviewTextLabel)
 
         NSLayoutConstraint.activate([
             reviewIDCommentLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10.0),

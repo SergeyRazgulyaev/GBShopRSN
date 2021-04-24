@@ -32,7 +32,7 @@ class ChangeUserDataTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
     
     //MARK: - Negative tests
@@ -55,6 +55,6 @@ class ChangeUserDataTests: XCTestCase {
                 failedChangedUserData.fulfill()
             }
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
 }

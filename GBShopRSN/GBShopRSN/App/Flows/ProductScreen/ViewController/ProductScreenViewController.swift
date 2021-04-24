@@ -14,11 +14,12 @@ class ProductScreenViewController: UITableViewController {
     }()
     
     // MARK: - Properties
+    private let requestFactory: RequestFactory
     private var reviewsArray: Array = [Review]()
     private let reuseIdentifierTableViewCell = "ProductScreenTableViewCell"
-    private let requestFactory: RequestFactory
     private let currencyUnit: String = "rub."
     private let productID: Int
+    private var increaseDecreaseCounter: Int = 0
     private var displayedProduct = Product(productID: 0, productName: "", productPrice: 0, productDescription: "", quantityInBasket: 0)
     
     // MARK: - Init
@@ -31,17 +32,24 @@ class ProductScreenViewController: UITableViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
+        configureAddToBasketButton()
+        configureDeleteFromBasketButton()
+        configureDecreaseProductForBasketCounterButton()
+        configureIncreaseProductForBasketCounterButton()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductData()
         loadReviewsData()
+        configureKeyboard()
     }
-
+    
     //MARK: - Configuration Methods
     func configureViewController() {
         navigationController?.navigationItem.backBarButtonItem?.title = "Products"
@@ -59,6 +67,49 @@ class ProductScreenViewController: UITableViewController {
         productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
         productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
         productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
+    }
+    
+    func configureAddToBasketButton() {
+        productScreenHeaderView.addToBasketButton.addTarget(self, action: #selector(tapAddToBasketButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapAddToBasketButton(_ sender: Any?) {
+        if (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue != self.displayedProduct.quantityInBasket) && !(productScreenHeaderView.productForBasketCounterTextField.text?.isTrimmedEmpty ?? true) && (((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0) {
+            addProductToBasket()
+        }
+    }
+    
+    func configureDeleteFromBasketButton() {
+        productScreenHeaderView.deleteFromBasketButton.addTarget(self, action: #selector(tapDeleteFromBasketButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapDeleteFromBasketButton(_ sender: Any?) {
+        if self.displayedProduct.quantityInBasket != 0 {
+            deleteProductFromBasket(productID: productID)
+        }
+    }
+    
+    func configureDecreaseProductForBasketCounterButton() {
+        productScreenHeaderView.decreaseProductForBasketCounterButton.addTarget(self, action: #selector(tapDecreaseProductForBasketCounterButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapDecreaseProductForBasketCounterButton(_ sender: Any?) {
+        if ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue > 0 {
+            increaseDecreaseCounter = ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+            increaseDecreaseCounter -= 1
+            productScreenHeaderView.productForBasketCounterTextField.text = "\(increaseDecreaseCounter)"
+        }
+    }
+    
+    func configureIncreaseProductForBasketCounterButton() {
+        productScreenHeaderView.increaseProductForBasketCounterButton.addTarget(self, action: #selector(tapIncreaseProductForBasketCounterButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc func tapIncreaseProductForBasketCounterButton(_ sender: Any?) {
+        increaseDecreaseCounter = ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+        increaseDecreaseCounter += 1
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(increaseDecreaseCounter)"
     }
     
     //MARK: - Interaction with Network
@@ -99,6 +150,38 @@ class ProductScreenViewController: UITableViewController {
         }
     }
     
+    func addProductToBasket() {
+        let addToBasket = requestFactory.makeAddToBasketRequestFactory()
+        addToBasket.addToBasket(productID: productID, quantityInBasket: ((productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue) { response in
+            switch response.result {
+            case .success(let addProductToBasket):
+                print(addProductToBasket)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: \(self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000")"
+                    self.displayedProduct.quantityInBasket = ((self.productScreenHeaderView.productForBasketCounterTextField.text ?? "000") as NSString).integerValue
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteProductFromBasket(productID: Int) {
+        let deleteFromBasket = requestFactory.makeDeleteFromBasketRequestFactory()
+        deleteFromBasket.deleteFromBasket(productID: productID) { response in
+            switch response.result {
+            case .success(let deleteProductFromBasket):
+                print(deleteProductFromBasket)
+                DispatchQueue.main.async {
+                    self.productScreenHeaderView.productQuantityInBasketLabel.text = "Quantity in basket: 0"
+                    self.displayedProduct.quantityInBasket = 0
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if reviewsArray.count == 0 {
@@ -109,7 +192,7 @@ class ProductScreenViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        250.0
+        265.0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -135,5 +218,16 @@ class ProductScreenViewController: UITableViewController {
         cell.reviewTextLabel.text = "\(reviewsArray[indexPath.row].text)"
         return cell
     }
+}
+
+//MARK: - Keyboard configuration
+extension ProductScreenViewController {
+    func configureKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardByTap))
+        tableView.addGestureRecognizer(tapGesture)
+    }
     
+    @objc func hideKeyboardByTap() {
+        tableView.endEditing(true)
+    }
 }

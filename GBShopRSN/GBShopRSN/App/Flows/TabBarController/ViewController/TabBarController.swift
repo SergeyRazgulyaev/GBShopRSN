@@ -10,10 +10,12 @@ import UIKit
 class TabBarController: UITabBarController {
     // MARK: - Properties
     private let requestFactory: RequestFactory
+    private let userID: Int
     
     // MARK: - Init
-    init(requestFactory: RequestFactory) {
+    init(requestFactory: RequestFactory, userID: Int) {
         self.requestFactory = requestFactory
+        self.userID = userID
         super.init(nibName: nil, bundle: nil)
         self.viewControllers = createViewControllers()
     }
@@ -47,8 +49,19 @@ class TabBarController: UITabBarController {
         
         viewControllers.append(productListNavigationController)
         
-        //2. UserInfoScreen
-        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory)
+        //2. BasketScreen
+        let basketScreenViewController = BasketScreenViewController(requestFactory: requestFactory, userID: userID)
+        basketScreenViewController.tabBarItem = UITabBarItem(title: "Basket", image: UIImage(systemName: "cart"), selectedImage: UIImage(systemName: "cart.fill"))
+        
+        let basketNavigationController = UINavigationController(rootViewController: basketScreenViewController)
+        basketNavigationController.navigationBar.tintColor = .rsnPurpleColor
+        basketNavigationController.navigationBar.barTintColor = .rsnLightBlueColor
+        basketNavigationController.navigationBar.prefersLargeTitles = false;
+        
+        viewControllers.append(basketNavigationController)
+        
+        //3. UserInfoScreen
+        let userInfoScreenViewController = UserInfoScreenViewController(requestFactory: requestFactory, userID: userID)
         userInfoScreenViewController.tabBarItem = UITabBarItem(title: "User info", image: UIImage(systemName: "person.circle"), selectedImage: UIImage(systemName: "person.circle.fill"))
         
         let userInfoNavigationController = UINavigationController(rootViewController: userInfoScreenViewController)

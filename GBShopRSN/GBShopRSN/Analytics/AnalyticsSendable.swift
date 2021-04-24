@@ -10,6 +10,7 @@ import FirebaseAnalytics
 
 protocol AnalyticsSendable {
     func sendAnalyticsSignUpSuccess(assignedUserId: Int,
+                                    signedUpUserLogin: String,
                                     signedUpUserName: String,
                                     signedUpUserLastName: String,
                                     signedUpEmail: String,
@@ -60,6 +61,7 @@ protocol AnalyticsSendable {
 
 extension AnalyticsSendable {
     func sendAnalyticsSignUpSuccess(assignedUserId: Int,
+                                    signedUpUserLogin: String,
                                     signedUpUserName: String,
                                     signedUpUserLastName: String,
                                     signedUpEmail: String,
@@ -70,6 +72,7 @@ extension AnalyticsSendable {
         Analytics.logEvent("sign_up_success",
                            parameters: [
                             "assigned_user_id": assignedUserId as NSObject,
+                            "signedUpUserLogin": signedUpUserLogin as NSObject,
                             "signed_up_user_name": signedUpUserName as NSObject,
                             "signed_up_user_last_name": signedUpUserLastName as NSObject,
                             "signed_up_email": signedUpEmail as NSObject,

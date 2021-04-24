@@ -10,35 +10,35 @@ import UIKit
 class ProductListScreenTableViewCell: UITableViewCell, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var productQRCodeImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "qrcode")!, tintColor: .rsnPurpleColor)
+        makeSystemImageView(systemImage: UIImage(systemName: "qrcode")!, tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var productIDLabel: UILabel = {
-        configureLabel(text: "Product ID: ",
+        makeLabel(text: "Product ID: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productNameLabel: UILabel = {
-        configureLabel(text: "Name: ",
+        makeLabel(text: "Name: ",
                        textColor: .black,
                        font: .boldSystemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productPriceLabel: UILabel = {
-        configureLabel(text: "Price: ",
+        makeLabel(text: "Price: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productDescriptionLabel: UILabel = {
-        configureLabel(text: "Description: ",
+        makeLabel(text: "Description: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()
     
     private(set) lazy var productQuantityInBasketLabel: UILabel = {
-        configureLabel(text: "Quantity in basket: ",
+        makeLabel(text: "Quantity in basket: ",
                        textColor: .black,
                        font: .systemFont(ofSize: 17.0))
     }()

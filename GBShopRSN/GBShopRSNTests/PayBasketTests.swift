@@ -13,7 +13,7 @@ class PayBasketTests: XCTestCase {
     
     //MARK: - Positive tests
     func testPayBasket() throws {
-        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))        
+        let baseURL = try XCTUnwrap(URL(string: "https://thawing-wildwood-54540.herokuapp.com/"))
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = false
         configuration.headers = .default
@@ -26,7 +26,7 @@ class PayBasketTests: XCTestCase {
             switch response.result {
             case .success(let model):
                 XCTAssertEqual(model.result, 1)
-                XCTAssertEqual(model.accountBalance, 345)
+                XCTAssertEqual(model.accountBalance, 999000)
                 payBasketProducts.fulfill()
             case .failure(let error):
                 XCTFail(error.localizedDescription)

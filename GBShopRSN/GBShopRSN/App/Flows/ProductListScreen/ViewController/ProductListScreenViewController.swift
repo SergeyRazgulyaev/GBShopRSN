@@ -8,7 +8,7 @@
 import UIKit
 import os.log
 
-class ProductListScreenViewController: UITableViewController, AnalyticsSendable {
+class ProductListScreenViewController: UITableViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var productListScreenHeaderView: ProductListScreenHeaderView = {
         return ProductListScreenHeaderView()
@@ -39,11 +39,11 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
         configureViewController()
         configureTableView()
         configureSelectProductsCategoryButton()
+        configureKeyboard()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductListData()
-        configureKeyboard()
     }
     
     //MARK: - Configuration Methods
@@ -61,11 +61,19 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
     }
     
     @objc func tapSelectProductsCategoryButton(_ sender: Any?) {
-        if (!(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true)) {
+        if isFilledProductsCategoryTextField() {
             loadProductListData()
         } else {
-            print("You need to fill in all the fields for sign up")
+            self.showAttantionAlert(
+                viewController: self,
+                message: "You need to fill in the text field to upload the product list")
         }
+    }
+    
+    func isFilledProductsCategoryTextField() -> Bool {
+        if !(productListScreenHeaderView.selectProductsCategoryTextField.text?.isTrimmedEmpty ?? true) {
+            return true
+        } else { return false }
     }
     
     //MARK: - Interaction with Network
@@ -75,9 +83,9 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
                                       idCategory: ((productListScreenHeaderView.selectProductsCategoryTextField.text ?? "1") as NSString).integerValue) { response in
             switch response.result {
             case .success(let getProductList):
-                self.productsArray = getProductList.productList
                 self.sendAnalyticsOpenProductListSuccess(productListCount: getProductList.productList.count)
                 DispatchQueue.main.async {
+                    self.productsArray = getProductList.productList
                     self.tableView.reloadData()
                 }
             case .failure(let error):
@@ -91,11 +99,7 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
         
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if productsArray.count == 0 {
-            return 0
-        } else {
-            return productsArray.count
-        }
+        return productsArray.count
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -117,24 +121,20 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable 
     func configureTableViewCell(indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierTableViewCell, for: indexPath) as? ProductListScreenTableViewCell
         guard let cell = tableViewCell else { return UITableViewCell() }
-        if productsArray.count != 0 {
-            cell.productIDLabel.text = "Product ID: \(productsArray[indexPath.row].productID)"
-            cell.productNameLabel.text = "Name: \(productsArray[indexPath.row].productName)"
-            cell.productPriceLabel.text = "Price: \(productsArray[indexPath.row].productPrice) \(currencyUnit)"
-            cell.productQuantityInBasketLabel.text = "Quantity in basket: \(productsArray[indexPath.row].quantityInBasket)"
-            cell.productDescriptionLabel.text = "Description: \(productsArray[indexPath.row].productDescription)"
-        }
+        cell.productIDLabel.text = "Product ID: \(productsArray[indexPath.row].productID)"
+        cell.productNameLabel.text = "Name: \(productsArray[indexPath.row].productName)"
+        cell.productPriceLabel.text = "Price: \(productsArray[indexPath.row].productPrice) \(currencyUnit)"
+        cell.productQuantityInBasketLabel.text = "Quantity in basket: \(productsArray[indexPath.row].quantityInBasket)"
+        cell.productDescriptionLabel.text = "Description: \(productsArray[indexPath.row].productDescription)"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if productsArray.count != 0 {
-            let productScreenViewController = ProductScreenViewController(
-                requestFactory: requestFactory,
-                productID: productsArray[indexPath.row].productID,
-                user: user)
-            navigationController?.pushViewController(productScreenViewController, animated: true)
-        }
+        let productScreenViewController = ProductScreenViewController(
+            requestFactory: requestFactory,
+            productID: productsArray[indexPath.row].productID,
+            user: user)
+        navigationController?.pushViewController(productScreenViewController, animated: true)
     }
 }
 

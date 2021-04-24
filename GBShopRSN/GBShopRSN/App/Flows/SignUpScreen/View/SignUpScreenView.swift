@@ -10,76 +10,83 @@ import UIKit
 class SignUpScreenView: UIView, UIComponentsMakeable {
     // MARK: - UI components
     private(set) lazy var scrollView: UIScrollView = {
-        configureScrollView(increaseInScreenHeight: 200)
+        makeScrollView()
     }()
     
     private(set) lazy var logoSignUpScreenImageView: UIImageView = {
-        configureSystemImageView(systemImage: UIImage(systemName: "figure.wave")!, tintColor: .rsnPurpleColor)
+        makeSystemImageView(systemImage: UIImage(systemName: "figure.wave")!,
+                                 tintColor: .rsnPurpleColor)
     }()
     
     private(set) lazy var logoSignUpScreenLabel: UILabel = {
-        configureLabel(text: "Let's sign up",
+        makeLabel(text: "Let's sign up",
                        textColor: .rsnPurpleColor,
                        font: .boldSystemFont(ofSize: 30.0))
     }()
     
+    private(set) lazy var userLoginTextField: UITextField = {
+        makeTextField(placeholder: "User login",
+                           font: .systemFont(ofSize: 17),
+                           borderStyle: .roundedRect)
+    }()
+    
     private(set) lazy var userNameTextField: UITextField = {
-        configureTextField(placeholder: "User name",
+        makeTextField(placeholder: "User name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var userLastNameTextField: UITextField = {
-        configureTextField(placeholder: "User last name",
+        makeTextField(placeholder: "User last name",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var emailTextField: UITextField = {
-        configureTextField(placeholder: "E-mail",
+        makeTextField(placeholder: "E-mail",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var genderTextField: UITextField = {
-        configureTextField(placeholder: "Your gender (m/w)",
+        makeTextField(placeholder: "Your gender (m/w)",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var creditCardTextField: UITextField = {
-        configureTextField(placeholder: "Credit card number",
+        makeTextField(placeholder: "Credit card number",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var bioTextField: UITextField = {
-        configureTextField(placeholder: "Your bio",
+        makeTextField(placeholder: "Your bio",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var passwordTextField: UITextField = {
-        configureTextField(placeholder: "Сreate and enter a password",
+        makeTextField(placeholder: "Сreate and enter a password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var repeatedPasswordTextField: UITextField = {
-        configureTextField(placeholder: "Repeat password",
+        makeTextField(placeholder: "Repeat password",
                            font: .systemFont(ofSize: 17),
                            borderStyle: .roundedRect)
     }()
     
     private(set) lazy var sendDataForSignUpButton: UIButton = {
-        configureButton(title: "Sign up",
+        makeButton(title: "Sign up",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnPinkColor,
                         cornerRadius: 8.0)
     }()
     
     private(set) lazy var cancelAndReturnButton: UIButton = {
-        configureButton(title: "Сancel and return",
+        makeButton(title: "Сancel and return",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .lightGray,
                         cornerRadius: 8.0)
@@ -100,6 +107,7 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
         addSubview(scrollView)
         scrollView.addSubview(logoSignUpScreenImageView)
         scrollView.addSubview(logoSignUpScreenLabel)
+        scrollView.addSubview(userLoginTextField)
         scrollView.addSubview(userNameTextField)
         scrollView.addSubview(userLastNameTextField)
         scrollView.addSubview(emailTextField)
@@ -112,69 +120,141 @@ class SignUpScreenView: UIView, UIComponentsMakeable {
         scrollView.addSubview(cancelAndReturnButton)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            scrollView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            scrollView.topAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leftAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.leftAnchor),
+            scrollView.rightAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.rightAnchor),
             
-            logoSignUpScreenImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50.0),
-            logoSignUpScreenImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoSignUpScreenImageView.heightAnchor.constraint(equalToConstant: 150.0),
-            logoSignUpScreenImageView.widthAnchor.constraint(equalToConstant: 100.0),
+            logoSignUpScreenImageView.topAnchor.constraint(
+                equalTo: scrollView.topAnchor,
+                constant: 50.0),
+            logoSignUpScreenImageView.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            logoSignUpScreenImageView.heightAnchor.constraint(
+                equalToConstant: 150.0),
+            logoSignUpScreenImageView.widthAnchor.constraint(
+                equalToConstant: 100.0),
             
-            logoSignUpScreenLabel.topAnchor.constraint(equalTo: logoSignUpScreenImageView.bottomAnchor, constant: 10.0),
-            logoSignUpScreenLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoSignUpScreenLabel.topAnchor.constraint(
+                equalTo: logoSignUpScreenImageView.bottomAnchor,
+                constant: 10.0),
+            logoSignUpScreenLabel.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
 
-            userNameTextField.topAnchor.constraint(equalTo: logoSignUpScreenLabel.bottomAnchor, constant: 10.0),
-            userNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            userNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            userLoginTextField.topAnchor.constraint(
+                equalTo: logoSignUpScreenLabel.bottomAnchor,
+                constant: 10.0),
+            userLoginTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            userLoginTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            userLoginTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            userLastNameTextField.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 10.0),
-            userLastNameTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            userLastNameTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            userLastNameTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            userNameTextField.topAnchor.constraint(
+                equalTo: userLoginTextField.bottomAnchor,
+                constant: 10.0),
+            userNameTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            userNameTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            userNameTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
+            
+            userLastNameTextField.topAnchor.constraint(
+                equalTo: userNameTextField.bottomAnchor,
+                constant: 10.0),
+            userLastNameTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            userLastNameTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            userLastNameTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
             
-            emailTextField.topAnchor.constraint(equalTo: userLastNameTextField.bottomAnchor, constant: 10.0),
-            emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            emailTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            emailTextField.topAnchor.constraint(
+                equalTo: userLastNameTextField.bottomAnchor,
+                constant: 10.0),
+            emailTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            emailTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            emailTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            genderTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10.0),
-            genderTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            genderTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            genderTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            genderTextField.topAnchor.constraint(
+                equalTo: emailTextField.bottomAnchor,
+                constant: 10.0),
+            genderTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            genderTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            genderTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            creditCardTextField.topAnchor.constraint(equalTo: genderTextField.bottomAnchor, constant: 10.0),
-            creditCardTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            creditCardTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            creditCardTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            creditCardTextField.topAnchor.constraint(
+                equalTo: genderTextField.bottomAnchor,
+                constant: 10.0),
+            creditCardTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            creditCardTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            creditCardTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            bioTextField.topAnchor.constraint(equalTo: creditCardTextField.bottomAnchor, constant: 10.0),
-            bioTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            bioTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            bioTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            bioTextField.topAnchor.constraint(
+                equalTo: creditCardTextField.bottomAnchor,
+                constant: 10.0),
+            bioTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            bioTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            bioTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            passwordTextField.topAnchor.constraint(equalTo: bioTextField.bottomAnchor, constant: 10.0),
-            passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            passwordTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            passwordTextField.topAnchor.constraint(
+                equalTo: bioTextField.bottomAnchor,
+                constant: 10.0),
+            passwordTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            passwordTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            passwordTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            repeatedPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10.0),
-            repeatedPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor),
-            repeatedPasswordTextField.heightAnchor.constraint(equalToConstant: 25.0),
-            repeatedPasswordTextField.widthAnchor.constraint(equalToConstant: 270.0),
+            repeatedPasswordTextField.topAnchor.constraint(
+                equalTo: passwordTextField.bottomAnchor,
+                constant: 10.0),
+            repeatedPasswordTextField.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            repeatedPasswordTextField.heightAnchor.constraint(
+                equalToConstant: 25.0),
+            repeatedPasswordTextField.widthAnchor.constraint(
+                equalToConstant: 270.0),
             
-            sendDataForSignUpButton.topAnchor.constraint(equalTo: repeatedPasswordTextField.bottomAnchor, constant: 20.0),
-            sendDataForSignUpButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            sendDataForSignUpButton.heightAnchor.constraint(equalToConstant: 30.0),
-            sendDataForSignUpButton.widthAnchor.constraint(equalToConstant: 100.0),
+            sendDataForSignUpButton.topAnchor.constraint(
+                equalTo: repeatedPasswordTextField.bottomAnchor,
+                constant: 20.0),
+            sendDataForSignUpButton.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            sendDataForSignUpButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            sendDataForSignUpButton.widthAnchor.constraint(
+                equalToConstant: 100.0),
             
-            cancelAndReturnButton.topAnchor.constraint(equalTo: sendDataForSignUpButton.bottomAnchor, constant: 20.0),
-            cancelAndReturnButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cancelAndReturnButton.heightAnchor.constraint(equalToConstant: 30.0),
-            cancelAndReturnButton.widthAnchor.constraint(equalToConstant: 180.0)
+            cancelAndReturnButton.topAnchor.constraint(
+                equalTo: sendDataForSignUpButton.bottomAnchor,
+                constant: 20.0),
+            cancelAndReturnButton.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            cancelAndReturnButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            cancelAndReturnButton.widthAnchor.constraint(
+                equalToConstant: 180.0)
         ])
     }
 }

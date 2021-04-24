@@ -10,7 +10,7 @@ import UIKit
 class BasketScreenFooterView: UIView, UIComponentsMakeable {
     // MARK: - UI components    
     private(set) lazy var basketPayButton: UIButton = {
-        configureButton(title: "Pay basket",
+        makeButton(title: "Pay basket",
                         font: .boldSystemFont(ofSize: 17),
                         backgroundColor: .rsnLightGreenColor,
                         cornerRadius: 8.0)
@@ -32,10 +32,14 @@ class BasketScreenFooterView: UIView, UIComponentsMakeable {
         addSubview(basketPayButton)
         
         NSLayoutConstraint.activate([
-        basketPayButton.heightAnchor.constraint(equalToConstant: 30.0),
-        basketPayButton.widthAnchor.constraint(equalToConstant: 200.0),
-        basketPayButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            basketPayButton.centerYAnchor.constraint(equalTo: centerYAnchor)
+            basketPayButton.heightAnchor.constraint(
+                equalToConstant: 30.0),
+            basketPayButton.widthAnchor.constraint(
+                equalToConstant: 300.0),
+            basketPayButton.centerXAnchor.constraint(
+                equalTo: centerXAnchor),
+            basketPayButton.centerYAnchor.constraint(
+                equalTo: centerYAnchor)
         ])
     }
 }

@@ -8,29 +8,38 @@
 import UIKit
 
 protocol UIComponentsMakeable: UIView {
-    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView
+    func makeScrollView() -> UIScrollView
     
-    func configureSystemImageView(systemImage: UIImage, tintColor: UIColor) -> UIImageView
+    func makeSystemImageView(systemImage: UIImage,
+                                  tintColor: UIColor) -> UIImageView
     
-    func configureLabel(text: String, textColor: UIColor, font: UIFont) -> UILabel
+    func makeLabel(text: String,
+                        textColor: UIColor,
+                        font: UIFont) -> UILabel
     
-    func configureTextField(placeholder: String, font: UIFont, borderStyle: UITextField.BorderStyle) -> UITextField
+    func makeTextField(placeholder: String,
+                            font: UIFont,
+                            borderStyle: UITextField.BorderStyle) -> UITextField
     
-    func configureButton(title: String, font: UIFont, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton
+    func makeButton(title: String,
+                         font: UIFont,
+                         backgroundColor: UIColor,
+                         cornerRadius: CGFloat) -> UIButton
 }
 
 extension UIComponentsMakeable {
-    func configureScrollView(increaseInScreenHeight: CGFloat) -> UIScrollView {
+    func makeScrollView() -> UIScrollView {
         let screensize: CGRect = UIScreen.main.bounds
         let screenWidth = screensize.width
         let screenHeight = screensize.height
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight + increaseInScreenHeight)
+        scrollView.contentSize = CGSize(width: screenWidth, height: screenHeight)
         return scrollView
     }
     
-    func configureSystemImageView(systemImage: UIImage, tintColor: UIColor) -> UIImageView {
+    func makeSystemImageView(systemImage: UIImage,
+                                  tintColor: UIColor) -> UIImageView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
@@ -39,7 +48,9 @@ extension UIComponentsMakeable {
         return imageView
     }
     
-    func configureLabel(text: String, textColor: UIColor, font: UIFont) -> UILabel {
+    func makeLabel(text: String,
+                        textColor: UIColor,
+                        font: UIFont) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
@@ -48,7 +59,9 @@ extension UIComponentsMakeable {
         return label
     }
     
-    func configureTextField(placeholder: String, font: UIFont, borderStyle: UITextField.BorderStyle) -> UITextField {
+    func makeTextField(placeholder: String,
+                            font: UIFont,
+                            borderStyle: UITextField.BorderStyle) -> UITextField {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = borderStyle
@@ -60,7 +73,10 @@ extension UIComponentsMakeable {
         return textField
     }
     
-    func configureButton(title: String, font: UIFont, backgroundColor: UIColor, cornerRadius: CGFloat) -> UIButton {
+    func makeButton(title: String,
+                         font: UIFont,
+                         backgroundColor: UIColor,
+                         cornerRadius: CGFloat) -> UIButton {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)

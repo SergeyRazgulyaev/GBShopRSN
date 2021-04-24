@@ -8,7 +8,7 @@
 import UIKit
 import os.log
 
-class ProductScreenViewController: UITableViewController, AnalyticsSendable {
+class ProductScreenViewController: UITableViewController, AnalyticsSendable, Alertable {
     // MARK: - UI components
     private lazy var productScreenHeaderView: ProductScreenHeaderView = {
         return ProductScreenHeaderView()
@@ -45,18 +45,14 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         super.viewDidLoad()
         configureViewController()
         configureTableView()
-        configureAddToBasketButton()
-        configureDeleteFromBasketButton()
-        configureDecreaseProductForBasketCounterButton()
-        configureIncreaseProductForBasketCounterButton()
-        configureAddReviewButton()
+        configureUIComponents()
+        configureKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductData()
         loadReviewsData()
-        configureKeyboard()
     }
     
     //MARK: - Configuration Methods
@@ -70,13 +66,12 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         tableView.register(ProductScreenTableViewCell.self, forCellReuseIdentifier: reuseIdentifierTableViewCell)
     }
     
-    func configureProductDataLabels() {
-        productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
-        productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
-        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)" 
-        productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)" 
-        productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
-        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
+    func configureUIComponents() {
+        configureAddToBasketButton()
+        configureDeleteFromBasketButton()
+        configureDecreaseProductForBasketCounterButton()
+        configureIncreaseProductForBasketCounterButton()
+        configureAddReviewButton()
     }
     
     func configureAddToBasketButton() {
@@ -130,11 +125,22 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
             if !(productScreenHeaderView.userReviewTextField.text?.isTrimmedEmpty ?? true) {
                 addUserReview()
             } else {
-                print("You need to write a review to publish it")
+                self.showAttantionAlert(
+                    viewController: self,
+                    message: "You need to write a review to publish it")
             }
         } else {
             deleteUserReview()
         }
+    }
+    
+    func configureProductDataLabels() {
+        productScreenHeaderView.productIDLabel.text = "Product ID: \(displayedProduct.productID)"
+        productScreenHeaderView.productNameLabel.text = "Name: \(displayedProduct.productName)"
+        productScreenHeaderView.productPriceLabel.text = "Price: \(displayedProduct.productPrice) \(currencyUnit)"
+        productScreenHeaderView.quantityInBasketLabel.text = "Quantity in basket: \(displayedProduct.quantityInBasket)"
+        productScreenHeaderView.productDescriptionLabel.text = "Description: \(displayedProduct.productDescription)"
+        productScreenHeaderView.productForBasketCounterTextField.text = "\(displayedProduct.quantityInBasket)"
     }
     
     //MARK: - Interaction with Network
@@ -213,10 +219,10 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
         getReviews.getReviews(pageNumber: defaultPageNumber, productID: productID) { response in
             switch response.result {
             case .success(let getReviews):
-                self.reviewsArray = getReviews.reviews
                 self.sendAnalyticsGetReviewsSuccess(
                     reviewsCount: getReviews.reviews.count)
                 DispatchQueue.main.async {
+                    self.reviewsArray = getReviews.reviews
                     if self.reviewsArray.count != 0 {
                         self.productScreenHeaderView.reviewsTitleLabel.text = "Reviews"
                     }
@@ -277,11 +283,7 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if reviewsArray.count == 0 {
-            return 0
-        } else {
-            return reviewsArray.count
-        }
+        return reviewsArray.count
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

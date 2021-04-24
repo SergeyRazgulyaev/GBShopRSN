@@ -17,7 +17,6 @@ class RequestFactory {
         let manager = Session(configuration: configuration)
         return manager
     }()
-    
     let sessionQueue = DispatchQueue.global(qos: .utility)
     let baseURL: URL
     
@@ -26,6 +25,7 @@ class RequestFactory {
         self.baseURL = baseURL
     }
     
+    //MARK: - Methods
     func makeErrorParser() -> AbstractErrorParser {
         return ErrorParser()
     }

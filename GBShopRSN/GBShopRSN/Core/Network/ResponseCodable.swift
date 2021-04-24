@@ -17,8 +17,13 @@ class CustomDecodableSerializer<T: Decodable>: DataResponseSerializerProtocol {
         self.errorParser = errorParser
     }
     
-    func serialize(request: URLRequest?, response: HTTPURLResponse?, data: Data?, error: Error?) throws -> T {
-        if let error = errorParser.parse(response: response, data: data, error: error) {
+    func serialize(request: URLRequest?,
+                   response: HTTPURLResponse?,
+                   data: Data?,
+                   error: Error?) throws -> T {
+        if let error = errorParser.parse(response: response,
+                                         data: data,
+                                         error: error) {
             throw error
         }
         do {

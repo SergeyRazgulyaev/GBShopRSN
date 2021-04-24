@@ -31,8 +31,7 @@ class EntranceScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        configureSignUpButton()
-        configureLogInButton()
+        configureUIComponents()
     }
     
     override func loadView() {
@@ -42,6 +41,11 @@ class EntranceScreenViewController: UIViewController {
     //MARK: - Configuration Methods
     func configureViewController() {
         view.backgroundColor = .rsnLightBlueColor
+    }
+    
+    func configureUIComponents() {
+        configureSignUpButton()
+        configureLogInButton()
     }
     
     func configureSignUpButton() {

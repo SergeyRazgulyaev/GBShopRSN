@@ -28,6 +28,7 @@ class SignUp: AbstractRequestFactory {
 
 extension SignUp: SignUpRequestFactory {
     func signUp(userID: Int,
+                userLogin: String,
                 userName: String,
                 userLastName: String,
                 password: String,
@@ -38,6 +39,7 @@ extension SignUp: SignUpRequestFactory {
                 completionHandler: @escaping (AFDataResponse<SignUpResult>) -> Void) {
         let requestModel = SignUpRequest(baseURL: baseURL,
                                          userID: userID,
+                                         userLogin: userLogin,
                                          userName: userName,
                                          userLastName: userLastName,
                                          email: email,
@@ -57,6 +59,7 @@ extension SignUp {
         let path: String = "signUp"
         
         let userID: Int
+        let userLogin: String
         let userName: String
         let userLastName: String
         let email: String
@@ -68,6 +71,7 @@ extension SignUp {
         var parameters: Parameters? {
             return [
                 "user_id": userID,
+                "user_login": userLogin,
                 "user_name": userName,
                 "user_last_name": userLastName,
                 "email": email,

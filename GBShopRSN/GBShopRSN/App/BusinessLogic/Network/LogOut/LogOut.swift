@@ -41,7 +41,7 @@ extension LogOut {
         let baseURL: URL
         let method: HTTPMethod = .post
         let path: String = "logOut"
-        
+
         let userID: Int
         
         var parameters: Parameters? {

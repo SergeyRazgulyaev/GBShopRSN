@@ -10,6 +10,7 @@ import Alamofire
 
 protocol SignUpRequestFactory {
     func signUp(userID: Int,
+                userLogin: String,
                 userName: String,
                 userLastName: String,
                 password: String,

@@ -49,8 +49,8 @@ extension AddToBasket {
         
         var parameters: Parameters? {
             return [
-                "added_product_id" : addedProductID,
-                "updated_quantity_in_basket" : updatedQuantityInBasket,
+                "added_product_id": addedProductID,
+                "updated_quantity_in_basket": updatedQuantityInBasket,
             ]
         }
     }

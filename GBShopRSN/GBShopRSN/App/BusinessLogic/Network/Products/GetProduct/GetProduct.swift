@@ -45,9 +45,7 @@ extension GetProduct {
         let productID: Int
         
         var parameters: Parameters? {
-            return [
-                "product_id": productID
-            ]
+            return [ "product_id": productID ]
         }
     }
 }

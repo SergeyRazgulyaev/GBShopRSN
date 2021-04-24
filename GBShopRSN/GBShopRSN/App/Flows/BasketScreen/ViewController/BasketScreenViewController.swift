@@ -39,12 +39,12 @@ class BasketScreenViewController: UITableViewController, AnalyticsSendable, Aler
         configureViewController()
         configureTableView()
         configurePayBasketButton()
+        configureKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadBasketData()
-        configureKeyboard()
     }
     
     //MARK: - Configuration Methods

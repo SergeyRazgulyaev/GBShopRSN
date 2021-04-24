@@ -39,11 +39,11 @@ class ProductListScreenViewController: UITableViewController, AnalyticsSendable,
         configureViewController()
         configureTableView()
         configureSelectProductsCategoryButton()
+        configureKeyboard()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductListData()
-        configureKeyboard()
     }
     
     //MARK: - Configuration Methods

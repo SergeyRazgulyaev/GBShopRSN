@@ -46,13 +46,13 @@ class ProductScreenViewController: UITableViewController, AnalyticsSendable, Ale
         configureViewController()
         configureTableView()
         configureUIComponents()
+        configureKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadProductData()
         loadReviewsData()
-        configureKeyboard()
     }
     
     //MARK: - Configuration Methods

@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "AAE9F058-C717-412B-9FD5-33E3897B5F0E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:GBShopRSN.xcodeproj",
+          "identifier" : "C5DCB79125D87D7700220690",
+          "name" : "GBShopRSN"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:GBShopRSN.xcodeproj",
+        "identifier" : "C5DCB7B225D87D7B00220690",
+        "name" : "GBShopRSNUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
